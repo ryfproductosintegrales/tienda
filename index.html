@@ -122,40 +122,6 @@
     &copy; 2025 RYF Productos Integrales. Todos los derechos reservados.
   </footer>
 
-<form id="pedidoForm">
-  <label>Nombre: <input name="nombre" required></label><br>
-  <label>Teléfono: <input name="telefono" required></label><br>
-  <label>Producto: <input name="producto" required></label><br>
-  <label>Cantidad: <input name="cantidad" type="number" required></label><br>
-  <label>Método de pago:
-    <select name="pago">
-      <option>Transferencia</option>
-      <option>Efectivo</option>
-      <option>Tarjeta</option>
-    </select>
-  </label><br>
-  <label>Comentarios:<br><textarea name="comentarios"></textarea></label><br>
-  <button type="submit">Enviar Pedido</button>
-</form>
-<p id="mensaje"></p>
-
-<script>
-  const scriptURL = 'TU_URL_DEL_SCRIPT_AQUI';
-  const form = document.getElementById('pedidoForm');
-  const mensaje = document.getElementById('mensaje');
-
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-      .then(response => mensaje.textContent = 'Pedido enviado correctamente. ¡Gracias!')
-      .catch(error => mensaje.textContent = 'Error al enviar el pedido.');
-  });
-</script>
-
-
-
-
-
                                                              
 </body>
 </html>
