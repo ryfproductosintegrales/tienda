@@ -1,188 +1,216 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Tienda en Línea - Productos Naturales</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tienda RYF</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       margin: 0; padding: 0;
-      background-color: #f5f5f5;
+      background: #f4f4f4;
     }
-
     header {
-      background-color: #1b3a2f;
+      background: #1b3a2f;
       color: white;
       padding: 20px;
       text-align: center;
     }
-
-    nav {
-      background: #307054;
-      color: white;
-      padding: 10px;
-      text-align: center;
-    }
-
     nav a {
       color: white;
-      margin: 0 10px;
+      margin: 0 15px;
       text-decoration: none;
       font-weight: bold;
     }
-
-    .container {
-      max-width: 800px;
-      margin: 30px auto;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      padding: 30px;
+    section {
+      padding: 40px 20px;
+      max-width: 1000px;
+      margin: auto;
     }
-
     h2 {
       text-align: center;
+      margin-bottom: 30px;
       color: #1b3a2f;
     }
-
-    label {
-      display: block;
-      margin-top: 15px;
-      font-weight: bold;
+    .productos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
     }
-
-    input, select {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    }
-
-    .total {
-      margin-top: 20px;
-      font-size: 18px;
-      font-weight: bold;
-      text-align: center;
-      color: #1b3a2f;
-    }
-
-    .btn-whatsapp {
-      margin-top: 25px;
-      display: block;
-      text-align: center;
-      background: #25D366;
-      color: white;
-      text-decoration: none;
+    .producto {
+      background: white;
       padding: 15px;
-      border-radius: 8px;
-      font-size: 18px;
-    }
-
-    .btn-whatsapp:hover {
-      background: #1ebc5e;
-    }
-
-    footer {
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
       text-align: center;
+      max-width: 280px;
+      flex: 1;
+    }
+    .producto img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .producto h3 {
+      margin: 10px 0;
+    }
+    .precio {
+      color: #007b4b;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .boton {
+      display: inline-block;
+      margin-top: 10px;
       background: #1b3a2f;
       color: white;
-      padding: 15px;
-      margin-top: 50px;
+      padding: 10px 15px;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+    footer {
+      background: #eee;
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
     }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>Tienda de Productos Naturales</h1>
-    <p>Salud y bienestar desde la naturaleza</p>
+    <h1>RYF Productos Integrales</h1>
+    <nav>
+      <a href="../index.html">Inicio</a>
+      <a href="#productos">Productos</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
   </header>
 
-  <nav>
-    <a href="#">Inicio</a>
-    <a href="#pedido">Hacer pedido</a>
-    <a href="#contacto">Contacto</a>
-  </nav>
+	<a href="#pedido" class="boton">Hacer pedido</a>
 
-  <div class="container" id="pedido">
-    <h2>Formulario de Pedido</h2>
 
-    <form id="pedidoForm">
-      <label>Nombre completo:</label>
-      <input type="text" id="nombre" required>
 
-      <label>Dirección:</label>
-      <input type="text" id="direccion" required>
-
-      <label>Producto:</label>
-      <select id="producto" onchange="calcularTotal()">
-        <option value="500">1 frasco (RD$500)</option>
-        <option value="450">6+ frascos (RD$450)</option>
-      </select>
-
-      <label>Cantidad:</label>
-      <input type="number" id="cantidad" value="1" min="1" onchange="calcularTotal()">
-
-      <label>Entrega:</label>
-      <select id="envio" onchange="calcularTotal()">
-        <option value="0">Recoge en tienda (Gratis)</option>
-        <option value="300">A domicilio (+RD$300)</option>
-      </select>
-
-      <label>Método de pago:</label>
-      <select id="pago">
-        <option value="efectivo">Efectivo</option>
-        <option value="transferencia">Transferencia (Banco Popular, Banreservas o BHD)</option>
-      </select>
-
-      <div class="total" id="resumenTotal">
-        Total: RD$500
+  <section id="productos">
+    <h2>Nuestros Productos</h2>
+    <div class="productos">
+      <div class="producto">
+        <img src="https://via.placeholder.com/300x200?text=Producto+1" alt="Aceite de Batana">
+        <h3>Aceite de Batana</h3>
+        <p class="precio">RD$500</p>
+        <a href="https://wa.me/18094254540?text=Quiero%20comprar%20Aceite%20de%20Batana" class="boton">🛒 Comprar</a>
       </div>
+      <div class="producto">
+        <img src="https://via.placeholder.com/300x200?text=Producto+2" alt="Diabenol">
+        <h3>Diabenol</h3>
+        <p class="precio">RD$1,200</p>
+        <a href="https://wa.me/18094254540?text=Quiero%20comprar%20Diabenol" class="boton">🛒 Comprar</a>
+      </div>
+      <div class="producto">
+        <img src="https://via.placeholder.com/300x200?text=Producto+3" alt="Té Matcha">
+        <h3>Té Matcha</h3>
+        <p class="precio">RD$1,300</p>
+        <a href="https://wa.me/18094254540?text=Quiero%20comprar%20Té%20Matcha" class="boton">🛒 Comprar</a>
+      </div>
+    </div>
+  </section>
 
-      <a href="#" class="btn-whatsapp" id="btnEnviar" target="_blank">Enviar pedido por WhatsApp</a>
-    </form>
-  </div>
+  <section id="contacto">
+    <h2>Contacto</h2>
+    <p style="text-align:center;">Escríbenos por WhatsApp: <a href="https://wa.me/18094254540">1809 425 4540</a></p>
+  </section>
 
-  <footer id="contacto">
-    <p>&copy; 2025 Tienda Natural | Todos los derechos reservados.</p>
+
+<form id="pedido-form" onsubmit="enviarPedidoPorWhatsApp(); return false;" style="max-width: 600px; margin:auto; padding: 20px; background: #fff; border-radius: 12px; box-shadow: 0 0 15px rgba(0,0,0,0.1);">
+  <h2 style="text-align:center;">Formulario de Pedido</h2>
+
+  <!-- Datos del Cliente -->
+  <label>Nombre:</label>
+  <input type="text" id="nombre" required style="width: 100%; margin-bottom: 10px;">
+  <label>Dirección:</label>
+  <textarea id="direccion" required style="width: 100%; margin-bottom: 10px;"></textarea>
+
+  <!-- Productos -->
+  <label>Cantidad de productos:</label>
+  <input type="number" id="cantidad" min="1" value="1" style="width: 100%; margin-bottom: 10px;">
+
+  <!-- Cálculo automático -->
+  <p><strong>Precio unitario:</strong> <span id="precio-unitario">RD$500</span></p>
+  <p><strong>Subtotal:</strong> <span id="subtotal">RD$500</span></p>
+
+  <!-- Tipo de entrega -->
+  <label>Tipo de entrega:</label>
+  <select id="entrega" style="width: 100%; margin-bottom: 10px;">
+    <option value="0">Recoger en tienda</option>
+    <option value="300">Envío a domicilio (RD$300)</option>
+  </select>
+
+  <!-- Método de pago -->
+  <label>Método de pago:</label>
+  <select id="pago" style="width: 100%; margin-bottom: 10px;">
+    <option>Efectivo</option>
+    <option>Transferencia - Banco Popular</option>
+    <option>Transferencia - BanReservas</option>
+    <option>Transferencia - BHD León</option>
+  </select>
+
+  <!-- Total final -->
+  <p><strong>Total a pagar:</strong> <span id="total">RD$500</span></p>
+
+  <!-- Botón de envío por WhatsApp -->
+  <button type="submit" style="width: 100%; padding: 10px; background: green; color: white; border: none; border-radius: 8px;">Enviar Pedido por WhatsApp</button>
+</form>
+
+<script>
+  const precioDetalle = 500;
+  const precioMayor = 450;
+
+  document.getElementById("cantidad").addEventListener("input", actualizarTotales);
+  document.getElementById("entrega").addEventListener("change", actualizarTotales);
+
+  function actualizarTotales() {
+    const cantidad = parseInt(document.getElementById("cantidad").value) || 0;
+    const envio = parseInt(document.getElementById("entrega").value) || 0;
+
+    const precio = cantidad >= 6 ? precioMayor : precioDetalle;
+    const subtotal = cantidad * precio;
+    const total = subtotal + envio;
+
+    document.getElementById("precio-unitario").innerText = `RD$${precio}`;
+    document.getElementById("subtotal").innerText = `RD$${subtotal}`;
+    document.getElementById("total").innerText = `RD$${total}`;
+  }
+
+  function enviarPedidoPorWhatsApp() {
+    const nombre = document.getElementById("nombre").value;
+    const direccion = document.getElementById("direccion").value;
+    const cantidad = document.getElementById("cantidad").value;
+    const entrega = document.getElementById("entrega").selectedOptions[0].text;
+    const pago = document.getElementById("pago").value;
+    const total = document.getElementById("total").innerText;
+
+    const mensaje = `📦 *Nuevo Pedido*\n\n👤 Nombre: ${nombre}\n📍 Dirección: ${direccion}\n📦 Cantidad: ${cantidad}\n🚚 Entrega: ${entrega}\n💳 Pago: ${pago}\n💰 Total: ${total}`;
+
+    const telefono = "18094254540";
+    const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
+    window.open(url, "_blank");
+  }
+
+  // Inicia con valores actualizados
+  actualizarTotales();
+</script>
+
+
+
+
+
+
+
+  <footer>
+    &copy; 2025 RYF Productos Integrales. Todos los derechos reservados.
   </footer>
-
-  <script>
-    function calcularTotal() {
-      const precio = parseInt(document.getElementById('producto').value);
-      const cantidad = parseInt(document.getElementById('cantidad').value);
-      const envio = parseInt(document.getElementById('envio').value);
-
-      const subtotal = precio * cantidad;
-      const total = subtotal + envio;
-
-      document.getElementById('resumenTotal').innerText = "Total: RD$" + total;
-      return total;
-    }
-
-    document.getElementById("btnEnviar").addEventListener("click", function(e) {
-      e.preventDefault();
-
-      const nombre = document.getElementById("nombre").value;
-      const direccion = document.getElementById("direccion").value;
-      const producto = document.getElementById("producto").options[document.getElementById("producto").selectedIndex].text;
-      const cantidad = document.getElementById("cantidad").value;
-      const envio = document.getElementById("envio").options[document.getElementById("envio").selectedIndex].text;
-      const pago = document.getElementById("pago").value;
-      const total = calcularTotal();
-
-      const mensaje = `Hola, deseo hacer un pedido:\n\nNombre: ${nombre}\nDirección: ${direccion}\nProducto: ${producto}\nCantidad: ${cantidad}\nEntrega: ${envio}\nMétodo de pago: ${pago}\n\nTotal: RD$${total}`;
-
-      const numeroWhatsApp = "18094254540";
-      const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
-      window.open(url, "_blank");
-    });
-
-    // Calcular el total al cargar la página
-    calcularTotal();
-  </script>
 
 </body>
 </html>
