@@ -2,240 +2,153 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tienda Natural - Inicio</title>
   <style>
     :root {
-      --main-color: #00695c;
-      --accent-color: #26a69a;
-      --bg-color: #f5f5f5;
-      --text-color: #333;
-      --white: #fff;
+      --verde: #006400;
+      --verde-claro: #00a86b;
+      --gris-fondo: #f2f2f2;
+      --blanco: #ffffff;
     }
 
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      scroll-behavior: smooth;
+      font-family: Arial, sans-serif;
+      background-color: var(--gris-fondo);
     }
 
     header {
-      background-color: var(--main-color);
-      color: var(--white);
-      padding: 1rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      background-color: var(--verde);
+      color: white;
+      padding: 1rem 0;
       position: sticky;
       top: 0;
       z-index: 1000;
     }
 
-    .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
-    }
-
     nav {
       display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 1rem;
+      padding: 0.5rem;
     }
 
     nav a {
-      color: var(--white);
+      color: white;
       text-decoration: none;
-      font-weight: 500;
+      font-weight: bold;
+      padding: 0.5rem 1rem;
+      background-color: var(--verde-claro);
+      border-radius: 5px;
+      transition: background-color 0.3s;
     }
 
-    .menu-toggle {
-      display: none;
-      font-size: 1.8rem;
-      cursor: pointer;
-    }
-
-    @media (max-width: 768px) {
-      nav {
-        display: none;
-        position: absolute;
-        top: 60px;
-        right: 0;
-        background-color: var(--main-color);
-        flex-direction: column;
-        width: 100%;
-        text-align: right;
-        padding: 1rem;
-      }
-
-      nav.active {
-        display: flex;
-      }
-
-      .menu-toggle {
-        display: block;
-      }
-
-      nav a {
-        padding: 0.5rem 0;
-      }
+    nav a:hover {
+      background-color: #008c5a;
     }
 
     .section {
-      padding: 2rem 1rem;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    .section h2 {
-      color: var(--main-color);
-      margin-bottom: 1rem;
+      padding: 2rem;
+      text-align: center;
+      background-color: var(--blanco);
+      margin: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     }
 
     .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 1rem;
     }
 
     .card {
-      background-color: var(--white);
+      background-color: var(--gris-fondo);
+      padding: 1rem;
       border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      padding: 1rem;
-      transition: transform 0.2s;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      text-align: left;
     }
 
-    .card:hover {
-      transform: scale(1.02);
-    }
-
-    .card h3 {
-      margin-top: 0;
-      color: var(--accent-color);
-    }
-
-    .testimonial {
-      font-style: italic;
-      color: #555;
-    }
-
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background-color: var(--main-color);
-      color: var(--white);
+    @media screen and (max-width: 600px) {
+      nav {
+        flex-direction: column;
+        align-items: center;
+      }
     }
   </style>
 </head>
 <body>
-
   <header>
-    <div class="logo">Tienda Natural</div>
-    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-    <nav id="navbar">
-      <a href="#">Inicio</a>
-      <a href="catalogo.html">Ver Catálogo</a>
+    <nav>
+      <a href="#inicio">Inicio</a>
+      <a href="#catalogo">Ver Catálogo</a>
       <a href="#contacto">Contacto</a>
-      <a href="#">Sobre Nosotros</a>
-      <a href="#">Comprar Aquí</a>
-      <a href="#">Método de Pago</a>
-      <a href="#">Blog</a>
-      <a href="#soluciones">Enfermedades</a>
-      <a href="#valoraciones">Valoraciones</a>
+      <a href="#sobre">Sobre Nosotros</a>
+      <a href="#comprar">Comprar Aquí</a>
+      <a href="#pagos">Método de Pago</a>
+      <a href="#blog">Blog</a>
+      <a href="#soluciones">Enfermedades y Soluciones</a>
     </nav>
   </header>
 
-  <section id="destacados" class="section">
+  <section id="inicio" class="section">
+    <h1>Bienvenido a Tu Tienda Natural</h1>
+    <p>Productos naturales para mejorar tu bienestar y salud.</p>
+  </section>
+
+  <section id="catalogo" class="section">
     <h2>Productos Destacados</h2>
     <div class="cards">
       <div class="card">
-        <h3>Producto A</h3>
-        <p>Ideal para mejorar tu energía y bienestar.</p>
+        <h3>Producto 1</h3>
+        <p>Descripción del producto 1.</p>
       </div>
       <div class="card">
-        <h3>Producto B</h3>
-        <p>Alivia molestias digestivas de forma natural.</p>
+        <h3>Producto 2</h3>
+        <p>Descripción del producto 2.</p>
       </div>
       <div class="card">
-        <h3>Producto C</h3>
-        <p>Refuerza tu sistema inmunológico diariamente.</p>
+        <h3>Producto 3</h3>
+        <p>Descripción del producto 3.</p>
       </div>
     </div>
   </section>
 
   <section id="soluciones" class="section">
     <h2>Enfermedades y Soluciones Naturales</h2>
-    <div class="cards">
-      <div class="card">
-        <h3>Diabetes</h3>
-        <p>Control natural con extractos de plantas eficaces.</p>
-      </div>
-      <div class="card">
-        <h3>Hipertensión</h3>
-        <p>Fórmulas naturales que ayudan a regular la presión.</p>
-      </div>
-      <div class="card">
-        <h3>Dolor Articular</h3>
-        <p>Productos naturales para aliviar inflamación y dolor.</p>
-      </div>
-    </div>
+    <p>Descubre cómo nuestros productos ayudan a tratar diversas dolencias.</p>
   </section>
 
-  <section id="valoraciones" class="section">
+  <section id="comentarios" class="section">
     <h2>Valoraciones de Nuestros Clientes</h2>
+    <p>Lee lo que dicen nuestros usuarios sobre su experiencia con nosotros.</p>
+  </section>
+
+  <section id="pagos" class="section">
+    <h2>Métodos de Pago</h2>
     <div class="cards">
-      <div class="card testimonial">
-        "Excelente producto, me ayudó a sentirme con más energía todos los días." — Ana M.
+      <div class="card">
+        <h3>💳 Tarjeta de Crédito o Débito</h3>
+        <p>Paga fácilmente con tu tarjeta desde cualquier lugar. Aceptamos Visa, Mastercard y más.</p>
       </div>
-      <div class="card testimonial">
-        "El tratamiento natural fue más efectivo de lo que imaginé. ¡Gracias!" — Carlos R.
+      <div class="card">
+        <h3>💵 Efectivo</h3>
+        <p>Puedes pagar en efectivo al momento de la entrega si estás en zonas disponibles para entrega personal.</p>
       </div>
-      <div class="card testimonial">
-        "Todo el proceso de compra fue fácil, y el producto llegó rápido." — Laura S.
+      <div class="card">
+        <h3>🏦 Transferencia Bancaria</h3>
+        <p>Realiza una transferencia a nuestras cuentas autorizadas. Envíanos el comprobante por WhatsApp para confirmar tu pedido.</p>
       </div>
     </div>
   </section>
 
-  <section id="contacto" class="section">
-    <h2>Contacto</h2>
-    <p>Escríbenos a nuestro WhatsApp: <strong>+1 809 425 4540</strong></p>
-    <p>O envíanos un correo: <strong>tienda@natural.com</strong></p>
-  </section>
-
-
-<section id="pagos" class="section">
-  <h2>Métodos de Pago</h2>
-  <div class="cards">
-    <div class="card">
-      <h3>💳 Tarjeta de Crédito o Débito</h3>
-      <p>Paga fácilmente con tu tarjeta desde cualquier lugar. Aceptamos Visa, Mastercard y más.</p>
-    </div>
-    <div class="card">
-      <h3>💵 Efectivo</h3>
-      <p>Puedes pagar en efectivo al momento de la entrega si estás en zonas disponibles para entrega personal.</p>
-    </div>
-    <div class="card">
-      <h3>🏦 Transferencia Bancaria</h3>
-      <p>Realiza una transferencia a nuestras cuentas autorizadas. Envíanos el comprobante por WhatsApp para confirmar tu pedido.</p>
-    </div>
-  </div>
-</section>
-
-  
-
-
-  
-  <footer>
-    &copy; 2025 Tienda Natural. Todos los derechos reservados.
+  <footer class="section">
+    <p>&copy; 2025 Tienda Natural. Todos los derechos reservados.</p>
   </footer>
-
-  <script>
-    function toggleMenu() {
-      const nav = document.getElementById("navbar");
-      nav.classList.toggle("active");
-    }
-  </script>
-
 </body>
 </html>
