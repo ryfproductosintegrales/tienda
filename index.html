@@ -3,152 +3,108 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tienda Natural - Inicio</title>
+  <title>R&F Productos Integrales</title>
   <style>
-    :root {
-      --verde: #006400;
-      --verde-claro: #00a86b;
-      --gris-fondo: #f2f2f2;
-      --blanco: #ffffff;
-    }
-
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: var(--gris-fondo);
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f7fff7;
+      color: #333;
     }
 
     header {
-      background-color: var(--verde);
-      color: white;
-      padding: 1rem 0;
-      position: sticky;
+      position: fixed;
       top: 0;
+      width: 100%;
+      background-color: #4CAF50;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 1rem;
       z-index: 1000;
     }
 
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1rem;
-      padding: 0.5rem;
+    header img {
+      height: 50px;
     }
 
-    nav a {
+    header nav {
+      display: flex;
+      gap: 1rem;
+    }
+
+    header nav a {
       color: white;
       text-decoration: none;
       font-weight: bold;
-      padding: 0.5rem 1rem;
-      background-color: var(--verde-claro);
+      padding: 0.5rem;
+    }
+
+    header nav a:hover {
+      background-color: #388E3C;
       border-radius: 5px;
-      transition: background-color 0.3s;
     }
 
-    nav a:hover {
-      background-color: #008c5a;
-    }
-
-    .section {
-      padding: 2rem;
+    .main-content {
+      padding-top: 100px;
       text-align: center;
-      background-color: var(--blanco);
-      margin: 1rem;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     }
 
-    .cards {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1rem;
+    .main-content h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #2e7d32;
     }
 
-    .card {
-      background-color: var(--gris-fondo);
-      padding: 1rem;
-      border-radius: 10px;
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-      width: 300px;
-      text-align: left;
+    footer {
+      background-color: #4CAF50;
+      color: white;
+      text-align: center;
+      padding: 1rem 0;
+      margin-top: 50px;
     }
 
-    @media screen and (max-width: 600px) {
-      nav {
+    @media (max-width: 768px) {
+      header {
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
+      }
+
+      header nav {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      header nav a {
+        width: 100%;
+        padding: 1rem;
+      }
+
+      .main-content h1 {
+        font-size: 2rem;
+        padding: 0 1rem;
       }
     }
   </style>
 </head>
 <body>
   <header>
+    <img src="logos para encabezado  (2).png" alt="Logo R&F Productos Integrales">
     <nav>
       <a href="#inicio">Inicio</a>
-      <a href="#catalogo">Ver Catálogo</a>
-      <a href="#contacto">Contacto</a>
-      <a href="#sobre">Sobre Nosotros</a>
+      <a href="#catalogo">Catálogo</a>
       <a href="#comprar">Comprar Aquí</a>
-      <a href="#pagos">Método de Pago</a>
-      <a href="#blog">Blog</a>
-      <a href="#soluciones">Enfermedades y Soluciones</a>
     </nav>
   </header>
 
-  <section id="inicio" class="section">
-    <h1>Bienvenido a Tu Tienda Natural</h1>
-    <p>Productos naturales para mejorar tu bienestar y salud.</p>
+  <section class="main-content" id="inicio">
+    <h1>R&F Productos Integrales</h1>
   </section>
 
-  <section id="catalogo" class="section">
-    <h2>Productos Destacados</h2>
-    <div class="cards">
-      <div class="card">
-        <h3>Producto 1</h3>
-        <p>Descripción del producto 1.</p>
-      </div>
-      <div class="card">
-        <h3>Producto 2</h3>
-        <p>Descripción del producto 2.</p>
-      </div>
-      <div class="card">
-        <h3>Producto 3</h3>
-        <p>Descripción del producto 3.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="soluciones" class="section">
-    <h2>Enfermedades y Soluciones Naturales</h2>
-    <p>Descubre cómo nuestros productos ayudan a tratar diversas dolencias.</p>
-  </section>
-
-  <section id="comentarios" class="section">
-    <h2>Valoraciones de Nuestros Clientes</h2>
-    <p>Lee lo que dicen nuestros usuarios sobre su experiencia con nosotros.</p>
-  </section>
-
-  <section id="pagos" class="section">
-    <h2>Métodos de Pago</h2>
-    <div class="cards">
-      <div class="card">
-        <h3>💳 Tarjeta de Crédito o Débito</h3>
-        <p>Paga fácilmente con tu tarjeta desde cualquier lugar. Aceptamos Visa, Mastercard y más.</p>
-      </div>
-      <div class="card">
-        <h3>💵 Efectivo</h3>
-        <p>Puedes pagar en efectivo al momento de la entrega si estás en zonas disponibles para entrega personal.</p>
-      </div>
-      <div class="card">
-        <h3>🏦 Transferencia Bancaria</h3>
-        <p>Realiza una transferencia a nuestras cuentas autorizadas. Envíanos el comprobante por WhatsApp para confirmar tu pedido.</p>
-      </div>
-    </div>
-  </section>
-
-  <footer class="section">
-    <p>&copy; 2025 Tienda Natural. Todos los derechos reservados.</p>
+  <footer>
+    <p>© 2025 R&F Productos Integrales</p>
+    <p>Contacto por WhatsApp: <a href="https://wa.me/18094254540" style="color: #fff; text-decoration: underline;">+1 809 425 4540</a></p>
   </footer>
 </body>
 </html>
