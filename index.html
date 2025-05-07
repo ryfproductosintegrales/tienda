@@ -3,182 +3,208 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>RYF Productos Integrales</title>
+  <title>Tienda Natural - Inicio</title>
   <style>
-    /* Reset y base */
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family: Arial, sans-serif; background:#f4f4f4; color:#333; }
+    :root {
+      --main-color: #00695c;
+      --accent-color: #26a69a;
+      --bg-color: #f5f5f5;
+      --text-color: #333;
+      --white: #fff;
+    }
 
-    /* Navegación fija */
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+
     header {
-      position: fixed; top:0; left:0; right:0;
-      background:#008060; padding:12px 0;
-      box-shadow:0 2px 6px rgba(0,0,0,0.2);
-      z-index:1000;
+      background-color: var(--main-color);
+      color: var(--white);
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
     nav {
-      max-width:1200px; margin:auto;
-      display:flex; justify-content:center; gap:16px;
+      display: flex;
+      gap: 1rem;
     }
+
     nav a {
-      color:#fff; text-decoration:none; font-weight:bold;
-      padding:6px 12px; border-radius:4px;
-    }
-    nav a:hover {
-      background:rgba(255,255,255,0.2);
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 500;
     }
 
-    /* Contenedor principal (compensa header fijo) */
-    .container {
-      max-width:1200px;
-      margin:100px auto 60px;
-      padding:0 20px;
+    .menu-toggle {
+      display: none;
+      font-size: 1.8rem;
+      cursor: pointer;
     }
 
-    h1, h2 {
-      color:#008060;
-      text-align:center;
-      margin-bottom:16px;
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background-color: var(--main-color);
+        flex-direction: column;
+        width: 100%;
+        text-align: right;
+        padding: 1rem;
+      }
+
+      nav.active {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      nav a {
+        padding: 0.5rem 0;
+      }
     }
 
-    /* Bloques flotantes */
-    .bloque {
-      background:rgba(255,255,255,0.9);
-      border-radius:12px;
-      box-shadow:0 8px 20px rgba(0,0,0,0.1);
-      padding:24px;
-      margin-bottom:40px;
+    .section {
+      padding: 2rem 1rem;
+      max-width: 1200px;
+      margin: auto;
     }
 
-    /* Productos Destacados */
-    .grid-3 {
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-      gap:24px;
-    }
-    .producto {
-      text-align:center;
-      transition:transform .2s;
-    }
-    .producto:hover {
-      transform:translateY(-5px);
-    }
-    .producto img {
-      width:100%; border-radius:8px; margin-bottom:12px;
-    }
-    .producto h3 {
-      margin-bottom:8px;
-    }
-    .precio {
-      color:#008060; font-weight:bold; margin-bottom:12px;
-    }
-    .boton {
-      display:inline-block;
-      background:#008060;
-      color:#fff;
-      padding:8px 14px;
-      border-radius:6px;
-      text-decoration:none;
-      font-weight:bold;
-      transition:background .3s;
-    }
-    .boton:hover {
-      background:#006a50;
+    .section h2 {
+      color: var(--main-color);
+      margin-bottom: 1rem;
     }
 
-    /* Listas simples */
-    ul { list-style: disc inside; }
-    li { margin-bottom:8px; }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+    }
 
-    /* Testimonios */
+    .card {
+      background-color: var(--white);
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      padding: 1rem;
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: scale(1.02);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      color: var(--accent-color);
+    }
+
     .testimonial {
-      font-style:italic;
-      margin-bottom:16px;
-      border-left:4px solid #008060;
-      padding-left:12px;
-      background:#fff;
-      border-radius:6px;
+      font-style: italic;
+      color: #555;
     }
 
     footer {
-      text-align:center;
-      background:#008060;
-      color:#fff;
-      padding:20px 0;
-      margin-top:60px;
+      text-align: center;
+      padding: 1rem;
+      background-color: var(--main-color);
+      color: var(--white);
     }
   </style>
 </head>
 <body>
 
   <header>
-    <nav>
-      <a href="index.html">Inicio</a>
-      <a href="catalogo.html">Catálogo</a>
-      <a href="contacto.html">Contacto</a>
-      <a href="sobre-nosotros.html">Sobre Nosotros</a>
-      <a href="comprar.html">Comprar Aquí</a>
-      <a href="metodo-pago.html">Método de Pago</a>
-      <a href="blog.html">Blog</a>
-      <a href="enfermedades.html">Enfermedades</a>
+    <div class="logo">Tienda Natural</div>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <nav id="navbar">
+      <a href="#">Inicio</a>
+      <a href="#">Ver Catálogo</a>
+      <a href="#">Contacto</a>
+      <a href="#">Sobre Nosotros</a>
+      <a href="#">Comprar Aquí</a>
+      <a href="#">Método de Pago</a>
+      <a href="#">Blog</a>
+      <a href="#">Enfermedades y Soluciones</a>
     </nav>
   </header>
 
-  <div class="container">
-
-    <!-- Productos Destacados -->
-    <section id="destacados" class="bloque">
-      <h2>Productos Destacados</h2>
-      <div class="grid-3">
-        <div class="producto">
-          <img src="https://via.placeholder.com/300x200?text=Aceite+de+Batana" alt="Aceite de Batana">
-          <h3>Aceite de Batana</h3>
-          <p class="precio">RD$500</p>
-          <a href="comprar.html?producto=Aceite+de+Batana" class="boton">🛒 Comprar</a>
-        </div>
-        <div class="producto">
-          <img src="https://via.placeholder.com/300x200?text=Diabenol" alt="Diabenol">
-          <h3>Diabenol</h3>
-          <p class="precio">RD$1,200</p>
-          <a href="comprar.html?producto=Diabenol" class="boton">🛒 Comprar</a>
-        </div>
-        <div class="producto">
-          <img src="https://via.placeholder.com/300x200?text=Te+Matcha" alt="Té Matcha">
-          <h3>Té Matcha</h3>
-          <p class="precio">RD$1,300</p>
-          <a href="comprar.html?producto=Te+Matcha" class="boton">🛒 Comprar</a>
-        </div>
+  <section class="section">
+    <h2>Productos Destacados</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Producto A</h3>
+        <p>Ideal para mejorar tu energía y bienestar.</p>
       </div>
-    </section>
-
-    <!-- Enfermedades y Soluciones -->
-    <section id="enfermedades" class="bloque">
-      <h2>Enfermedades y Soluciones Naturales</h2>
-      <ul>
-        <li><strong>Caída del Cabello:</strong> Usa Aceite de Batana para fortalecer los folículos.</li>
-        <li><strong>Piel Seca:</strong> Aplica aceite con vitamina E para hidratación profunda.</li>
-        <li><strong>Estrés:</strong> Infusiones de Té Matcha y Diabenol para relajar cuerpo y mente.</li>
-        <!-- Añade más ítems según necesites -->
-      </ul>
-    </section>
-
-    <!-- Valoraciones de Usuarios -->
-    <section id="testimonios" class="bloque">
-      <h2>Valoraciones de Usuarios</h2>
-      <div class="testimonial">
-        “¡El Aceite de Batana cambió totalmente mi cabello! Ahora luce fuerte y brillante.” – Ana G.
+      <div class="card">
+        <h3>Producto B</h3>
+        <p>Alivia molestias digestivas de forma natural.</p>
       </div>
-      <div class="testimonial">
-        “El Té Matcha me dio energía natural sin nerviosismo. Lo recomiendo 100%.” – Carlos M.
+      <div class="card">
+        <h3>Producto C</h3>
+        <p>Refuerza tu sistema inmunológico diariamente.</p>
       </div>
-      <!-- Más testimonios -->
-    </section>
+    </div>
+  </section>
 
-  </div>
+  <section class="section">
+    <h2>Enfermedades y Soluciones Naturales</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Diabetes</h3>
+        <p>Control natural con extractos de plantas eficaces.</p>
+      </div>
+      <div class="card">
+        <h3>Hipertensión</h3>
+        <p>Fórmulas naturales que ayudan a regular la presión.</p>
+      </div>
+      <div class="card">
+        <h3>Dolor Articular</h3>
+        <p>Productos naturales para aliviar inflamación y dolor.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Valoraciones de Nuestros Clientes</h2>
+    <div class="cards">
+      <div class="card testimonial">
+        "Excelente producto, me ayudó a sentirme con más energía todos los días." — Ana M.
+      </div>
+      <div class="card testimonial">
+        "El tratamiento natural fue más efectivo de lo que imaginé. ¡Gracias!" — Carlos R.
+      </div>
+      <div class="card testimonial">
+        "Todo el proceso de compra fue fácil, y el producto llegó rápido." — Laura S.
+      </div>
+    </div>
+  </section>
 
   <footer>
-    &copy; 2025 RYF Productos Integrales. Todos los derechos reservados.
+    &copy; 2025 Tienda Natural. Todos los derechos reservados.
   </footer>
+
+  <script>
+    function toggleMenu() {
+      const nav = document.getElementById("navbar");
+      nav.classList.toggle("active");
+    }
+  </script>
 
 </body>
 </html>
