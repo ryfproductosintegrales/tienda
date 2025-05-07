@@ -3,28 +3,106 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Catálogo – RYF</title>
+  <title>Catálogo – RYF Productos Integrales</title>
   <style>
+    /* Reset y base */
     * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family:Arial,sans-serif; background:#f4f4f4; }
+    body { font-family: Arial, sans-serif; background:#f4f4f4; color:#333; }
+
+    /* Navegación fija */
     header {
       position: fixed; top:0; left:0; right:0;
-      background:#1b3a2f; padding:10px 0;
-      text-align:center; z-index:1000;
+      background:#008060; padding:10px 0;
+      box-shadow:0 2px 6px rgba(0,0,0,0.2);
+      z-index:1000;
     }
-    nav { display:flex; justify-content:center; gap:15px; }
-    nav a { color:white; font-weight:bold; padding:6px 12px; }
-    nav a:hover { background:rgba(255,255,255,0.1); border-radius:4px; }
+    nav {
+      max-width:1200px; margin:auto;
+      display:flex; justify-content:center; gap:16px;
+    }
+    nav a {
+      color:#fff; text-decoration:none; font-weight:bold;
+      padding:6px 12px; border-radius:4px;
+    }
+    nav a:hover { background:rgba(255,255,255,0.2); }
 
-    .container { margin:80px auto 40px; max-width:1200px; padding:0 20px; }
-    .bloque { background:rgba(255,255,255,0.9); border-radius:12px; box-shadow:0 8px 20px rgba(0,0,0,0.1); padding:20px; margin-bottom:30px; }
-    .grid { display:grid; gap:20px; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); }
-    .producto { background:white; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1); padding:16px; text-align:center; transition:transform .2s; }
-    .producto:hover { transform:translateY(-5px); }
-    .producto img { width:100%; border-radius:8px; margin-bottom:12px; }
-    .precio { color:#008060; font-weight:bold; margin-bottom:10px; }
-    .boton { display:inline-block; background:#008060; color:white; padding:8px 14px; border-radius:6px; text-decoration:none; }
-    .boton:hover { background:#006a50; }
+    /* Contenedor para compensar header */
+    .container {
+      max-width:1200px;
+      margin:80px auto 60px;
+      padding:0 20px;
+    }
+
+    /* Título de sección */
+    h1 {
+      color:#008060;
+      text-align:center;
+      margin-bottom:24px;
+    }
+
+    /* Cuadrícula de productos */
+    .grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:24px;
+    }
+
+    /* Tarjeta de producto */
+    .producto {
+      background:rgba(255,255,255,0.95);
+      border-radius:12px;
+      box-shadow:0 8px 20px rgba(0,0,0,0.1);
+      padding:16px;
+      text-align:center;
+      transition:transform .2s;
+    }
+    .producto:hover {
+      transform:translateY(-5px);
+    }
+    .producto img {
+      width:100%;
+      height:140px;
+      object-fit:cover;
+      border-radius:8px;
+      margin-bottom:12px;
+    }
+    .producto h3 {
+      font-size:18px;
+      margin-bottom:8px;
+      color:#1b3a2f;
+    }
+    .producto p.desc {
+      font-size:14px;
+      margin-bottom:10px;
+      color:#555;
+    }
+    .producto p.precio {
+      font-weight:bold;
+      color:#008060;
+      margin-bottom:12px;
+    }
+    .producto a {
+      display:inline-block;
+      background:#008060;
+      color:#fff;
+      padding:8px 14px;
+      border-radius:6px;
+      text-decoration:none;
+      font-weight:bold;
+      transition:background .3s;
+    }
+    .producto a:hover {
+      background:#006a50;
+    }
+
+    /* Footer simple */
+    footer {
+      text-align:center;
+      padding:20px 0;
+      background:#008060;
+      color:#fff;
+      margin-top:40px;
+    }
   </style>
 </head>
 <body>
@@ -43,32 +121,98 @@
   </header>
 
   <div class="container">
-    <!-- Botón de regreso -->
-    <div class="bloque" style="text-align:center;">
-      <a href="index.html" class="boton">⬅ Volver a Inicio</a>
-    </div>
-
-    <section class="bloque" id="productos">
-      <h2>Catálogo de Productos</h2>
-      <div class="grid">
-        <!-- Producto 1 -->
-        <div class="producto">
-          <img src="https://via.placeholder.com/300x200?text=Aceite+de+Batana" alt="Aceite de Batana">
-          <h3>Aceite de Batana</h3>
-          <p class="precio">RD$500</p>
-          <a href="comprar.html?producto=Batana" class="boton">Comprar</a>
-        </div>
-        <!-- Producto 2 -->
-        <div class="producto">
-          <img src="https://via.placeholder.com/300x200?text=Diabenol" alt="Diabenol">
-          <h3>Diabenol</h3>
-          <p class="precio">RD$1,200</p>
-          <a href="comprar.html?producto=Diabenol" class="boton">Comprar</a>
-        </div>
-        <!-- Agrega aquí los 48 productos -->
+    <h1>Catálogo de Productos</h1>
+    <div class="grid">
+      <!-- 12 tarjetas de ejemplo -->
+      <div class="producto">
+        <img src="https://via.placeholder.com/300x200?text=Producto+1" alt="Producto 1">
+        <h3>Aceite de Batana</h3>
+        <p class="desc">Nutre y repara el cabello seco y dañado.</p>
+        <p class="precio">RD$500</p>
+        <a href="comprar.html?producto=Aceite+de+Batana">Comprar</a>
       </div>
-    </section>
+      <div class="producto">
+        <img src="https://via.placeholder.com/300x200?text=Producto+2" alt="Producto 2">
+        <h3>Diabenol</h3>
+        <p class="desc">Complemento para controlar niveles de azúcar.</p>
+        <p class="precio">RD$1,200</p>
+        <a href="comprar.html?producto=Diabenol">Comprar</a>
+      </div>
+      <div class="producto">
+        <img src="https://via.placeholder.com/300x200?text=Producto+3" alt="Producto 3">
+        <h3>Té Matcha</h3>
+        <p class="desc">Energía natural sin nerviosismo.</p>
+        <p class="precio">RD$1,300</p>
+        <a href="comprar.html?producto=Te+Matcha">Comprar</a>
+      </div>
+      <div class="producto">
+        <img src="https://via.placeholder.com/300x200?text=Producto+4" alt="Producto 4">
+        <h3>Jabón de Alepo</h3>
+        <p class="desc">Limpieza suave para todo tipo de piel.</p>
+        <p class="precio">RD$350</p>
+        <a href="comprar.html?producto=Jabon+de+Alepo">Comprar</a>
+      </div>
+      <div class="producto">
+        <img src="https://via.placeholder.com/300x200?text=Producto+5" alt="Producto 5">
+        <h3>Capsulas de Cúrcuma</h3>
+        <p class="desc">Antiinflamatorio natural.</p>
+        <p class="precio">RD$900</p>
+        <a href="comprar.html?producto=Capsulas+de+Curcuma">Comprar</a>
+      </div>
+      <div class="producto">
+        <img src="https://via.placeholder.com/300x200?text=Producto+6" alt="Producto 6">
+        <h3>Aceite de Orégano</h3>
+        <p class="desc">Potente antibacteriano natural.</p>
+        <p class="precio">RD$450</p>
+        <a href="comprar.html?producto=Aceite+de+Oregano">Comprar</a>
+      </div>
+      <div class="producto">
+        <img src="https://via.placeholder.com/300x200?text=Producto+7" alt="Producto 7">
+        <h3>Extracto de Aloe Vera</h3>
+        <p class="desc">Hidratación y regeneración de la piel.</p>
+        <p class="precio">RD$600</p>
+        <a href="comprar.html?producto=Extracto+de+Aloe+Vera">Comprar</a>
+      </div>
+      <div class="producto">
+        <img src="https://via.placeholder.com/300x200?text=Producto+8" alt="Producto 8">
+        <h3>Ginseng Rojo</h3>
+        <p class="desc">Mejora energía y concentración.</p>
+        <p class="precio">RD$1,100</p>
+        <a href="comprar.html?producto=Ginseng+Rojo">Comprar</a>
+      </div>
+      <div class="producto">
+        <img src="https://via.placeholder.com/300x200?text=Producto+9" alt="Producto 9">
+        <h3>Miel de Abeja</h3>
+        <p class="desc">Antioxidante y antibacteriano.</p>
+        <p class="precio">RD$400</p>
+        <a href="comprar.html?producto=Miel+de+Abeja">Comprar</a>
+      </div>
+      <div class="producto">
+        <img src="https://via.placeholder.com/300x200?text=Producto+10" alt="Producto 10">
+        <h3>Hierba Luisa</h3>
+        <p class="desc">Té relajante para mejorar el sueño.</p>
+        <p class="precio">RD$300</p>
+        <a href="comprar.html?producto=Hierba+Luisa">Comprar</a>
+      </div>
+      <div class="producto">
+        <img src="https://via.placeholder.com/300x200?text=Producto+11" alt="Producto 11">
+        <h3>Vitamina C</h3>
+        <p class="desc">Refuerzo inmunológico diario.</p>
+        <p class="precio">RD$700</p>
+        <a href="comprar.html?producto=Vitamina+C">Comprar</a>
+      </div>
+      <div class="producto">
+        <img src="https://via.placeholder.com/300x200?text=Producto+12" alt="Producto 12">
+        <h3>Spirulina</h3>
+        <p class="desc">Superalimento rico en proteínas.</p>
+        <p class="precio">RD$800</p>
+        <a href="comprar.html?producto=Spirulina">Comprar</a>
+      </div>
+    </div>
   </div>
 
+  <footer>
+    &copy; 2025 RYF Productos Integrales. Todos los derechos reservados.
+  </footer>
 </body>
 </html>
