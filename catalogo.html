@@ -1,182 +1,74 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Catálogo de Productos</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Catálogo – RYF</title>
   <style>
-    :root {
-      --main-color: #00695c;
-      --accent-color: #26a69a;
-      --bg-color: #f5f5f5;
-      --text-color: #333;
-      --card-bg: #ffffff;
-    }
-
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-    }
-
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:Arial,sans-serif; background:#f4f4f4; }
     header {
-      background-color: var(--main-color);
-      color: white;
-      padding: 1rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 10;
+      position: fixed; top:0; left:0; right:0;
+      background:#1b3a2f; padding:10px 0;
+      text-align:center; z-index:1000;
     }
+    nav { display:flex; justify-content:center; gap:15px; }
+    nav a { color:white; font-weight:bold; padding:6px 12px; }
+    nav a:hover { background:rgba(255,255,255,0.1); border-radius:4px; }
 
-    .logo {
-      font-size: 1.4rem;
-      font-weight: bold;
-    }
-
-    nav {
-      display: flex;
-      gap: 1rem;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    .menu-toggle {
-      display: none;
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1rem;
-      padding: 1rem;
-    }
-
-    .card {
-      background-color: var(--card-bg);
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      overflow: hidden;
-      transition: transform 0.2s;
-    }
-
-    .card:hover {
-      transform: scale(1.02);
-    }
-
-    .card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-    }
-
-    .card-content {
-      padding: 1rem;
-    }
-
-    .card-content h3 {
-      margin-top: 0;
-      color: var(--main-color);
-    }
-
-    .card-content p {
-      margin-bottom: 0.5rem;
-      font-size: 0.95rem;
-    }
-
-    @media (max-width: 768px) {
-      nav {
-        display: none;
-        flex-direction: column;
-        background-color: var(--main-color);
-        position: absolute;
-        top: 60px;
-        right: 0;
-        width: 200px;
-        padding: 1rem;
-      }
-
-      nav.active {
-        display: flex;
-      }
-
-      .menu-toggle {
-        display: block;
-      }
-    }
+    .container { margin:80px auto 40px; max-width:1200px; padding:0 20px; }
+    .bloque { background:rgba(255,255,255,0.9); border-radius:12px; box-shadow:0 8px 20px rgba(0,0,0,0.1); padding:20px; margin-bottom:30px; }
+    .grid { display:grid; gap:20px; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); }
+    .producto { background:white; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1); padding:16px; text-align:center; transition:transform .2s; }
+    .producto:hover { transform:translateY(-5px); }
+    .producto img { width:100%; border-radius:8px; margin-bottom:12px; }
+    .precio { color:#008060; font-weight:bold; margin-bottom:10px; }
+    .boton { display:inline-block; background:#008060; color:white; padding:8px 14px; border-radius:6px; text-decoration:none; }
+    .boton:hover { background:#006a50; }
   </style>
 </head>
 <body>
 
   <header>
-    <div class="logo">Catálogo Natural</div>
-    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-    <nav id="navbar">
-      <a href="#">Inicio</a>
-      <a href="#">Productos</a>
-      <a href="#">Contacto</a>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="catalogo.html">Catálogo</a>
+      <a href="contacto.html">Contacto</a>
+      <a href="sobre-nosotros.html">Sobre Nosotros</a>
+      <a href="comprar.html">Comprar Aquí</a>
+      <a href="metodo-pago.html">Método de Pago</a>
+      <a href="blog.html">Blog</a>
+      <a href="enfermedades.html">Enfermedades</a>
     </nav>
   </header>
 
-  <section class="grid">
-    <!-- Copia y edita más tarjetas desde aquí -->
-    <div class="card">
-      <img src="https://via.placeholder.com/300x200" alt="Producto 1">
-      <div class="card-content">
-        <h3>Producto 1</h3>
-        <p>Descripción breve del producto uno, ideal para el bienestar diario.</p>
-      </div>
+  <div class="container">
+    <!-- Botón de regreso -->
+    <div class="bloque" style="text-align:center;">
+      <a href="index.html" class="boton">⬅ Volver a Inicio</a>
     </div>
 
-    <div class="card">
-      <img src="https://via.placeholder.com/300x200" alt="Producto 2">
-      <div class="card-content">
-        <h3>Producto 2</h3>
-        <p>Este producto está formulado para apoyar tu salud natural.</p>
+    <section class="bloque" id="productos">
+      <h2>Catálogo de Productos</h2>
+      <div class="grid">
+        <!-- Producto 1 -->
+        <div class="producto">
+          <img src="https://via.placeholder.com/300x200?text=Aceite+de+Batana" alt="Aceite de Batana">
+          <h3>Aceite de Batana</h3>
+          <p class="precio">RD$500</p>
+          <a href="comprar.html?producto=Batana" class="boton">Comprar</a>
+        </div>
+        <!-- Producto 2 -->
+        <div class="producto">
+          <img src="https://via.placeholder.com/300x200?text=Diabenol" alt="Diabenol">
+          <h3>Diabenol</h3>
+          <p class="precio">RD$1,200</p>
+          <a href="comprar.html?producto=Diabenol" class="boton">Comprar</a>
+        </div>
+        <!-- Agrega aquí los 48 productos -->
       </div>
-    </div>
+    </section>
+  </div>
 
-    <div class="card">
-      <img src="https://via.placeholder.com/300x200" alt="Producto 3">
-      <div class="card-content">
-        <h3>Producto 3</h3>
-        <p>Concentrado natural que ayuda a mejorar tu energía y vitalidad.</p>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="https://via.placeholder.com/300x200" alt="Producto 4">
-      <div class="card-content">
-        <h3>Producto 4</h3>
-        <p>Fórmula herbal para mejorar tu sistema digestivo de forma natural.</p>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="https://via.placeholder.com/300x200" alt="Producto 5">
-      <div class="card-content">
-        <h3>Producto 5</h3>
-        <p>Refuerza tus defensas con este suplemento natural poderoso.</p>
-      </div>
-    </div>
-
-    <!-- Agrega más tarjetas si lo deseas -->
-  </section>
-
-  <script>
-    function toggleMenu() {
-      const nav = document.getElementById('navbar');
-      nav.classList.toggle('active');
-    }
-  </script>
 </body>
 </html>
