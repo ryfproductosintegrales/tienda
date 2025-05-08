@@ -1,107 +1,127 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aceite de Batana</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>R&F Productos Integrales</title>
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
-
-    .product-card {
-      background: #fff;
-      border-radius: 20px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      max-width: 400px;
-      width: 90%;
-      padding: 20px;
-      text-align: center;
-      position: relative;
-    }
-
-    .product-card img {
-      width: 100%;
-      border-radius: 15px;
-      margin-bottom: 15px;
-    }
-
-    .product-card h2 {
-      margin: 0 0 10px;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f7fff7;
       color: #333;
     }
 
-    .product-card p {
-      color: #555;
-      font-size: 14px;
-      margin-bottom: 20px;
-    }
-
-    .product-info {
-      display: flex;
-      justify-content: space-between;
-      text-align: left;
-      font-size: 14px;
-      color: #333;
-      margin-top: 10px;
-    }
-
-    .whatsapp-button {
+    header {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #25D366;
-      padding: 15px;
-      border-radius: 50%;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      top: 0;
+      width: 100%;
+      background-color: #4CAF50;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 1rem;
       z-index: 1000;
     }
 
-    .whatsapp-button img {
-      width: 30px;
-      height: 30px;
+    header img {
+      height: 50px;
     }
 
-    @media (max-width: 500px) {
-      .product-info {
+    header nav {
+      display: flex;
+      gap: 1rem;
+    }
+
+    header nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 0.5rem;
+    }
+
+    header nav a:hover {
+      background-color: #388E3C;
+      border-radius: 5px;
+    }
+
+    .main-content {
+      padding-top: 100px;
+      text-align: center;
+    }
+
+    .main-content h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #2e7d32;
+    }
+
+    .whatsapp-button {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #25D366;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .whatsapp-button:hover {
+      background-color: #1ebe5d;
+    }
+
+    footer {
+      background-color: #4CAF50;
+      color: white;
+      text-align: center;
+      padding: 1rem 0;
+      margin-top: 50px;
+    }
+
+    @media (max-width: 768px) {
+      header {
         flex-direction: column;
-        gap: 10px;
-        text-align: center;
+        align-items: flex-start;
+      }
+
+      header nav {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      header nav a {
+        width: 100%;
+        padding: 1rem;
+      }
+
+      .main-content h1 {
+        font-size: 2rem;
+        padding: 0 1rem;
       }
     }
   </style>
 </head>
 <body>
+  <header>
+    <img src="Imagenes/logos.png" alt="Logo R&F" />
+    <nav>
+      <a href="#inicio">Inicio</a>
+      <a href="#catalogo">Catálogo</a>
+      <a href="#comprar">Comprar Aquí</a>
+    </nav>
+  </header>
 
-  <div class="product-card">
-    <img src="https://i.imgur.com/SeTf5VH.png" alt="Aceite de Batana">
-    <h2>Aceite de Batana</h2>
-    <p>
-      Nutre, fortalece y repara tu cabello desde la raíz. Ideal para todo tipo de cabello, especialmente para el cabello seco, maltratado o con caída. ¡Descubre el secreto ancestral para un cabello sano y brillante!
-    </p>
-    <div class="product-info">
-      <div>
-        <strong>Presentaciones:</strong><br>
-        60 ml - RD$600<br>
-        120 ml - RD$1,100
-      </div>
-      <div style="text-align: right;">
-        <strong>Descuento:</strong><br>
-        -10% al comprar 6 o más
-      </div>
-    </div>
-  </div>
+  <section class="main-content" id="inicio">
+    <h1>R&F Productos Integrales</h1>
+    <a class="whatsapp-button" href="https://wa.me/18094254540" target="_blank">Contáctanos por WhatsApp</a>
+  </section>
 
-  <!-- Botón flotante de WhatsApp con solo el ícono -->
-  <a href="https://wa.me/18094254540" target="_blank" class="whatsapp-button">
-    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
-  </a>
-
+  <footer>
+    <p>© 2025 R&F Productos Integrales</p>
+  </footer>
 </body>
 </html>
