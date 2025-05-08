@@ -1,165 +1,108 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>R&F Productos Integrales</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aceite de Batana</title>
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f7fff7;
-      color: #333;
+      font-family: Arial, sans-serif;
     }
 
     header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background-color: #4CAF50;
+      background-color: #000;
       color: white;
+      padding: 10px 20px;
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      padding: 0.5rem 1rem;
-      z-index: 1000;
     }
 
-    .logo {
+    .logo-container {
       display: flex;
       align-items: center;
+      gap: 10px;
+      flex: 1 1 100%;
     }
 
-    .logo img {
+    .logo-container img {
       height: 40px;
-      margin-right: 0.5rem;
     }
 
-    .logo span {
-      font-size: 1.2rem;
+    .logo-container span {
+      font-size: 1.2em;
       font-weight: bold;
     }
 
     nav {
       display: flex;
-      gap: 1rem;
+      gap: 15px;
+      flex: 1 1 100%;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      margin-top: 10px;
     }
 
     nav a {
       color: white;
       text-decoration: none;
-      font-weight: bold;
+      background-color: #444;
+      padding: 6px 12px;
+      border-radius: 5px;
     }
 
     nav a:hover {
-      text-decoration: underline;
+      background-color: #666;
     }
 
-    .main-content {
-      padding-top: 100px;
-      text-align: center;
-    }
-
-    .main-content h1 {
-      font-size: 2.2rem;
-      color: #2e7d32;
-    }
-
-    .whatsapp-button {
-      display: inline-block;
+    .floating-btn {
+      position: fixed;
+      bottom: 15px;
+      right: 15px;
       background-color: #25D366;
       color: white;
-      padding: 0.8rem 1.5rem;
-      border-radius: 30px;
-      text-decoration: none;
+      padding: 12px 20px;
+      border-radius: 50px;
       font-weight: bold;
-      margin-top: 2rem;
+      text-decoration: none;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      z-index: 1000;
     }
 
-    footer {
-      background-color: #4CAF50;
-      color: white;
-      text-align: center;
-      padding: 1rem 0;
-      margin-top: 50px;
-    }
+    @media (min-width: 600px) {
+      .logo-container {
+        flex: 0 0 auto;
+      }
 
-    .menu-toggle {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-    }
-
-    .bar {
-      width: 25px;
-      height: 3px;
-      background-color: white;
-      margin: 4px 0;
-    }
-
-    @media (max-width: 768px) {
       nav {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        background-color: #4CAF50;
-        margin-top: 1rem;
-      }
-
-      nav.active {
-        display: flex;
-      }
-
-      .menu-toggle {
-        display: flex;
-      }
-
-      nav a {
-        padding: 1rem;
-        border-top: 1px solid #66bb6a;
-      }
-
-      .main-content h1 {
-        font-size: 1.8rem;
-        padding: 0 1rem;
+        flex: 0 0 auto;
+        margin-top: 0;
+        justify-content: flex-end;
       }
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <div class="logo">
-      <img src="Imagenes/logos.png" alt="Logo">
-      <span>R&F Productos Integrales</span>
-    </div>
-    <div class="menu-toggle" onclick="toggleMenu()">
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-    </div>
-    <nav id="nav">
-      <a href="#inicio">Inicio</a>
-      <a href="#catalogo">Catálogo</a>
-      <a href="#comprar">Comprar Aquí</a>
-    </nav>
-  </header>
+<header>
+  <div class="logo-container">
+    <img src="https://i.imgur.com/SeTf5VH.png" alt="Logo">
+    <span>Nombre del Sitio</span>
+  </div>
+  <nav>
+    <a href="#inicio">Inicio</a>
+    <a href="#beneficios">Beneficios</a>
+    <a href="#ingredientes">Ingredientes</a>
+    <a href="#testimonios">Testimonios</a>
+    <a href="#comprar">Comprar Aquí</a>
+  </nav>
+</header>
 
-  <section class="main-content" id="inicio">
-    <h1>Bienvenidos a R&F Productos Integrales</h1>
-    <a class="whatsapp-button" href="https://wa.me/18094254540">Contáctanos por WhatsApp</a>
-  </section>
-
-  <footer>
-    <p>© 2025 R&F Productos Integrales</p>
-  </footer>
-
-  <script>
-    function toggleMenu() {
-      const nav = document.getElementById('nav');
-      nav.classList.toggle('active');
-    }
-  </script>
+<a class="floating-btn" href="https://wa.me/18094254540" target="_blank">
+  Pedir por WhatsApp
+</a>
 
 </body>
 </html>
