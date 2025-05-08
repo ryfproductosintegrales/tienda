@@ -25,25 +25,34 @@
       z-index: 1000;
     }
 
-    header img {
-      height: 50px;
+    .logo {
+      display: flex;
+      align-items: center;
     }
 
-    header nav {
+    .logo img {
+      height: 40px;
+      margin-right: 0.5rem;
+    }
+
+    .logo span {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    nav {
       display: flex;
       gap: 1rem;
     }
 
-    header nav a {
+    nav a {
       color: white;
       text-decoration: none;
       font-weight: bold;
-      padding: 0.5rem;
     }
 
-    header nav a:hover {
-      background-color: #388E3C;
-      border-radius: 5px;
+    nav a:hover {
+      text-decoration: underline;
     }
 
     .main-content {
@@ -52,26 +61,19 @@
     }
 
     .main-content h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
+      font-size: 2.2rem;
       color: #2e7d32;
     }
 
     .whatsapp-button {
       display: inline-block;
-      margin-top: 2rem;
-      padding: 0.8rem 1.5rem;
       background-color: #25D366;
       color: white;
-      border: none;
+      padding: 0.8rem 1.5rem;
       border-radius: 30px;
-      font-size: 1rem;
       text-decoration: none;
-      transition: background-color 0.3s ease;
-    }
-
-    .whatsapp-button:hover {
-      background-color: #1ebe5d;
+      font-weight: bold;
+      margin-top: 2rem;
     }
 
     footer {
@@ -82,33 +84,61 @@
       margin-top: 50px;
     }
 
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .bar {
+      width: 25px;
+      height: 3px;
+      background-color: white;
+      margin: 4px 0;
+    }
+
     @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      header nav {
+      nav {
+        display: none;
         flex-direction: column;
         width: 100%;
+        background-color: #4CAF50;
+        margin-top: 1rem;
       }
 
-      header nav a {
-        width: 100%;
+      nav.active {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      nav a {
         padding: 1rem;
+        border-top: 1px solid #66bb6a;
       }
 
       .main-content h1 {
-        font-size: 2rem;
+        font-size: 1.8rem;
         padding: 0 1rem;
       }
     }
   </style>
 </head>
 <body>
+
   <header>
-    <img src="Imagenes/logos.png" alt="Logo R&F" />
-    <nav>
+    <div class="logo">
+      <img src="Imagenes/logos.png" alt="Logo">
+      <span>R&F Productos Integrales</span>
+    </div>
+    <div class="menu-toggle" onclick="toggleMenu()">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+    <nav id="nav">
       <a href="#inicio">Inicio</a>
       <a href="#catalogo">Catálogo</a>
       <a href="#comprar">Comprar Aquí</a>
@@ -116,12 +146,20 @@
   </header>
 
   <section class="main-content" id="inicio">
-    <h1>R&F Productos Integrales</h1>
-    <a class="whatsapp-button" href="https://wa.me/18094254540" target="_blank">Contáctanos por WhatsApp</a>
+    <h1>Bienvenidos a R&F Productos Integrales</h1>
+    <a class="whatsapp-button" href="https://wa.me/18094254540">Contáctanos por WhatsApp</a>
   </section>
 
   <footer>
     <p>© 2025 R&F Productos Integrales</p>
   </footer>
+
+  <script>
+    function toggleMenu() {
+      const nav = document.getElementById('nav');
+      nav.classList.toggle('active');
+    }
+  </script>
+
 </body>
 </html>
