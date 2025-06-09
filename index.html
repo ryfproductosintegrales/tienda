@@ -1,0 +1,2573 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Catálogo y Formulario de Pedido - R&F Productos Integrales</title>
+<link rel="icon" href="favicon.png" type="image/png">
+
+  <style>
+    /* Estilos Generales */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 0; /* Eliminar padding del body para que header/footer ocupen todo el ancho */
+      margin: 0; /* Eliminar margen del body */
+      background-color: #f8f9fa;
+      color: #343a40;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh; /* Asegura que el footer se quede abajo */
+    }
+
+    .main-content {
+      padding: 20px;
+      max-width: 900px;
+      margin: 0 auto; /* Centrar el contenido principal */
+      flex-grow: 1; /* Permite que el contenido principal ocupe el espacio disponible */
+      width: 100%; /* Asegura que el contenido ocupe el ancho máximo de su contenedor */
+    }
+
+    /* Estilos del Encabezado */
+    header {
+      background-color: #007bff;
+      color: white;
+      padding: 20px 20px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      width: 100%;
+      box-sizing: border-box; /* Incluir padding en el ancho */
+    }
+
+    header h1 {
+      margin: 0 0 10px 0;
+      font-size: 2.5em;
+      letter-spacing: 1px;
+    }
+
+    header p {
+      margin: 5px 0;
+      font-size: 1.1em;
+      opacity: 0.9;
+    }
+
+    header a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    header a:hover {
+      text-decoration: underline;
+    }
+
+    h2 {
+      text-align: center;
+      color: #007bff;
+      margin-top: 30px;
+      margin-bottom: 30px;
+      font-size: 2em;
+    }
+
+    button, select, input[type="text"], input[type="number"], textarea {
+      width: 100%;
+      margin: 8px 0;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ced4da;
+      box-sizing: border-box;
+      font-size: 1em;
+    }
+
+    button {
+      cursor: pointer;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .section {
+      margin: 25px 0;
+      padding: 15px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    /* Estilos del Catálogo de Productos (Tarjetas) */
+    .productos {
+      display: grid;
+      /* Ahora fijo en 3 columnas en pantallas mayores */
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+      margin-top: 20px;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+    /* Basado en: grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); :contentReference[oaicite:0]{index=0} */
+
+    .producto-card {
+      border: 1px solid #e0e0e0;
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      background-color: #ffffff;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      position: relative; /* Necesario para el botón de ficha */
+    }
+
+    .producto-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    }
+
+    .producto-imagen {
+      width: 160px;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+    }
+
+    .producto-info {
+      flex-grow: 1;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .producto-card h3 {
+      margin-top: 0;
+      margin-bottom: 8px;
+      font-size: 1.3em;
+      color: #333;
+      font-weight: 600;
+    }
+
+    .producto-descripcion {
+      font-size: 0.95em;
+      color: #6c757d;
+      margin-bottom: 15px;
+      min-height: 45px;
+      line-height: 1.4;
+    }
+
+    .precios {
+      font-weight: bold;
+      margin-bottom: 15px;
+      font-size: 1.1em;
+      color: #28a745;
+    }
+
+    .precio-mayor {
+      font-size: 0.85em;
+      color: #007bff;
+      margin-left: 8px;
+      font-weight: normal;
+    }
+
+    .cantidad-control {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .cantidad-control button {
+      width: 35px;
+      height: 35px;
+      padding: 0;
+      font-size: 1.4em;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .cantidad-control button:hover {
+      background-color: #0056b3;
+    }
+
+    .cantidad-input {
+      width: 70px;
+      text-align: center;
+      -moz-appearance: textfield;
+      font-size: 1.1em;
+      padding: 5px;
+      height: 35px;
+    }
+    .cantidad-input::-webkit-outer-spin-button,
+    .cantidad-input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* Estilos para la barra de búsqueda */
+    #busqueda {
+      margin-bottom: 25px;
+      border: 1px solid #007bff;
+      padding: 12px;
+      font-size: 1.1em;
+      border-radius: 8px;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+    }
+    #busqueda::placeholder {
+      color: #007bff;
+      opacity: 0.7;
+    }
+
+    /* Estilos para Totales */
+    .totales {
+      background-color: #e9ecef;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 30px;
+      font-size: 1.1em;
+      border: 1px solid #dee2e6;
+    }
+    .totales span {
+      display: flex;
+      justify-content: space-between;
+      margin: 8px 0;
+      padding-bottom: 5px;
+      border-bottom: 1px dashed #ced4da;
+    }
+    .totales strong {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+      font-size: 1.3em;
+      color: #dc3545;
+    }
+    .totales span:last-of-type {
+      border-bottom: none;
+    }
+
+    /* Estilos para los radios y selects */
+    label {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 1.05em;
+      color: #495057;
+    }
+    input[type="radio"] {
+      width: auto;
+      margin-right: 10px;
+      transform: scale(1.2);
+    }
+    #cuentas {
+      margin-top: 10px;
+    }
+
+    /* Botón de Enviar Pedido */
+    .whatsapp-button {
+      background-color: #25D366 !important;
+      color: white;
+      border: none;
+      padding: 15px 25px;
+      border-radius: 10px;
+      font-size: 1.2em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      cursor: pointer;
+      margin-top: 30px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .whatsapp-button:hover {
+      background-color: #1DA851 !important;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+    }
+    .whatsapp-button img {
+      width: 24px;
+      height: 24px;
+      filter: brightness(0) invert(1);
+    }
+
+    /* Mensajes de validación */
+    .error-message {
+      color: #dc3545;
+      font-size: 0.9em;
+      margin-top: -5px;
+      margin-bottom: 10px;
+      display: none;
+    }
+
+    /* Ficha Técnica Modal */
+    .modal {
+      display: none; /* Oculto por defecto */
+      position: fixed; /* Posición fija en la pantalla */
+      z-index: 1000; /* Asegura que esté por encima de todo */
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto; /* Permite scroll si el contenido es muy largo */
+      background-color: rgba(0,0,0,0.6); /* Fondo semi-transparente */
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 15% auto; /* 15% desde arriba y centrado */
+      padding: 30px;
+      border: 1px solid #888;
+      border-radius: 12px;
+      width: 80%; /* Ancho del contenido */
+      max-width: 600px; /* Ancho máximo */
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      animation: fadeIn 0.3s;
+      position: relative;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    .close-button {
+      color: #aaa;
+      float: right;
+      font-size: 36px;
+      font-weight: bold;
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      cursor: pointer;
+    }
+
+    .close-button:hover,
+    .close-button:focus {
+      color: #000;
+      text-decoration: none;
+    }
+
+    .modal-title {
+      font-size: 2em;
+      color: #007bff;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    /* Nuevo contenedor flex para que el texto y la imagen coexistan sin ocupar tanto espacio */
+    .modal-body {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 20px;
+      color: #495057;
+      line-height: 1.6;
+    }
+    /* Imagen dentro de la modal reducida */
+    .modal-body img {
+      max-width: 150px;
+      height: 150%;
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+    /* Contenido de texto al lado de la imagen */
+    .modal-body .ficha-contenido {
+      flex: 1;
+      text-align: left;
+    }
+
+    /* Botón de ficha técnica en la tarjeta del producto */
+    .ficha-tecnica-btn {
+      background-color: #6c757d;
+      color: white;
+      padding: 5px 10px;
+      font-size: 0.8em;
+      border-radius: 5px;
+      margin-top: 10px;
+      text-decoration: none; /* Si fuera un enlace */
+      display: inline-block; /* Para que tenga padding */
+      width: auto; /* Ancho automático */
+    }
+    .ficha-tecnica-btn:hover {
+      background-color: #5a6268;
+    }
+
+    /* Estilos para el Resumen del Pedido */
+    .resumen-pedido {
+      background-color: #e6f7ff; /* Un color suave para distinguirlo */
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 25px;
+      border: 1px solid #b3e0ff;
+      display: none; /* Oculto por defecto, se mostrará si hay productos */
+    }
+
+    .resumen-pedido h3 {
+      text-align: center;
+      color: #007bff;
+      margin-bottom: 20px;
+      font-size: 1.6em;
+      border-bottom: 2px solid #b3e0ff;
+      padding-bottom: 10px;
+    }
+
+    .resumen-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px dashed #cceeff;
+      font-size: 1.05em;
+    }
+
+    .resumen-item:last-child {
+      border-bottom: none;
+    }
+
+    .resumen-item .item-info {
+      flex-grow: 1;
+      text-align: left;
+      font-weight: 500;
+      color: #34495e;
+    }
+
+    .resumen-item .item-precio {
+      font-weight: bold;
+      color: #28a745;
+      margin-left: 15px;
+      white-space: nowrap; /* Evita que el precio se rompa en varias líneas */
+    }
+
+    .resumen-item .eliminar-item-btn {
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 5px 8px;
+      font-size: 0.8em;
+      cursor: pointer;
+      margin-left: 10px;
+      transition: background-color 0.2s;
+    }
+
+    .resumen-item .eliminar-item-btn:hover {
+      background-color: #c82333;
+    }
+
+    /* Estilos del Pie de Página */
+    footer {
+      background-color: #343a40;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 50px;
+      box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    footer p {
+      margin: 0;
+      font-size: 0.9em;
+      opacity: 0.8;
+    }
+
+    /* Media Queries para Responsividad */
+    @media (max-width: 992px) {
+      .productos {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 576px) {
+      .productos {
+        grid-template-columns: 1fr;
+      }
+      .main-content {
+        padding: 15px;
+      }
+      header {
+        padding: 15px 15px;
+      }
+      header h1 {
+        font-size: 2em;
+      }
+      header p {
+        font-size: 1em;
+      }
+      .producto-imagen {
+        width: 120px;
+        height: 120px;
+      }
+      .producto-card h3 {
+        font-size: 1.1em;
+      }
+      .producto-descripcion {
+        font-size: 0.85em;
+	white-space: pre-wrap;
+      }
+      .cantidad-input {
+        width: 50px;
+        font-size: 1em;
+      }
+      .whatsapp-button {
+        font-size: 1.1em;
+        padding: 12px 20px;
+      }
+      .modal-content {
+        width: 90%;
+        margin: 10% auto;
+        padding: 20px;
+      }
+      .modal-title {
+        font-size: 1.5em;
+      }
+      .resumen-item {
+        flex-direction: column; /* Apila los elementos en pantallas pequeñas */
+        align-items: flex-start;
+      }
+      .resumen-item .item-precio,
+      .resumen-item .eliminar-item-btn {
+        margin-top: 5px;
+        margin-left: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>R&F Productos Integrales</h1>
+    <p>🍃 Tu fuente de bienestar natural</p>
+    <p>📍 Alma Rosa II, Santo Domingo Este, RD</p>
+    <p>📞 Teléfono: <a href="tel:+18095927464">809-592-7464</a></p>
+  </header>
+
+  <div class="main-content">
+    <h2>🛒 Tu Catálogo de Productos y Pedidos</h2>
+    <input type="text" id="busqueda" placeholder="🔍 Buscar producto..." onkeyup="filtrarProductos()" />
+
+    <div class="productos" id="productos">
+      <!-- Aquí se inyectarán las tarjetas de producto -->
+    </div>
+
+    <div class="resumen-pedido section" id="resumenPedido">
+      <h3>📝 Productos en tu Pedido</h3>
+      <div id="listaProductosResumen">
+        <p style="text-align: center; color: #6c757d;">Aún no has agregado productos.</p>
+      </div>
+    </div>
+
+    <div class="totales section">
+      <span>🧾 Subtotal: RD$<span id="subtotal">0.00</span></span>
+      <span>🎁 Descuento: RD$<span id="descuento">0.00</span></span>
+      <span>🚚 Envío: RD$<span id="envio">0.00</span></span>
+      <strong>💳 Total a pagar: RD$<span id="total">0.00</span></strong>
+    </div>
+
+    <div class="section">
+      <h3>Datos para tu Pedido</h3>
+      <input type="text" id="nombre" placeholder="🙋 Tu Nombre Completo" required>
+      <div id="nombre-error" class="error-message">Por favor, ingresa tu nombre.</div>
+
+      <input type="tel" id="telefono" placeholder="📞 Tu Número de WhatsApp (Ej: 18091234567)" required>
+      <div id="telefono-error" class="error-message">Por favor, ingresa un número de teléfono válido.</div>
+
+      <input type="text" id="direccion" placeholder="📍 Dirección de Envío (solo si es a domicilio)" oninput="calcularTotales()">
+      <div id="direccion-error" class="error-message">Por favor, ingresa tu dirección de envío para entrega a domicilio.</div>
+    </div>
+
+    <div class="section">
+      <h3>Tipo de Entrega</h3>
+      <label><input type="radio" name="entrega" value="Entrega a Domicilio" checked onchange="manejarEntrega()"> 🛻 Entrega a Domicilio</label>
+      <label><input type="radio" name="entrega" value="Recoger en Tienda" onchange="manejarEntrega()"> 🏬 Recoger en Tienda</label>
+    </div>
+
+    <div class="section">
+      <h3>Método de Pago</h3>
+      <label><input type="radio" name="pago" value="Efectivo" checked onclick="mostrarCuentas(false)"> 💵 Efectivo</label>
+      <label><input type="radio" name="pago" value="Transferencia" onclick="mostrarCuentas(true)"> 💳 Transferencia</label>
+      <select id="cuentas" style="display:none;">
+        <option>Banco Popular - 123456789</option>
+        <option>Banreservas - 987654321</option>
+        <option>Banco BHD - 543219870</option>
+      </select>
+    </div>
+
+    <div class="section">
+      <label for="comentario"><strong>📝 ¿Algún comentario o instrucción especial?</strong></label>
+      <textarea id="comentario" placeholder="Ej: Entregar después de las 3pm, o si no hay, reemplazar por..." rows="4"></textarea>
+    </div>
+
+    <div id="productos-error" class="error-message" style="text-align: center;">Por favor, selecciona al menos un producto.</div>
+
+    <button type="button" class="whatsapp-button" onclick="enviarPedido()">
+      <img src="https://img.icons8.com/ios-filled/24/ffffff/whatsapp.png" alt="WhatsApp">
+      Enviar pedido por WhatsApp
+    </button>
+
+    <!-- Modal de Ficha Técnica -->
+    <div id="fichaTecnicaModal" class="modal">
+      <div class="modal-content">
+        <span class="close-button" onclick="cerrarModal()">&times;</span>
+        <h3 class="modal-title" id="modalTituloProducto"></h3>
+        <div class="modal-body" id="modalCuerpoFicha">
+          <!-- Aquí se inyectará la ficha técnica con formato -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 R&F Productos Integrales. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    const productos = [
+      {
+        nombre: "Aceite de Ajonjolí<br> 4 oz",
+        precioDetalle: 400,
+        precioMayor: 340,
+        imagen: "imagenes/ajonjoli.jpg",
+        descripcion: "Aceite puro de ajonjolí, prensado en frío. Ideal para aderezos, salteados y masajes. Rico en antioxidantes y grasas saludables.",
+        /* Ahora puedes agregar en este campo HTML con secciones <h4>Uso</h4>, <h4>Beneficios</h4>, etc. */
+        fichaTecnica: `
+          <h4>Uso Culinario</h4>
+          <p>Ideal para salteados, aderezos de ensaladas y para realzar el sabor de platos asiáticos.</p>
+          <h4>Uso Tópico</h4>
+          <p>Humectante para la piel y el cabello, y en masajes relajantes.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Rico en ácidos grasos insaturados.</li>
+            <li>Antioxidante natural (sesamina y sesamolina).</li>
+            <li>Propiedades antiinflamatorias.</li>
+          </ul>
+        `
+      },
+      {
+        nombre: "Aceite de Batana<br> 2 oz",
+        precioDetalle: 1200,
+        precioMayor: 1100,
+        imagen: "imagenes/batana.png",
+        descripcion: "Aceite tradicional para el cuidado del cabello y la piel, promueve el crecimiento y la hidratación.",
+        fichaTecnica: `
+          <h4>Uso Capilar</h4>
+          <p>Fortalece los folículos, reduce la caída, aporta brillo y suavidad. Ayuda a reparar cabellos dañados.</p>
+          <h4>Uso Tópico en Piel</h4>
+          <p>Ideal para hidratar la piel seca y en masajes.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Rico en ácidos grasos y vitamina E.</li>
+            <li>Propiedades antioxidantes y nutritivas.</li>
+          </ul>
+        `
+      },
+      {
+        nombre: "Aceite de Coco<br> 8 Onzas",
+        precioDetalle: 400,
+        precioMayor: 320,
+        imagen: "imagenes/Coco pequeño.png",
+        descripcion: "Aceite de coco virgen extra, en formato práctico de 8 onzas. Excelente para cocina, piel y cabello.",
+        fichaTecnica: `
+          <h4>Uso Culinario</h4>
+          <p>Ideal para freír, hornear y en batidos.</p>
+          <h4>Uso Cosmético</h4>
+          <p>Humectante profundo para piel y cabello; desmaquillante natural.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Contiene triglicéridos de cadena media (MCTs).</li>
+            <li>Apoyo al metabolismo y antimicrobiano natural.</li>
+          </ul>
+        `
+      },
+      {
+        nombre: "Aceite de Coco ½ Galón",
+        precioDetalle: 1200,
+        precioMayor: 950,
+        imagen: "imagenes/Coco medio galon.jpg",
+        descripcion: "Formato económico de medio galón. Aceite de coco orgánico, perfecto para uso regular en el hogar.",
+        fichaTecnica: `
+          <h4>Propiedades Principales</h4>
+          <p>Mismas que el aceite de coco de 8 onzas, pero en presentación de medio galón para mayor conveniencia.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Gran fuente de MCTs.</li>
+            <li>Ideal para consumo familiar frecuente.</li>
+          </ul>
+        `
+      },
+      {
+        nombre: "Aceite de Coco Galón",
+        precioDetalle: 1900,
+        precioMayor: 1750,
+        imagen: "imagenes/Coco Galon.jpg",
+        descripcion: "El formato más grande para amantes del coco. Ideal para familias o uso profesional. Calidad premium.",
+        fichaTecnica: `
+          <h4>Descripción General</h4>
+          <p>Presentación de galón del aceite de coco virgen extra.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Económico para usos a gran escala.</li>
+            <li>Conserva todas las propiedades nutricionales y cosméticas.</li>
+          </ul>
+        `
+      },
+      {
+        nombre: "Aceite de Copaiba<br> 30 ml",
+        precioDetalle: 500,
+        precioMayor: 425,
+        imagen: "imagenes/Copaiba.jpg",
+        descripcion: "Aceite esencial de copaiba, conocido por sus propiedades antiinflamatorias y su uso en terapias naturales.",
+        fichaTecnica: `
+          <h4>Composición</h4>
+          <p>Extraído de la resina del árbol de copaiba. Contiene beta-cariofileno (cannabinoide natural).</p>
+          <h4>Uso</h4>
+          <ul>
+            <li>Tópico para dolores musculares y problemas de piel (diluido).</li>
+            <li>Aromaterapia para reducir la ansiedad.</li>
+          </ul>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Potente antiinflamatorio y analgésico.</li>
+            <li>Antibacteriano y cicatrizante.</li>
+          </ul>
+        `
+      },
+      {
+        nombre: "Aceite de Eucalipto<br> 1 oz",
+        precioDetalle: 400,
+        precioMayor: 340,
+        imagen: "imagenes/eucalipto.png",
+        descripcion: "Aceite esencial de eucalipto, perfecto para vías respiratorias, masajes y aromaterapia. Aroma fresco.",
+        fichaTecnica: `
+          <h4>Uso Respiratorio</h4>
+          <p>En inhalaciones de vapor para descongestionar vías respiratorias.</p>
+          <h4>Uso en Masajes</h4>
+          <p>Diluido en aceite base, ideal para masajes en el pecho.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Expectorante y descongestionante.</li>
+            <li>Antiséptico natural.</li>
+          </ul>
+        `
+      },
+      {
+        nombre: "Aceite de Linaza<br> 8 oz",
+        precioDetalle: 500,
+        precioMayor: 425,
+        imagen: "imagenes/linaza.jpg",
+        descripcion: "Aceite de linaza virgen, rico en Omega-3. Ideal como suplemento dietético o para aderezar ensaladas.",
+        fichaTecnica: `
+          <h4>Fuente de Omega-3 (ALA)</h4>
+          <p>Uno de los vegetales más ricos en ácidos grasos Omega-3.</p>
+          <h4>Uso Culinario</h4>
+          <p>Ideal para aderezar ensaladas, batidos y yogures (no apto para cocinar a altas temperaturas).</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Apoya la salud cardiovascular.</li>
+            <li>Propiedades antiinflamatorias y digestivas.</li>
+          </ul>
+        `
+      },
+      {
+        nombre: "Aceite de Orégano<br> 30 ml",
+        precioDetalle: 950,
+        precioMayor: 807,
+        imagen: "imagenes/oregano.jpg",
+        descripcion: "Aceite esencial concentrado de orégano. Potente para el sistema inmunológico y digestivo.",
+        fichaTecnica: `
+          <h4>Composición Básica</h4>
+          <p>Contiene carvacrol y timol (principios activos).</p>
+          <h4>Uso</h4>
+          <ul>
+            <li>Siempre diluido: tópico para infecciones cutáneas.</li>
+            <li>Interno (bajo supervisión): apoyo digestivo e inmunológico.</li>
+          </ul>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Antibacteriano, antiviral y antifúngico.</li>
+            <li>Fortalece el sistema inmunológico.</li>
+          </ul>
+        `
+      },
+      {
+        nombre: "Aceite de Rícino<br> 4 oz",
+        precioDetalle: 300,
+        precioMayor: 255,
+        imagen: "imagenes/ricino.jpg",
+        descripcion: "Aceite de rícino puro. Frecuentemente usado para el crecimiento de cejas, pestañas y cabello, y para la piel.",
+        fichaTecnica: `
+          <h4>Composición</h4>
+          <p>Rico en ácido ricinoleico (hasta 90%).</p>
+          <h4>Uso Cosmético</h4>
+          <ul>
+            <li>Estimula crecimiento de cejas, pestañas y cabello.</li>
+            <li>Hidratación profunda para piel seca.</li>
+          </ul>
+          <h4>Uso Interno</h4>
+          <p>Como laxante natural (con precaución y bajo supervisión médica).</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Propiedades antiinflamatorias y analgésicas.</li>
+            <li>Hidratante y nutritivo para piel y cabello.</li>
+          </ul>
+        `
+      },
+      {
+        nombre: "Aceites Esenciales<br> 10 ml",
+        precioDetalle: 800,
+        precioMayor: 680,
+        imagen: "imagenes/esenciales.png",
+        descripcion: "Mezcla selecta de aceites esenciales para aromaterapia y bienestar general. Variedad de aromas disponibles.",
+        fichaTecnica: `
+          <h4>Combinación de Mezclas</h4>
+          <p>Variedad de aceites (lavanda, eucalipto, menta, árbol de té, etc.).</p>
+          <h4>Uso</h4>
+          <ul>
+            <li>Difusores: purificación y aromaterapia.</li>
+            <li>Masajes (diluido en aceite portador).</li>
+            <li>Baños aromáticos.</li>
+          </ul>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Efectos relajantes, energizantes o purificantes según mezcla.</li>
+            <li>Mejora el estado de ánimo y el bienestar general.</li>
+          </ul>
+        `
+      },
+      {
+        nombre: "Adipo-CF<br> 600 mgs - 90 Caps.",
+        precioDetalle: 500,
+        precioMayor: 425,
+        imagen: "imagenes/adipo-cf.jpg",
+        descripcion: "Suplemento natural diseñado para apoyar el metabolismo y la quema de grasa. Consulta a tu especialista.",
+        fichaTecnica: `
+          <h4>Ingredientes Principales</h4>
+          <p>Extractos naturales de plantas (ej. Garcinia, L-carnitina, té verde).</p>
+          <h4>Dosis Recomendada</h4>
+          <p>[Dosis por cápsula/veces al día]</p>
+          <h4>Uso</h4>
+          <p>Acompañar con dieta balanceada y ejercicio regular.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Apoya la termogénesis y quema de grasa.</li>
+            <li>Incrementa niveles de energía.</li>
+          </ul>
+          <h4>Precauciones</h4>
+          <p>Consultar a un médico si está embarazada, lactando o tomando medicamentos.</p>
+        `
+      },
+      {
+        nombre: "Adipofin<br> 600 mgs - 90 Caps.",
+        precioDetalle: 600,
+        precioMayor: 510,
+        imagen: "imagenes/adipofin.jpg",
+        descripcion: "Fórmula avanzada para el control de peso, ayuda a regular el apetito y optimizar la energía.",
+        fichaTecnica: `
+          <h4>Ingredientes</h4>
+          <p>Extractos de té verde, L-carnitina, cafeína, vitamina B6.</p>
+          <h4>Dosis</h4>
+          <p>[Dosis por cápsula/veces al día]</p>
+          <h4>Uso</h4>
+          <p>Tomar 1 cápsula antes de las comidas principales.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Supresor de apetito natural.</li>
+            <li>Incrementa energía y metaboliza grasa.</li>
+          </ul>
+          <h4>Precauciones</h4>
+          <p>No apto para embarazadas, lactantes o personas con problemas cardíacos. Asesorarse con especialista.</p>
+        `
+      },
+      {
+        nombre: "Alcachofa Cápsulas<br> 500 mgs - 60 Caps.",
+        precioDetalle: 600,
+        precioMayor: 510,
+        imagen: "imagenes/Alcachofa.jpg",
+        descripcion: "Cápsulas de alcachofa, conocidas por su apoyo a la función hepática y digestiva. Desintoxicante natural.",
+        fichaTecnica: `
+          <h4>Origen</h4>
+          <p>Extracto de Cynara scolymus (alcachofa).</p>
+          <h4>Dosis</h4>
+          <p>[Dosis por cápsula/veces al día]</p>
+          <h4>Uso</h4>
+          <p>Tomar 1 cápsula antes de las comidas para mejorar digestión.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Hepatoprotector y colerético (aumenta bilis).</li>
+            <li>Diurético y antioxidante.</li>
+            <li>Ayuda en reducción de colesterol.</li>
+          </ul>
+        `
+      },
+      {
+        nombre: "Almendra<br> 227 grs",
+        precioDetalle: 250,
+        precioMayor: 212,
+        imagen: "imagenes/almendras.jpg",
+        descripcion: "Almendras frescas y naturales. Perfectas para un snack saludable o como ingrediente en tus recetas.",
+        fichaTecnica: `
+          <h4>Composición Nutricional</h4>
+          <ul>
+            <li>Grasas saludables (monoinsaturadas).</li>
+            <li>Proteínas, fibra, vitamina E, magnesio, calcio.</li>
+          </ul>
+          <h4>Uso</h4>
+          <ul>
+            <li>Snack natural.</li>
+            <li>En ensaladas, postres, leches vegetales.</li>
+          </ul>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Salud cardiovascular.</li>
+            <li>Control de azúcar en sangre.</li>
+            <li>Saciedad y antioxidantes.</li>
+          </ul>
+          <h4>Almacenamiento</h4>
+          <p>Conservar en lugar fresco y seco.</p>
+        `
+      },
+      {
+        nombre: "Amargo Sueco<br> 8 oz",
+        precioDetalle: 1500,
+        precioMayor: 1300,
+        imagen: "imagenes/amargo sueco.jpg",
+        descripcion: "Clásico tónico herbal con una mezcla de hierbas amargas, tradicionalmente usado para la digestión y depuración.",
+        fichaTecnica: `
+          <h4>Ingredientes</h4>
+          <p>Mezcla de hierbas como aloe, ruibarbo, azafrán, sena, mirra, etc.</p>
+          <h4>Uso</h4>
+          <p>Diluir unas gotas en agua o té, antes o después de las comidas.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Mejora la digestión y alivia hinchazón.</li>
+            <li>Depura el hígado y la sangre.</li>
+            <li>Estimula el apetito.</li>
+          </ul>
+        `
+      },
+      {
+        nombre: "Anís Comino",
+        precioDetalle: 50,
+        precioMayor: null,
+        imagen: "imagenes/anis comino.png",
+        descripcion: "Semillas de anís comino, aromáticas y digestivas. Ideales para infusiones o para condimentar alimentos.",
+        fichaTecnica: `
+          <h4>Propiedades</h4>
+          <p>Carminativas, digestivas y aromáticas.</p>
+          <h4>Uso Culinario</h4>
+          <p>En panadería, dulces, licores y guisos.</p>
+          <h4>Uso Medicinal</h4>
+          <ul>
+            <li>Infusiones para aliviar cólicos e indigestión.</li>
+            <li>Estimula lactancia en madres.</li>
+          </ul>
+        `
+      },
+      {
+        nombre: "Ashwagandha<br> 550 mgs - 60 Caps.",
+        precioDetalle: 600,
+        precioMayor: 510,
+        imagen: "imagenes/ashwagandha.png",
+        descripcion: "Adaptógeno herbal de la medicina ayurvédica, ayuda a manejar el estrés y promueve el equilibrio.",
+        fichaTecnica: `
+          <h4>Nombre Científico</h4>
+          <p>Withania somnifera.</p>
+          <h4>Uso</h4>
+          <p>Tomar 500 mg al día con agua o jugo.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Reduce estrés y ansiedad.</li>
+            <li>Mejora calidad de sueño y función cognitiva.</li>
+            <li>Aumenta energía y vitalidad.</li>
+          </ul>
+          <h4>Precauciones</h4>
+          <p>Consultar a un médico si está embarazada o con condiciones médicas.</p>
+        `
+      },
+      {
+        nombre: "Ayurcolon<br> 3.25 oz",
+        precioDetalle: 500,
+        precioMayor: 425,
+        imagen: "imagenes/ayurcolon.jpg",
+        descripcion: "Suplemento natural formulado para apoyar la salud del colon y la digestión. Ayuda a mantener la regularidad.",
+        fichaTecnica: `
+          <h4>Fórmula</h4>
+          <p>Mezcla de hierbas ayurvédicas que promueven la limpieza intestinal.</p>
+          <h4>Uso</h4>
+          <p>Tomar 1 cápsula con agua antes de dormir.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Alivia estreñimiento y hinchazón.</li>
+            <li>Mejora absorción de nutrientes.</li>
+          </ul>
+          <h4>Precaución</h4>
+          <p>Beber suficiente agua durante su uso.</p>
+        `
+      },
+      {
+        nombre: "Ayurfibra",
+        precioDetalle: 500,
+        precioMayor: 425,
+        imagen: "imagenes/ayurfibra.png",
+        descripcion: "Mezcla de fibras naturales que contribuyen a una digestión saludable y a la sensación de saciedad.",
+        fichaTecnica: `
+          <h4>Composición</h4>
+          <p>Fibra soluble e insoluble (psyllium, inulina, salvado de avena).</p>
+          <h4>Uso</h4>
+          <p>Mezclar 1 cucharada en agua, jugo o batidos antes de las comidas.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Promueve regularidad intestinal.</li>
+            <li>Previene estreñimiento y controla apetito.</li>
+            <li>Contribuye a niveles saludables de colesterol.</li>
+          </ul>
+        `
+      },
+      {
+        nombre: "Ayurmona<br> 500 mgs - 60 Caps.",
+        precioDetalle: 500,
+        precioMayor: 425,
+        imagen: "imagenes/ayurmona.jpg",
+        descripcion: "Fórmula ayurvédica diseñada para el equilibrio hormonal femenino, apoyando el bienestar general.",
+        fichaTecnica: `
+          <h4>Ingredientes</h4>
+          <p>Mezcla de hierbas como Shatavari, Ashoka, Lodhra.</p>
+          <h4>Uso</h4>
+          <p>Tomar 2 cápsulas al día con agua.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Alivia síntomas del síndrome premenstrual y menopausia.</li>
+            <li>Mejora estado de ánimo y reduce fatiga.</li>
+          </ul>
+          <h4>Precaución</h4>
+          <p>Consultar a un médico si está embarazada o tomando otras medicinas.</p>
+        `
+      },
+      {
+        nombre: "Barro (Arcilla)<br> 16 oz",
+        precioDetalle: 200,
+        precioMayor: 170,
+        imagen: "imagenes/arcilla.png",
+        descripcion: "Barro natural purificado, ideal para mascarillas faciales y corporales. Propiedades desintoxicantes.",
+        fichaTecnica: `
+          <h4>Composición</h4>
+          <p>Rico en minerales: sílice, magnesio, calcio, potasio.</p>
+          <h4>Uso</h4>
+          <p>Mezclar con agua hasta formar pasta; aplicar en rostro o cuerpo por 15-20 minutos.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Desintoxica y purifica la piel.</li>
+            <li>Astringente y revitalizante.</li>
+          </ul>
+        `
+      },
+      {
+        nombre: "Broncovedi<br> 4 oz",
+        precioDetalle: 300,
+        precioMayor: 255,
+        imagen: "imagenes/broncovedi.jpg",
+        descripcion: "Jarabe natural para el alivio de la tos y la congestión. A base de extractos herbales.",
+        fichaTecnica: `
+          <h4>Ingredientes</h4>
+          <p>Extractos de eucalipto, miel, jengibre.</p>
+          <h4>Dosis</h4>
+          <p>Tomar 10 ml cada 6 horas.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Expectorante y mucolítico natural.</li>
+            <li>Descongestiona vías respiratorias.</li>
+          </ul>
+          <h4>Precaución</h4>
+          <p>No exceder dosis recomendada.</p>
+        `
+      },
+      {
+        nombre: "Calaguala<br> 2 oz",
+        precioDetalle: 250,
+        precioMayor: 212,
+        imagen: "imagenes/calaguaca.png",
+        descripcion: "Hierba natural conocida por sus propiedades beneficiosas para la piel y el sistema inmunológico.",
+        fichaTecnica: `
+          <h4>Nombre Científico</h4>
+          <p>Polypodium leucotomos.</p>
+          <h4>Uso</h4>
+          <p>Infusiones con hojas secas; 1 cucharadita en agua caliente.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Propiedades inmunomoduladoras y antioxidantes.</li>
+            <li>Apoya salud de la piel (dermatitis, psoriasis).</li>
+            <li>Protege contra daño solar.</li>
+          </ul>
+        `
+      },
+      {
+        nombre: "Cápsulas Vacías Millar",
+        precioDetalle: 450,
+        precioMayor: null,
+        imagen: "imagenes/capsulas.png",
+        descripcion: "Mil cápsulas vegetales vacías, tamaño #0. Perfectas para crear tus propios suplementos herbales.",
+        fichaTecnica: `
+          <h4>Material</h4>
+          <p>Hipromelosa (vegetal, libre de gelatina).</p>
+          <h4>Uso</h4>
+          <p>Rellenar con polvos herbales o suplementos y cerrar.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Permiten dosificar tus propios suplementos.</li>
+            <li>Sin sabor ni olor.</li>
+            <li>Fáciles de rellenar con máquinas manuales.</li>
+          </ul>
+        `
+      },
+{
+        nombre: "Cápsulas Vacías Pag<br> 30 und",
+        precioDetalle: 450,
+        precioMayor: null,
+        imagen: "imagenes/capsulas vacias.png",
+        descripcion: "Mil cápsulas vegetales vacías, tamaño #0. Perfectas para crear tus propios suplementos herbales.",
+        fichaTecnica: `
+          <h4>Material</h4>
+          <p>Hipromelosa (vegetal, libre de gelatina).</p>
+          <h4>Uso</h4>
+          <p>Rellenar con polvos herbales o suplementos y cerrar.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Permiten dosificar tus propios suplementos.</li>
+            <li>Sin sabor ni olor.</li>
+            <li>Fáciles de rellenar con máquinas manuales.</li>
+          </ul>
+        `
+      },
+      {
+        nombre: "Carbón de Eucalipto<br> 30 und",
+        precioDetalle: 400,
+        precioMayor: 340,
+        imagen: "imagenes/carbon eucalipto.png",
+        descripcion: "Carbón activado de eucalipto, excelente absorbente para uso interno y externo (mascarillas).",
+        fichaTecnica: `
+          <h4>Composición</h4>
+          <p>Carbón activado con aroma y propiedades de eucalipto.</p>
+          <h4>Uso Interno</h4>
+          <p>Tomar 1 cucharadita en agua para alivio de gases e indigestión (bajo supervisión).</p>
+          <h4>Uso Externo</h4>
+          <p>Mascarillas faciales: mezclar con agua o arcilla.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Adsorbe toxinas y gases.</li>
+            <li>Purifica la piel y limpia poros.</li>
+          </ul>
+        `
+      },
+      {
+        nombre: "Cardo Mariano<br> 2 oz",
+        precioDetalle: 250,
+        precioMayor: 212,
+        imagen: "imagenes/cardo mariano.jpg",
+        descripcion: "Hierba conocida por su apoyo a la salud del hígado y sus propiedades antioxidantes.",
+        fichaTecnica: `
+          <h4>Nombre Científico</h4>
+          <p>Silybum marianum.</p>
+          <h4>Uso</h4>
+          <p>Infusiones con hojas: 1 cucharadita en agua caliente.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Protege y regenera células hepáticas (silimarina).</li>
+            <li>Potente antioxidante y desintoxicante.</li>
+          </ul>
+        `
+      },
+      {
+        nombre: "Cecropia<br> 2 oz",
+        precioDetalle: 200,
+        precioMayor: 170,
+        imagen: "imagenes/cecropia.png",
+        descripcion: "Hierba cecropia, utilizada en la medicina tradicional por sus propiedades diversas.",
+        fichaTecnica: `
+          <h4>Uso</h4>
+          <p>Infusiones para afecciones renales y respiratorias.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Diurético natural.</li>
+            <li>Propiedades hipotensoras y antiasmáticas.</li>
+          </ul>
+          <h4>Precaución</h4>
+          <p>Consultar con especialista antes de usar.</p>
+        `
+      },
+      {
+        nombre: "Chanca Piedra<br> 500 mg",
+        precioDetalle: 600,
+        precioMayor: 510,
+        imagen: "imagenes/chanca piedra.jpg",
+        descripcion: "Popular hierba utilizada para la salud renal y el sistema urinario. Conocida como 'rompepiedras'.",
+        fichaTecnica: `
+          <h4>Nombre Científico</h4>
+          <p>Phyllanthus niruri.</p>
+          <h4>Uso</h4>
+          <p>Infusiones o extractos concentrados.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Ayuda a disolver y expulsar cálculos renales y biliares.</li>
+            <li>Propiedades diuréticas, antiinflamatorias y hepatoprotectoras.</li>
+          </ul>
+        `
+      },
+      {
+        nombre: "Citrato de Calcio con Magnesio",
+        precioDetalle: 600,
+        precioMayor: 510,
+        imagen: "imagenes/calcio magnesio.png",
+        descripcion: "Suplemento combinado de calcio y magnesio para huesos fuertes, función muscular y nerviosa.",
+        fichaTecnica: `
+          <h4>Composición</h4>
+          <p>Citrato de calcio y magnesio (alta biodisponibilidad).</p>
+          <h4>Dosis</h4>
+          <p>[Dosis diaria recomendada]</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Mantiene huesos y dientes fuertes.</li>
+            <li>Apoya función muscular y nerviosa.</li>
+            <li>Previene osteoporosis y regula ritmo cardíaco.</li>
+          </ul>
+        `
+      },
+{
+        nombre: "Citrato de Magnesio<br> 142 grs",
+        precioDetalle: 500,
+        precioMayor: 400,
+        imagen: "imagenes/citrato magnesio.png",
+        descripcion: "Suplemento de magnesio para huesos fuertes, función muscular y nerviosa.",
+        fichaTecnica: `
+          <h4>Composición</h4>
+          <p>Citrato de Magnesio (alta biodisponibilidad).</p>
+          <h4>Dosis</h4>
+          <p>[Dosis diaria recomendada]</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Mantiene huesos y dientes fuertes.</li>
+            <li>Apoya función muscular y nerviosa.</li>
+            <li>Previene osteoporosis y regula ritmo cardíaco.</li>
+          </ul>
+        `
+      },
+      {
+        nombre: "Citrato de Potasio<br> 152 grs",
+        precioDetalle: 500,
+        precioMayor: 425,
+        imagen: "imagenes/potasio polvo.jpg",
+        descripcion: "Suplemento de potasio, esencial para el equilibrio de electrolitos y la salud cardiovascular.",
+        fichaTecnica: `
+          <h4>Fórmula</h4>
+          <p>Citrato de potasio en polvo.</p>
+          <h4>Dosis</h4>
+          <p>[Dosis diaria recomendada]</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Mantiene equilibrio de electrolitos.</li>
+            <li>Apoya presión arterial saludable y función muscular.</li>
+            <li>Previene cálculos renales.</li>
+          </ul>
+          <h4>Precaución</h4>
+          <p>No exceder dosis sin supervisión médica.</p>
+        `
+      },
+      {
+        nombre: "Cola de Caballo Entera<br> 16 oz",
+        precioDetalle: 400,
+        precioMayor: 340,
+        imagen: "imagenes/cola caballo.png",
+        descripcion: "Hierba cola de caballo en su forma entera. Diurético natural, bueno para el cabello y uñas.",
+        fichaTecnica: `
+          <h4>Nombre Científico</h4>
+          <p>Equisetum arvense.</p>
+          <h4>Uso</h4>
+          <p>Infusiones con hojas secas.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Diurética y remineralizante.</li>
+            <li>Fortalece cabello, piel y uñas (rica en sílice).</li>
+          </ul>
+        `
+      },
+ {
+        nombre: "Cola de Caballo en Polvo<br> 3 oz",
+        precioDetalle: 200,
+        precioMayor: 160,
+        imagen: "imagenes/caballo.png",
+        descripcion: "Hierba cola de caballo en su forma entera. Diurético natural, bueno para el cabello y uñas.",
+        fichaTecnica: `
+          <h4>Nombre Científico</h4>
+          <p>Equisetum arvense.</p>
+          <h4>Uso</h4>
+          <p>Infusiones con hojas secas.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Diurética y remineralizante.</li>
+            <li>Fortalece cabello, piel y uñas (rica en sílice).</li>
+          </ul>
+        `
+      },
+      {
+        nombre: "Colágeno Hidrolizado<br> 150 grs",
+        precioDetalle: 600,
+        precioMayor: 475,
+        imagen: "imagenes/colageno.png",
+        descripcion: "Colágeno hidrolizado de alta pureza. Promueve la salud de la piel, articulaciones y cabello.",
+        fichaTecnica: `
+          <h4>Composición</h4>
+          <p>Colágeno hidrolizado (fácil absorción).</p>
+          <h4>Dosis</h4>
+          <p>[Dosis diaria recomendada]</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Mejora elasticidad de la piel.</li>
+            <li>Apoya la salud de articulaciones, huesos y cartílagos.</li>
+            <li>Fortalece cabello y uñas.</li>
+          </ul>
+          <h4>Precaución</h4>
+          <p>Consumir con abundante agua.</p>
+        `
+      },
+      {
+        nombre: "Crema Relajante Relabir<br> 3 oz",
+        precioDetalle: 350,
+        precioMayor: 297,
+        imagen: "imagenes/relabir.jpg",
+        descripcion: "Crema de masaje relajante con extractos herbales para aliviar tensiones musculares y estrés.",
+        fichaTecnica: `
+          <h4>Ingredientes</h4>
+          <p>Extractos de árnica, harpagofito y menta.</p>
+          <h4>Uso</h4>
+          <p>Aplicar masajeando suavemente sobre zonas de tensión.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Relajante muscular y antiinflamatoria.</li>
+            <li>Alivia dolores articulares y estrés.</li>
+          </ul>
+          <h4>Precaución</h4>
+          <p>Evitar contacto con ojos y mucosas.</p>
+        `
+      },
+      {
+        nombre: "Cúrcuma en Polvo<br> 3.5 oz",
+        precioDetalle: 200,
+        precioMayor: 170,
+        imagen: "imagenes/curcuma polvo.jpg",
+        descripcion: "Cúrcuma en polvo de alta calidad, conocida por sus potentes propiedades antiinflamatorias y antioxidantes.",
+        fichaTecnica: `
+          <h4>Composición</h4>
+          <p>Curcuminoides (principalmente curcumina).</p>
+          <h4>Uso Culinario</h4>
+          <p>En curries, sopas, batidos; combinar con pimienta negra para mejor absorción.</p>
+          <h4>Uso Medicinal</h4>
+          <p>Infusiones o cápsulas para propiedades antiinflamatorias.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Antiinflamatoria y antioxidante.</li>
+            <li>Apoyo digestivo y hepatoprotector.</li>
+          </ul>
+        `
+      },
+      {
+        nombre: "Curcumin<br> 600 mgs",
+        precioDetalle: 500,
+        precioMayor: 425,
+        imagen: "imagenes/curcumin.jpg",
+        descripcion: "Suplemento de Curcumin, el ingrediente activo de la cúrcuma, para máxima absorción y beneficios.",
+        fichaTecnica: `
+          <h4>Formulación</h4>
+          <p>Curcumina microencapsulada con piperina para aumentar biodisponibilidad.</p>
+          <h4>Dosis</h4>
+          <p>[Dosis diaria recomendada]</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Soporte articular y salud cerebral.</li>
+            <li>Antiinflamatorio y antioxidante.</li>
+            <li>Apoya digestión y sistema cardiovascular.</li>
+          </ul>
+        `
+      },
+      {
+        nombre: "Damiana Cápsula<br> 400 mgs",
+        precioDetalle: 500,
+        precioMayor: 425,
+        imagen: "imagenes/damiana.jpg",
+        descripcion: "Cápsulas de damiana, utilizadas tradicionalmente como afrodisíaco y para mejorar el ánimo.",
+        fichaTecnica: `
+          <h4>Nombre Científico</h4>
+          <p>Turnera diffusa.</p>
+          <h4>Uso</h4>
+          <p>Tomar 1 cápsula al día con agua.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Afrodisíaco natural.</li>
+            <li>Reduce ansiedad y mejora estado de ánimo.</li>
+          </ul>
+          <h4>Precaución</h4>
+          <p>No apto para embarazadas o lactantes.</p>
+        `
+      },
+      {
+        nombre: "Diabenol<br> 1560 grs - 60 Caps.",
+        precioDetalle: 2600,
+        precioMayor:   2100,
+        imagen: "imagenes/diabenol.jpg",
+        descripcion: "Fórmula especializada para reducir los niveles de azúcar en la sangre y la salud metabólica.",
+        fichaTecnica: `
+          <h4>Ingredientes Principales</h4>
+          <p>Extractos herbales y nutrientes como cromo, canela y ácido alfa-lipoico.</p>
+          <h4>Uso</h4>
+          <p>Tomar 1 cápsula antes del desayuno y otra antes de la cena, dependiendo de los niveles de azúcar que tenga.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Reduce los niveles de Azúcar en la sangre.</li>
+	    <li>Mejora la sensibilidad a la insulina.</li>
+            <li>Reduce picos de glucosa postprandial.</li>
+	    <li>Regula el metabolismo.</li>
+	    <li>Aporta antioxidantes naturales.</li>
+	    <li>Favorece la conciliación del sueño.</li>
+	    <li>Favorece la pérdida de peso.</li>
+	    <li>Favorece el apetito sexual.</li>
+          </ul>
+          <h4>Nota Importante</h4>
+          <p>Si usted esta consumiendo algun medicamento para bajar su azúcar, puede consumir el Diabenol conjuntamente con cualquier otro medicamento.</p>
+	  <p>El plan de regulacion para bajar los niveles de azúcar en la sangre, contempla 3 frascos completos de Diabenol,
+aun cuando usted puede iniciar con un frasco, recuerde que para obtener los beneficios buscados y bajar los niveles a un estado deseado,
+debe procurar consumir los 3 frascos. Hara un "ALTO" por espacio de 3 a 6 meses y luego retoma el tratamiento.</p>
+        `
+      },
+      {
+        nombre: "Dianim<br> 20 ml",
+        precioDetalle: 300,
+        precioMayor: 255,
+        imagen: "imagenes/dianin.jpg",
+        descripcion: "Suplemento para apoyar la vitalidad y energía general. Ayuda a combatir la fatiga.",
+        fichaTecnica: `
+          <h4>Ingredientes</h4>
+          <p>Ginseng, jalea real, vitaminas del complejo B.</p>
+          <h4>Uso</h4>
+          <p>Tomar 1 cápsula en la mañana con agua.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Combate cansancio y mejora concentración.</li>
+            <li>Aumenta energía física y mental.</li>
+          </ul>
+        `
+      },
+      {
+        nombre: "Diente de León<br> 3 oz",
+        precioDetalle: 250,
+        precioMayor: 212,
+        imagen: "imagenes/diente leon.png",
+        descripcion: "Hierba diente de león, conocida por su efecto diurético y apoyo a la función hepática.",
+        fichaTecnica: `
+          <h4>Nombre Científico</h4>
+          <p>Taraxacum officinale.</p>
+          <h4>Uso</h4>
+          <p>Infusiones con raíces u hojas.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Propiedades diuréticas y depurativas.</li>
+            <li>Apoya función hepática y renal.</li>
+          </ul>
+        `
+      },
+      {
+        nombre: "Dióxido de Cloro",
+        precioDetalle: 500,
+        precioMayor: 425,
+        imagen: "imagenes/dioxido cloro.png",
+        descripcion: "Solución de dióxido de cloro, usada por algunos para la purificación de agua o desinfección.",
+        fichaTecnica: `
+          <h4>Uso</h4>
+          <p>Principalmente como desinfectante de agua y superficies.</p>
+          <h4>Advertencia</h4>
+          <p>Su uso interno NO está respaldado científicamente. Puede ser peligroso. NO se recomienda consumo interno.</p>
+        `
+      },
+      {
+        nombre: "Fennel<br> 600 mg",
+        precioDetalle: 500,
+        precioMayor: 425,
+        imagen: "imagenes/fennel.jpg",
+        descripcion: "Semillas de hinojo (fennel), excelentes para la digestión y el alivio de gases.",
+        fichaTecnica: `
+          <h4>Uso</h4>
+          <p>En infusiones para aliviar cólicos e indigestión. En cocina para panadería y guisos.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Propiedades carminativas y antiespasmódicas.</li>
+            <li>Alivia gases y mejora digestión.</li>
+          </ul>
+        `
+      },
+      {
+        nombre: "Fenugreek Cápsula<br> 500 mg",
+        precioDetalle: 500,
+        precioMayor: 425,
+        imagen: "imagenes/fenugreek capsula.jpg",
+        descripcion: "Cápsulas de fenogreco, usadas para el apoyo a la lactancia y el control de azúcar en sangre.",
+        fichaTecnica: `
+          <h4>Nombre Científico</h4>
+          <p>Trigonella foenum-graecum.</p>
+          <h4>Dosis</h4>
+          <p>Tomar 1 cápsula antes de cada comida.</p>
+          <h4>Uso</h4>
+          <p>Estimula producción de leche materna y regula azúcar en sangre.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Galactogogo natural.</li>
+            <li>Ayuda a controlar niveles de glucosa.</li>
+          </ul>
+          <h4>Precaución</h4>
+          <p>Consultar a médico si se tienen condiciones médicas preexistentes.</p>
+        `
+      },
+      {
+        nombre: "Fenugreek Polvo<br> 2 oz",
+        precioDetalle: 300,
+        precioMayor: 255,
+        imagen: "imagenes/fenugreek polvo.jpg",
+        descripcion: "Polvo de fenogreco, versátil para uso culinario y como suplemento natural.",
+        fichaTecnica: `
+          <h4>Uso Culinario</h4>
+          <p>En la cocina india y de Oriente Medio como especia.</p>
+          <h4>Uso Medicinal</h4>
+          <p>En infusiones o batidos para los mismos beneficios que las cápsulas (lactancia, regulación de glucosa).</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Promueve lactancia y controla azúcar.</li>
+            <li>Propiedades digestivas y antiinflamatorias.</li>
+          </ul>
+        `
+      },
+      {
+        nombre: "Fenuzing",
+        precioDetalle: 500,
+        precioMayor: 400,
+        imagen: "imagenes/fenuzing.png",
+        descripcion: "Suplemento para el metabolismo, ayuda a optimizar la energía y la quema de calorías.",
+        fichaTecnica: `
+          <h4>Ingredientes</h4>
+          <p>Extracto de té verde, L-carnitina, cafeína.</p>
+          <h4>Uso</h4>
+          <p>Tomar 1 cápsula en la mañana con agua.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Estimula termogénesis y oxidación de grasas.</li>
+            <li>Aumenta energía.</li>
+          </ul>
+          <h4>Precaución</h4>
+          <p>No apto para personas sensibles a la cafeína o con problemas cardíacos.</p>
+        `
+      },
+      {
+        nombre: "Flor de Jamaica<br> 3 oz",
+        precioDetalle: 200,
+        precioMayor: 170,
+        imagen: "imagenes/jamaica.png",
+        descripcion: "Flores secas de Jamaica (hibisco), ideales para preparar infusiones refrescantes y saludables.",
+        fichaTecnica: `
+          <h4>Uso</h4>
+          <p>Infusiones frías o calientes, aguas frescas, jaleas y postres.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Diurética y antioxidante.</li>
+            <li>Ayuda a regular presión arterial y colesterol.</li>
+          </ul>
+        `
+      },
+      {
+        nombre: "Flores de Lavanda<br> 3 oz",
+        precioDetalle: 300,
+        precioMayor: 255,
+        imagen: "imagenes/lavanda.jpg",
+        descripcion: "Flores de lavanda secas, perfectas para infusiones, bolsitas aromáticas o decoración. Calma y relaja.",
+        fichaTecnica: `
+          <h4>Uso</h4>
+          <p>Infusiones para ansiedad e insomnio; bolsitas aromáticas para ropa y almohadas.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Propiedades calmantes y antiestrés.</li>
+            <li>Uso en cosmética y productos naturales.</li>
+          </ul>
+        `
+      },
+      {
+        nombre: "Ganoderma<br> 500 mg",
+        precioDetalle: 600,
+        precioMayor: 510,
+        imagen: "imagenes/ganoderma.jpg",
+        descripcion: "Extracto de hongo Ganoderma Lucidum, potente adaptógeno para el sistema inmunológico y bienestar general.",
+        fichaTecnica: `
+          <h4>Nombre Científico</h4>
+          <p>Ganoderma lucidum (Reishi).</p>
+          <h4>Uso</h4>
+          <p>Extractos en cápsulas o infusiones.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Inmunoestimulante poderoso.</li>
+            <li>Reduce estrés y mejora calidad de sueño.</li>
+            <li>Propiedades antioxidantes y hepatoprotectoras.</li>
+          </ul>
+        `
+      },
+ {
+        nombre: "Generador Desinfectante",
+        precioDetalle: 500,
+        precioMayor: 400,
+        imagen: "imagenes/generador.png",
+        descripcion: "La combinación de sal marina más agua más electricidad de baja intensidad, produce un compuesto llamado hipoclorito de sodio. Útil en la limpieza, desinfección, esterilización y blanqueado. De naturaleza orgánica, a una concentración de 300 ppm, la cual es inofensiva para el ser humano y letal para bacterias, virus y hongos.",
+        fichaTecnica: `
+          <h4>Ingredientes Principales</h4>
+          <p>Sal + Agua y 5 minutos.</p>
+          <h4>Uso</h4>
+          <p>lavado de productos comestibles, limpieza de productos para el hogar, limpieza de productos para bebes, limpieza y desinfección de cocinas, baño en general, juguetes para niños, interior de lavadoras.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Limpieza.</li>
+            <li>Desinfectante.</li>
+            <li>Esterilizacion.</li>
+	    <li>Blanqueado.</li>
+          </ul>
+        `
+      },
+      {
+        nombre: "Ginkgo Biloba<br> 400 mg",
+        precioDetalle: 500,
+        precioMayor: 425,
+        imagen: "imagenes/ginkgo biloba.jpg",
+        descripcion: "Suplemento de Ginkgo Biloba, tradicionalmente usado para la memoria, concentración y circulación.",
+        fichaTecnica: `
+          <h4>Composición</h4>
+          <p>Extracto de hojas de Ginkgo Biloba estandarizado al 24% en flavonoides.</p>
+          <h4>Dosis</h4>
+          <p>Tomar 1 cápsula (120 mg) al día.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Mejora circulación cerebral y periférica.</li>
+            <li>Antioxidante y neuroprotector.</li>
+            <li>Apoya memoria y concentración.</li>
+          </ul>
+          <h4>Precaución</h4>
+          <p>Consultar si tomas anticoagulantes.</p>
+        `
+      },
+      {
+        nombre: "Ginseng Coreano<br> 400 mg",
+        precioDetalle: 600,
+        precioMayor: 510,
+        imagen: "imagenes/ginseng.jpg",
+        descripcion: "Ginseng coreano de alta calidad, conocido por sus propiedades energizantes y su apoyo a la vitalidad.",
+        fichaTecnica: `
+          <h4>Nombre Científico</h4>
+          <p>Panax ginseng.</p>
+          <h4>Uso</h4>
+          <p>Infusiones o cápsulas: 1 cápsula (500 mg) al día.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Adaptógeno que aumenta resistencia al estrés.</li>
+            <li>Mejora concentración y energía.</li>
+            <li>Refuerza sistema inmunológico.</li>
+          </ul>
+          <h4>Precaución</h4>
+          <p>No tomar antes de dormir; consultar con médico si tomas medicación cardiovascular.</p>
+        `
+      },
+      {
+        nombre: "Glucosamina Sulfato",
+        precioDetalle: 600,
+        precioMayor: 475,
+        imagen: "imagenes/glucosamina.png",
+        descripcion: "Suplemento de glucosamina sulfato, esencial para la salud de las articulaciones y el cartílago.",
+        fichaTecnica: `
+          <h4>Composición</h4>
+          <p>Glucosamina sulfato (1500 mg por dosis).</p>
+          <h4>Uso</h4>
+          <p>Tomar 2 cápsulas diarias con agua.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Reconstituye y mantiene cartílago articular.</li>
+            <li>Reduce dolor e inflamación en articulaciones.</li>
+            <li>Mejora movilidad, ideal para osteoartritis.</li>
+          </ul>
+        `
+      },
+      {
+        nombre: "Hojas de Laurel<br> 3 oz",
+        precioDetalle: 200,
+        precioMayor: 170,
+        imagen: "imagenes/laurel.png",
+        descripcion: "Hojas de laurel secas, perfectas para dar sabor a tus comidas y como remedio natural.",
+        fichaTecnica: `
+          <h4>Uso Culinario</h4>
+          <p>En guisos, sopas y salsas. Retirar hoja antes de servir.</p>
+          <h4>Uso Medicinal</h4>
+          <p>Infusiones para aliviar indigestión y gases.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Propiedades digestivas y carminativas.</li>
+            <li>Antiséptico y expectorante.</li>
+          </ul>
+        `
+      },
+      {
+        nombre: "Hojas de Zapote Blanco<br> 2 oz",
+        precioDetalle: 200,
+        precioMayor: 170,
+        imagen: "imagenes/zapote blanco.jpg",
+        descripcion: "Hojas de zapote blanco, usadas en la medicina tradicional por sus propiedades diversas.",
+        fichaTecnica: `
+          <h4>Uso</h4>
+          <p>Infusiones para sedantes y ansiolíticos.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Propiedades sedantes y ansiolíticas.</li>
+            <li>Efecto hipotensor.</li>
+          </ul>
+          <h4>Precaución</h4>
+          <p>Consultar con médico si se toman medicamentos para la presión o el sueño.</p>
+        `
+      },
+      {
+        nombre: "Ionteracare",
+        precioDetalle: 8200,
+        precioMayor: null,
+        imagen: "imagenes/ionteracare.png",
+        descripcion: "Dispositivo de tecnología avanzada para terapias de bienestar y relajación. Consulta sus beneficios.",
+        fichaTecnica: `
+          <h4>Tecnología</h4>
+          <p>Emite iones negativos y ondas de terahercios para promover bienestar.</p>
+          <h4>Uso</h4>
+          <p>Seguir instrucciones del fabricante. Uso en sesiones de 10-15 minutos.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Mejora circulación y alivia dolor.</li>
+            <li>Reduce inflamación y promueve regeneración celular.</li>
+          </ul>
+          <h4>Precaución</h4>
+          <p>No es un dispositivo médico. No sustituye tratamiento profesional.</p>
+        `
+      },
+      {
+        nombre: "Jengibre<br> 3.2 oz",
+        precioDetalle: 200,
+        precioMayor: 170,
+        imagen: "imagenes/jenjibre.png",
+        descripcion: "Raíz de jengibre fresca, ideal para infusiones, cocinar y como digestivo natural.",
+        fichaTecnica: `
+          <h4>Nombre Científico</h4>
+          <p>Zingiber officinale.</p>
+          <h4>Uso</h4>
+          <ul>
+            <li>Infusiones para náuseas y dolor.</li>
+            <li>En comidas y batidos como especia.</li>
+          </ul>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Antiinflamatorio y antioxidante.</li>
+            <li>Alivia náuseas y dolores musculares.</li>
+            <li>Fortalece sistema inmunológico.</li>
+          </ul>
+        `
+      },
+      {
+        nombre: "Kelp<br> 600 mg",
+        precioDetalle: 500,
+        precioMayor: 382,
+        imagen: "imagenes/kelp.jpg",
+        descripcion: "Suplemento de alga Kelp, fuente natural de yodo para el soporte de la tiroides y el metabolismo.",
+        fichaTecnica: `
+          <h4>Composición</h4>
+          <p>Alga marina rica en yodo y minerales.</p>
+          <h4>Uso</h4>
+          <p>Tomar 1 cápsula al día con agua.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Apoya función tiroidea y metabolismo.</li>
+            <li>Fuente natural de nutrientes esenciales.</li>
+          </ul>
+          <h4>Precaución</h4>
+          <p>No exceder dosis de yodo; consultar si tienes condición tiroidea.</p>
+        `
+      },
+      {
+        nombre: "Levadura Nutricional<br> 146 grs",
+        precioDetalle: 400,
+        precioMayor: 340,
+        imagen: "imagenes/levadura nutricional.jpg",
+        descripcion: "Levadura nutricional en hojuelas, fuente de vitaminas B y sabor umami para tus comidas.",
+        fichaTecnica: `
+          <h4>Composición</h4>
+          <p>Levadura inactivada, fortificada con vitaminas B (incluyendo B12).</p>
+          <h4>Uso</h4>
+          <p>Espolvorear sobre ensaladas, pastas, palomitas o salsas.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Fuente de proteínas y fibra.</li>
+            <li>Mejora aporte de vitaminas del complejo B en dietas veganas/vegetarianas.</li>
+            <li>Sabor umami que enriquece platillos.</li>
+          </ul>
+          <h4>Almacenamiento</h4>
+          <p>Conservar en lugar fresco y seco.</p>
+        `
+      },
+      {
+        nombre: "Levitron (Juego Interactivo Magnético)",
+        precioDetalle: 800,
+        precioMayor: null,
+        imagen: "imagenes/levitron.png",
+        descripcion: "Divertido juego magnético interactivo que demuestra principios de levitación. Ideal para todas las edades.",
+        fichaTecnica: `
+          <h4>Funcionamiento</h4>
+          <p>Basado en levitación magnética entre una base y un trompo metálico magnetizado.</p>
+          <h4>Uso</h4>
+          <p>Alinear el trompo y ajustar campos magnéticos según instrucciones para lograr levitación estable.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Experimenta principios de física de forma lúdica.</li>
+            <li>Estimula interés en ciencias y tecnología.</li>
+          </ul>
+        `
+      },
+      {
+        nombre: "Licorice<br> 2 oz",
+        precioDetalle: 300,
+        precioMayor: 255,
+        imagen: "imagenes/licorice.jpg",
+        descripcion: "Extracto de regaliz (licorice), utilizado por sus propiedades calmantes para el sistema digestivo y respiratorio.",
+        fichaTecnica: `
+          <h4>Composición</h4>
+          <p>Extracto de Glycyrrhiza glabra.</p>
+          <h4>Uso</h4>
+          <p>Infusiones para aliviar acidez y dolor de garganta.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Propiedades antiinflamatorias y antivirales.</li>
+            <li>Alivia tos y problemas digestivos.</li>
+          </ul>
+          <h4>Precaución</h4>
+          <p>Consumo excesivo puede elevar presión arterial. Consultar a médico.</p>
+        `
+      },
+      {
+        nombre: "Maca Cápsulas<br> 500 mgs",
+        precioDetalle: 500,
+        precioMayor: 382,
+        imagen: "imagenes/maca capsula.jpg",
+        descripcion: "Cápsulas de maca andina, conocida por aumentar la energía, el ánimo y el equilibrio hormonal.",
+        fichaTecnica: `
+          <h4>Nombre Científico</h4>
+          <p>Lepidium meyenii.</p>
+          <h4>Uso</h4>
+          <p>Tomar 1 cápsula al día con agua.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Mejora energía y resistencia.</li>
+            <li>Equilibra hormonas y mejora libido.</li>
+            <li>Reduce síntomas de menopausia.</li>
+          </ul>
+        `
+      },
+      {
+        nombre: "Maca en Polvo<br> 3.2 oz",
+        precioDetalle: 350,
+        precioMayor: 297,
+        imagen: "imagenes/maca polvo.jpg",
+        descripcion: "Maca en polvo orgánica, ideal para añadir a batidos, yogures y recetas. Energizante natural.",
+        fichaTecnica: `
+          <h4>Uso</h4>
+          <p>Añadir 1 cucharada a batidos, yogures o cereales.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Fuente de carbohidratos, proteínas, fibra y vitaminas/minerales.</li>
+            <li>Efecto energizante y adaptógeno.</li>
+            <li>Mejora libido, fertilidad y equilibrio hormonal.</li>
+          </ul>
+          <h4>Precaución</h4>
+          <p>Conservar en lugar fresco y seco.</p>
+        `
+      },
+      {
+        nombre: "Macadamia<br> 227 grs",
+        precioDetalle: 260,
+        precioMayor: 221,
+        imagen: "imagenes/macadamia.png",
+        descripcion: "Nueces de macadamia premium, deliciosas y ricas en grasas saludables. Un snack exquisito.",
+        fichaTecnica: `
+          <h4>Composición Nutricional</h4>
+          <ul>
+            <li>Alto contenido en grasas monoinsaturadas.</li>
+            <li>Vitaminas, minerales y antioxidantes.</li>
+          </ul>
+          <h4>Uso</h4>
+          <p>Snacks, repostería, ensaladas o leches vegetales.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Salud cardiovascular.</li>
+            <li>Fuente de energía y antioxidantes.</li>
+          </ul>
+          <h4>Almacenamiento</h4>
+          <p>Conservar en lugar fresco y oscuro para mantener frescura.</p>
+        `
+      },
+      {
+        nombre: "Miel de Abeja en Panal<br> 596 grs",
+        precioDetalle: 500,
+        precioMayor: 400,
+        imagen: "imagenes/miel.jpg",
+        descripcion: "Miel de abeja 100% natural, pura y deliciosa. Ideal para endulzar y por sus propiedades saludables.",
+        fichaTecnica: `
+          <h4>Origen</h4>
+          <p>Recolección de [ej. flor de azahar, multifloral].</p>
+          <h4>Uso</h4>
+          <ul>
+            <li>Endulzante natural en infusiones y comidas.</li>
+            <li>Usar como remedio casero para tos y garganta irritada.</li>
+          </ul>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Antibacteriana, antiinflamatoria y prebiótica.</li>
+            <li>Fuente rápida de energía.</li>
+          </ul>
+          <h4>Precaución</h4>
+          <p>Puede cristalizar; calentar suavemente para volver a estado líquido.</p>
+        `
+      },
+      {
+        nombre: "Moringa en Polvo<br> 3.5 oz",
+        precioDetalle: 200,
+        precioMayor: 170,
+        imagen: "imagenes/moringa polvo.jpg",
+        descripcion: "Moringa en polvo, súper alimento con gran cantidad de nutrientes, vitaminas y antioxidantes.",
+        fichaTecnica: `
+          <h4>Nombre Científico</h4>
+          <p>Moringa oleifera.</p>
+          <h4>Uso</h4>
+          <p>Añadir 1 cucharadita a batidos, jugos, yogures o espolvorear sobre comidas.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Fuente concentrada de vitaminas A, C, E, K, minerales y antioxidantes.</li>
+            <li>Propiedades antiinflamatorias y digestivas.</li>
+            <li>Apoya sistema inmunológico y aumenta energía.</li>
+          </ul>
+        `
+      },
+   
+      {
+        nombre: "Parasito<br> 4 oz",
+        precioDetalle: 400,
+        precioMayor: 340,
+        imagen: "imagenes/parasito.jpg",
+        descripcion: "Fórmula herbal para el soporte de la limpieza intestinal y la eliminación de parásitos.",
+        fichaTecnica: `
+          <h4>Ingredientes</h4>
+          <p>Sinergia de hierbas: nogal negro, ajenjo, clavo.</p>
+          <h4>Dosis</h4>
+          <p>[Dosis diaria y duración del ciclo]</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Apoya desintoxicación intestinal.</li>
+            <li>Alivia hinchazón, gases y síntomas asociados a parásitos.</li>
+          </ul>
+          <h4>Precaución</h4>
+          <p>Repetir ciclo según recomendaciones. Consultar a profesional de la salud.</p>
+        `
+      },
+      {
+        nombre: "Pasiflora en Polvo<br> 3 oz",
+        precioDetalle: 250,
+        precioMayor: 212,
+        imagen: "imagenes/pasiflora povo.png",
+        descripcion: "Polvo de pasiflora (flor de la pasión), utilizado para calmar la ansiedad y promover el sueño.",
+        fichaTecnica: `
+          <h4>Nombre Científico</h4>
+          <p>Passiflora incarnata.</p>
+          <h4>Uso</h4>
+          <p>Infusiones con 1 cucharadita de polvo antes de dormir.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Propiedades ansiolíticas y sedantes suaves.</li>
+            <li>Mejora calidad del sueño sin somnolencia diurna.</li>
+          </ul>
+        `
+      },
+{
+        nombre: "Pasiflora & Valeriana<br> 600 mgs",
+        precioDetalle: 600,
+        precioMayor: 480,
+        imagen: "imagenes/valeriana y pasiflora.png",
+        descripcion: "Pasiflora (flor de la pasión),  es una formula herbal milenaria, utilizada para calmar la ansiedad y promover el sueño.",
+        fichaTecnica: `
+          <h4>Advertencia</h4>
+          <p>En caso de embarazo o madre lactando, no consumir este producto.</p>
+          <h4>Uso</h4>
+          <p>Tomar dos capsulas dos veces al dia antes o despues de las comidas.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Propiedades ansiolíticas y sedantes suaves.</li>
+            <li>Mejora la calidad del sueño sin somnolencia diurna.</li>
+	    <li>Relaja el Sistema Nervioso.</li>
+	    <li>Ideal para: insomnio, nerviosismo, jaqueca, migraña, etc.</li>
+          </ul>
+        `
+      },
+      {
+        nombre: "Pau de Arco<br> 2 oz",
+        precioDetalle: 250,
+        precioMayor: 212,
+       imagen: "imagenes/palo arco.png",
+        descripcion: "Corteza de Pau D'Arco, conocida por sus propiedades antifúngicas, antivirales e inmunoestimulantes.",
+        fichaTecnica: `
+          <h4>Nombre Científico</h4>
+          <p>Handroanthus impetiginosus (Lapacho).</p>
+          <h4>Uso</h4>
+          <p>Decocciones (hervir corteza durante 10-15 minutos).</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Propiedades antimicrobianas (antifúngicas, antivirales, antibacterianas).</li>
+            <li>Soporte inmunológico y antiinflamatorio.</li>
+          </ul>
+          <h4>Precaución</h4>
+          <p>No apto para embarazadas. Consultar a un profesional.</p>
+        `
+      },
+      
+      {
+        nombre: "Progesterona Natural<br> 600 mg",
+        precioDetalle: 500,
+        precioMayor: 382,
+        imagen: "imagenes/progesterona.jpg",
+        descripcion: "Crema de progesterona natural para el equilibrio hormonal y el bienestar femenino.",
+        fichaTecnica: `
+          <h4>Origen</h4>
+          <p>Extracto vegetal (ñame silvestre).</p>
+          <h4>Uso</h4>
+          <p>Aplicar dosis recomendada en la piel según indicaciones médicas.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Equilibra niveles de progesterona en perimenopausia y menopausia.</li>
+            <li>Alivia bochornos y mejora calidad de sueño.</li>
+          </ul>
+          <h4>Precaución</h4>
+          <p>Consultar a un médico antes de usar.</p>
+        `
+      },
+      {
+        nombre: "Prostazan<br> 500 mgs",
+        precioDetalle: 600,
+        precioMayor: 510,
+        imagen: "imagenes/prostazan.jpg",
+        descripcion: "Suplemento formulado para el apoyo de la salud de la próstata en hombres.",
+        fichaTecnica: `
+          <h4>Ingredientes</h4>
+          <p>Saw Palmetto, Pygeum, Zinc y otros nutrientes.</p>
+          <h4>Dosis</h4>
+          <p>Tomar 1 cápsula al día con agua.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Reduce síntomas de hiperplasia prostática benigna (HPB).</li>
+            <li>Mejora flujo urinario y reduce frecuencia nocturna de micción.</li>
+          </ul>
+          <h4>Precaución</h4>
+          <p>Consultar a un médico antes de usar.</p>
+        `
+      },
+      {
+        nombre: "Quercetin & Bromelain<br> 500 mgs",
+        precioDetalle: 550,
+        precioMayor: 467,
+        imagen: "imagenes/quercetin y bromelain.jpg",
+        descripcion: "Combinación de quercetina y bromelina para el soporte antiinflamatorio y la salud inmunológica.",
+        fichaTecnica: `
+          <h4>Composición</h4>
+          <p>Quercetina (flavonoide antioxidante) y Bromelina (enzima de piña).</p>
+          <h4>Uso</h4>
+          <p>Tomar 1 cápsula al día con agua.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Alivia alergias estacionales.</li>
+            <li>Reduce inflamación en articulaciones y tejidos.</li>
+            <li>Apoya la salud respiratoria.</li>
+          </ul>
+        `
+      },
+      {
+        nombre: "Raíz de Pachulí<br> 5 oz",
+        precioDetalle: 200,
+        precioMayor: 170,
+        imagen: "https://via.placeholder.com/150/8B4513/FFFFFF?text=Pachuli",
+        descripcion: "Raíz de pachulí, usada en la medicina tradicional y para propósitos aromáticos.",
+        fichaTecnica: `
+          <h4>Nombre Científico</h4>
+          <p>Pogostemon cablin.</p>
+          <h4>Uso</h4>
+          <p>Infusiones para digestión y relajación; uso en aromaterapia.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Propiedades digestivas y antiinflamatorias.</li>
+            <li>Efecto relajante y ansiolítico en aromaterapia.</li>
+          </ul>
+        `
+      },
+      {
+        nombre: "Sangre de Drago<br> 20 ml",
+        precioDetalle: 600,
+        precioMayor: 510,
+        imagen: "imagenes/sangre drago.jpg",
+        descripcion: "Resina de sangre de drago, potente cicatrizante y antiinflamatorio natural.",
+        fichaTecnica: `
+          <h4>Nombre Científico</h4>
+          <p>Croton lechleri.</p>
+          <h4>Uso Tópico</h4>
+          <p>Aplicar directamente sobre heridas, cortes o picaduras.</p>
+          <h4>Uso Interno</h4>
+          <p>Consultar a un profesional antes de uso interno para úlceras gástricas.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Propiedades cicatrizantes y antimicrobianas.</li>
+            <li>Potente antiinflamatorio y antioxidante.</li>
+          </ul>
+        `
+      },
+      {
+        nombre: "Semilla de Cilantro<br> 2 oz",
+        precioDetalle: 75,
+        precioMayor: 63,
+        imagen: "https://via.placeholder.com/150/9ACD32/000000?text=Cilantro",
+        descripcion: "Semillas de cilantro frescas, ideales para condimentar comidas y con propiedades digestivas.",
+        fichaTecnica: `
+          <h4>Composición</h4>
+          <p>Ricas en aceites esenciales (linalol).</p>
+          <h4>Uso</h4>
+          <p>En curries, adobos, sopas y asadas en panes.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Propiedades carminativas y digestivas.</li>
+            <li>Antioxidantes naturales.</li>
+          </ul>
+        `
+      },
+      {
+        nombre: "Semillas de Hinojo<br> 2 oz",
+        precioDetalle: 100,
+        precioMayor: 85,
+        imagen: "imagenes/hinojo.jpg",
+        descripcion: "Semillas de hinojo, conocidas por sus beneficios digestivos y su sabor anisado.",
+        fichaTecnica: `
+          <h4>Composición</h4>
+          <p>Ricas en aceites esenciales (anethole).</p>
+          <h4>Uso Culinario</h4>
+          <p>En repostería, curries y como especia en guisos.</p>
+          <h4>Uso Medicinal</h4>
+          <p>Infusiones para aliviar gases e indigestión.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Propiedades carminativas y antiespasmódicas.</li>
+            <li>Expectorante natural.</li>
+          </ul>
+        `
+      },
+      {
+        nombre: "Zeolita<br> 400 mg",
+        precioDetalle: 600,
+        precioMayor: 510,
+        imagen: "imagenes/zeolita.jpg",
+        descripcion: "Suplemento de zeolita, mineral natural conocido por sus propiedades desintoxicantes.",
+        fichaTecnica: `
+          <h4>Composición</h4>
+          <p>Mineral microporoso con estructura de tamiz molecular.</p>
+          <h4>Uso</h4>
+          <p>Tomar 1 cucharadita en agua al día.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Filtra metales pesados y toxinas del cuerpo.</li>
+            <li>Apoya salud intestinal y sistémica.</li>
+          </ul>
+          <h4>Precaución</h4>
+          <p>Consumir con suficiente agua para evitar obstrucciones.</p>
+        `
+      },
+
+
+ {
+        nombre: "Té Matcha<br> 150 grs",
+        precioDetalle: 1300,
+        precioMayor: 1000,
+        imagen: "imagenes/matcha0.jpg",
+        descripcion: "Suplemento de zeolita, mineral natural conocido por sus propiedades desintoxicantes.",
+        fichaTecnica: `
+          <h4>Composición</h4>
+          <p>Mineral microporoso con estructura de tamiz molecular.</p>
+          <h4>Uso</h4>
+          <p>Tomar 1 cucharadita en agua al día.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Filtra metales pesados y toxinas del cuerpo.</li>
+            <li>Apoya salud intestinal y sistémica.</li>
+          </ul>
+          <h4>Precaución</h4>
+          <p>Consumir con suficiente agua para evitar obstrucciones.</p>
+        `
+      },
+   {
+        nombre: "Xanthin <br> 4 mg",
+        precioDetalle: 2000,
+        precioMayor: 1700,
+        imagen: "imagenes/xanthin.jpg",
+        descripcion: "La xantina es un compuesto natural esencial para el metabolismo humano, aunque poco conocido fuera del ámbito científico.",
+        fichaTecnica: `
+          <h4>Composición</h4>
+          <p>En el cuerpo humano, la xantina es un intermediario metabólico que se transforma en ácido úrico mediante la enzima xantina oxidasa.</p>
+          <h4>Uso</h4>
+          <p>Consumir segun recomendacion prescripta.</p>
+          <h4>Beneficios</h4>
+          <ul>
+            <li>Estimula el sistema nervioso: Mejora la concentración, el estado de alerta y el rendimiento mental.</li>
+            <li>Alivio en enfermedades respiratorias: Broncodilatador eficaz (teofilina).</li>
+	    <li>Mejora el rendimiento físico: Disminuye la fatiga y aumenta la resistencia.</li>
+	    <li>Propiedades antioxidantes: Ayuda a proteger las células del daño oxidativo.</li>	
+          </ul>
+        `
+      }
+
+   
+    ];
+
+    let carrito = [];
+
+    function mostrarProductos() {
+      const cont = document.getElementById("productos");
+      cont.innerHTML = "";
+
+      productos.forEach((p, i) => {
+        // Inicializar cantidad si ya está en carrito
+        const productoEnCarrito = carrito.find(item => item.index === i);
+        const cantidadInicial = productoEnCarrito ? productoEnCarrito.cantidad : '';
+
+        const div = document.createElement("div");
+        div.className = "producto-card";
+        div.dataset.nombre = p.nombre.toLowerCase();
+
+        div.innerHTML = `
+          <img src="${p.imagen}" alt="${p.nombre}" class="producto-imagen">
+          <div class="producto-info">
+            <h3>${p.nombre}</h3>
+            <p class="producto-descripcion">${p.descripcion}</p>
+            <div class="precios">
+              <span>RD$${p.precioDetalle.toFixed(2)}</span>
+              ${p.precioMayor ? `<span class="precio-mayor">RD$${p.precioMayor.toFixed(2)} (Mayor)</span>` : ''}
+            </div>
+            <button type="button" class="ficha-tecnica-btn" onclick="abrirModal(${i})">Ver Ficha Técnica</button>
+            <div class="cantidad-control">
+              <button type="button" onclick="cambiarCantidad(${i}, -1)">-</button>
+              <input type="number" min="0" value="${cantidadInicial}" placeholder="Cant." data-index="${i}"
+                     onkeydown="manejarInputCantidadConEnter(event, ${i})"
+                     onblur="manejarInputCantidad(${i})"
+                     onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                     onpaste="return false;"
+                     ondrop="return false;">
+              <button type="button" onclick="cambiarCantidad(${i}, 1)">+</button>
+            </div>
+          </div>
+        `;
+        cont.appendChild(div);
+      });
+    }
+
+    function manejarInputCantidad(index) {
+      const input = document.querySelector(`.producto-card input[data-index="${index}"]`);
+      let qty = parseInt(input.value) || 0;
+      agregarOActualizarProductoEnCarrito(index, qty);
+    }
+
+    function manejarInputCantidadConEnter(event, index) {
+      if (event.key === 'Enter') {
+        const input = event.target;
+        let qty = parseInt(input.value) || 0;
+        agregarOActualizarProductoEnCarrito(index, qty);
+        event.preventDefault();
+      }
+    }
+
+    function cambiarCantidad(index, cambio) {
+      const input = document.querySelector(`.producto-card input[data-index="${index}"]`);
+      const productoExistente = carrito.find(item => item.index === index);
+      let valorActualEnCarrito = productoExistente ? productoExistente.cantidad : 0;
+
+      valorActualEnCarrito += cambio;
+      if (valorActualEnCarrito < 0) valorActualEnCarrito = 0;
+
+      agregarOActualizarProductoEnCarrito(index, valorActualEnCarrito);
+      input.value = valorActualEnCarrito > 0 ? valorActualEnCarrito : '';
+    }
+
+    function agregarOActualizarProductoEnCarrito(index, newQuantity) {
+      const prod = productos[index];
+      const productoExistenteIndex = carrito.findIndex(item => item.index === index);
+
+      if (newQuantity > 0) {
+        const precioUnitario = (newQuantity >= 6 && prod.precioMayor) ? prod.precioMayor : prod.precioDetalle;
+
+        if (productoExistenteIndex > -1) {
+          carrito[productoExistenteIndex].cantidad = newQuantity;
+          carrito[productoExistenteIndex].precioUnitarioActual = precioUnitario;
+        } else {
+          carrito.push({
+            index: index,
+            nombre: prod.nombre,
+            cantidad: newQuantity,
+            precioUnitarioActual: precioUnitario,
+            precioDetalle: prod.precioDetalle,
+            precioMayor: prod.precioMayor
+          });
+        }
+      } else {
+        if (productoExistenteIndex > -1) {
+          carrito.splice(productoExistenteIndex, 1);
+        }
+      }
+
+      calcularTotales();
+      actualizarResumenPedido();
+      const input = document.querySelector(`.producto-card input[data-index="${index}"]`);
+      if (input) {
+        input.value = newQuantity > 0 ? newQuantity : '';
+      }
+    }
+
+    function filtrarProductos() {
+      const filtro = document.getElementById("busqueda").value.toLowerCase();
+      document.querySelectorAll(".producto-card").forEach(item => {
+        const nombreProducto = item.dataset.nombre;
+        const descripcionProducto = item.querySelector('.producto-descripcion').textContent.toLowerCase();
+        item.style.display = (nombreProducto.includes(filtro) || descripcionProducto.includes(filtro)) ? "flex" : "none";
+      });
+    }
+
+    function mostrarCuentas(mostrar) {
+      document.getElementById("cuentas").style.display = mostrar ? "block" : "none";
+    }
+
+    function manejarEntrega() {
+      const entregaADomicilio = document.querySelector('input[name="entrega"]:checked').value === "Entrega a Domicilio";
+      const direccionInput = document.getElementById("direccion");
+      const direccionError = document.getElementById("direccion-error");
+
+      if (entregaADomicilio) {
+        direccionInput.placeholder = "📍 Dirección de Envío (Calle, Número, Sector, Ciudad)";
+        direccionInput.required = true;
+        direccionInput.readOnly = false;
+        direccionInput.style.backgroundColor = '';
+      } else {
+        direccionInput.placeholder = "No es necesaria la dirección para recoger en tienda";
+        direccionInput.value = '';
+        direccionInput.required = false;
+        direccionInput.readOnly = true;
+        direccionInput.style.backgroundColor = '#e9ecef';
+        direccionError.style.display = 'none';
+      }
+      calcularTotales();
+    }
+
+    function calcularTotales() {
+      let subtotal = 0;
+      carrito.forEach(item => {
+        const precio = (item.cantidad >= 6 && productos[item.index].precioMayor) ? productos[item.index].precioMayor : productos[item.index].precioDetalle;
+        item.precioUnitarioActual = precio;
+        subtotal += item.cantidad * precio;
+      });
+
+      const productosError = document.getElementById("productos-error");
+      if (carrito.length === 0) {
+        productosError.style.display = "block";
+      } else {
+        productosError.style.display = "none";
+      }
+
+      const descuento = subtotal >= 5000 ? subtotal * 0.05 : 0;
+
+      let envio = 0;
+      const tipoEntrega = document.querySelector('input[name="entrega"]:checked').value;
+      const direccionInput = document.getElementById("direccion").value.toLowerCase().trim();
+
+      if (tipoEntrega === "Entrega a Domicilio") {
+        if (direccionInput !== '') {
+          if (direccionInput.includes("santo domingo") || direccionInput.includes("dn") || direccionInput.includes("distrito nacional")) {
+            envio = 300;
+          } else {
+            envio = 600;
+          }
+        }
+      }
+
+      const total = subtotal - descuento + envio;
+
+      document.getElementById("subtotal").textContent = subtotal.toFixed(2);
+      document.getElementById("descuento").textContent = descuento.toFixed(2);
+      document.getElementById("envio").textContent = envio.toFixed(2);
+      document.getElementById("total").textContent = total.toFixed(2);
+    }
+
+    function actualizarResumenPedido() {
+      const resumenContainer = document.getElementById("listaProductosResumen");
+      const seccionResumen = document.getElementById("resumenPedido");
+      resumenContainer.innerHTML = "";
+
+      if (carrito.length === 0) {
+        resumenContainer.innerHTML = '<p style="text-align: center; color: #6c757d;">Aún no has agregado productos.</p>';
+        seccionResumen.style.display = 'none';
+      } else {
+        seccionResumen.style.display = 'block';
+        carrito.forEach((item, idx) => {
+          const div = document.createElement("div");
+          div.className = "resumen-item";
+          div.innerHTML = `
+            <span class="item-info">${item.nombre} x${item.cantidad}</span>
+            <span class="item-precio">RD$${(item.cantidad * item.precioUnitarioActual).toFixed(2)}</span>
+            <button class="eliminar-item-btn" onclick="eliminarDelResumen(${idx})">X</button>
+          `;
+          resumenContainer.appendChild(div);
+        });
+      }
+    }
+
+    function eliminarDelResumen(indexEnCarrito) {
+      const productoEliminado = carrito[indexEnCarrito];
+      const originalProductIndex = productoEliminado.index;
+
+      carrito.splice(indexEnCarrito, 1);
+
+      const inputOriginal = document.querySelector(`.producto-card input[data-index="${originalProductIndex}"]`);
+      if (inputOriginal) {
+        inputOriginal.value = '';
+      }
+
+      calcularTotales();
+      actualizarResumenPedido();
+    }
+
+    // Ficha Técnica Modal - Funciones (modificado para formato con flex y HTML)
+    function abrirModal(index) {
+      const producto = productos[index];
+      document.getElementById("modalTituloProducto").innerHTML = producto.nombre;
+      document.getElementById("modalCuerpoFicha").innerHTML = `
+        <img src="${producto.imagen}" alt="${producto.nombre}">
+        <div class="ficha-contenido">
+          <p><strong>Descripción:</strong> ${producto.descripcion}</p>
+          ${producto.fichaTecnica}
+        </div>
+      `;
+      document.getElementById("fichaTecnicaModal").style.display = "flex";
+    }
+    /* Antes en: <p>${producto.fichaTecnica}</p> :contentReference[oaicite:1]{index=1}
+       Ahora permite incluir HTML dentro de fichaTecnica para agregar secciones (uso, beneficios, etc.) */
+
+    function cerrarModal() {
+      document.getElementById("fichaTecnicaModal").style.display = "none";
+    }
+
+    window.onclick = function(event) {
+      const modal = document.getElementById("fichaTecnicaModal");
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+
+    function enviarPedido() {
+      const nombre = document.getElementById("nombre");
+      const telefono = document.getElementById("telefono");
+      const direccion = document.getElementById("direccion");
+      const entregaADomicilio = document.querySelector('input[name="entrega"]:checked').value === "Entrega a Domicilio";
+      let isValid = true;
+
+      document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
+
+      if (nombre.value.trim() === '') {
+        document.getElementById('nombre-error').style.display = 'block';
+        isValid = false;
+      }
+
+      if (telefono.value.trim() === '' || !/^\d{10,15}$/.test(telefono.value.trim())) {
+        document.getElementById('telefono-error').style.display = 'block';
+        isValid = false;
+      }
+
+      if (entregaADomicilio && direccion.value.trim() === '') {
+        document.getElementById('direccion-error').style.display = 'block';
+        isValid = false;
+      }
+
+      if (carrito.length === 0) {
+        document.getElementById('productos-error').style.display = 'block';
+        isValid = false;
+      }
+
+      if (!isValid) {
+        alert("Por favor, completa todos los campos requeridos y selecciona al menos un producto.");
+        return;
+      }
+
+      const clienteNombre = nombre.value.trim();
+      const clienteTelefono = telefono.value.trim();
+      const clienteDireccion = (entregaADomicilio && direccion.value.trim() !== '') ? direccion.value.trim() : "N/A";
+      const entrega = document.querySelector('input[name="entrega"]:checked').value;
+      const pago = document.querySelector('input[name="pago"]:checked').value;
+      const cuenta = (pago === "Transferencia") ? document.getElementById("cuentas").value : "N/A";
+      const comentario = document.getElementById("comentario").value.trim();
+
+      let msg = `👉 *Nuevo Pedido desde la Web*:\n\n*🛍 Productos:*\n`;
+      let productosEnMensaje = [];
+      carrito.forEach(item => {
+        productosEnMensaje.push(`- ${item.nombre} x${item.cantidad} (RD$${item.precioUnitarioActual.toFixed(2)} c/u)`);
+      });
+      msg += productosEnMensaje.join('\n');
+
+      msg += `\n\n*🧾 Subtotal:* RD$${document.getElementById("subtotal").textContent}`;
+      msg += `\n*🎁 Descuento:* RD$${document.getElementById("descuento").textContent}`;
+      msg += `\n*🚚 Envío:* RD$${document.getElementById("envio").textContent}`;
+      msg += `\n*💳 Total a pagar:* RD$${document.getElementById("total").textContent}`;
+      msg += `\n\n*--- Datos del Cliente ---*`;
+      msg += `\n*🙋 Nombre:* ${clienteNombre}`;
+      msg += `\n*📞 Teléfono:* ${clienteTelefono}`;
+      msg += `\n*📍 Dirección:* ${clienteDireccion}`;
+      msg += `\n*🚚 Entrega:* ${entrega}`;
+      msg += `\n*💰 Pago:* ${pago}`;
+      if (pago === "Transferencia") msg += `\n*🏦 Cuenta:* ${cuenta}`;
+      if (comentario) msg += `\n*✏️ Nota:* ${comentario}`;
+
+      const numeroWhatsApp = "18094254540";
+      const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+      const base = isMobile
+        ? "https://api.whatsapp.com/send"
+        : "https://web.whatsapp.com/send";
+      const url = `${base}?phone=${numeroWhatsApp}&text=${encodeURIComponent(msg)}`;
+
+      window.open(url, "_blank");
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      mostrarProductos();
+      manejarEntrega();
+      calcularTotales();
+      actualizarResumenPedido();
+    });
+  </script>
+</body>
+</html>
