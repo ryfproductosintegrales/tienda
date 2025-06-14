@@ -29,15 +29,33 @@
 
     /* Estilos del Encabezado */
     header {
-      background-color: #007bff;
-      color: white;
-      padding: 20px 20px;
-      text-align: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      width: 100%;
-      box-sizing: border-box; /* Incluir padding en el ancho */
-    }
+  background-color: #007bff;
+  color: white;
+  padding: 20px 20px;
+  /* text-align: center;  <--- Esta línea ya no es necesaria aquí */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  width: 100%;
+  box-sizing: border-box;
 
+  display: flex; /* Hacemos el header un contenedor flex */
+  flex-direction: column; /* Apila los elementos verticalmente */
+  align-items: center; /* Centra horizontalmente los elementos hijos (logo y texto) */
+  justify-content: center; /* Centra verticalmente los elementos hijos (si hay espacio) */
+}
+
+.header-logo {
+    max-height: 100px; /* Tamaño máximo del alto del logo (ajusta a tu gusto) */
+    width: auto; /* Ancho se ajusta automáticamente para mantener proporciones */
+    margin-bottom: 15px; /* Espacio entre el logo y el texto de abajo */
+    border-radius: 8px; /* Opcional: para suavizar los bordes si el logo tiene un fondo */
+}
+
+.header-content {
+    text-align: center; /* Centra el texto dentro de este contenedor */
+}
+
+	  
+	  
     header h1 {
       margin: 0 0 10px 0;
       font-size: 2.5em;
