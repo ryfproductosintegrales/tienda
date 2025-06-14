@@ -32,33 +32,10 @@
       background-color: #007bff;
       color: white;
       padding: 20px 20px;
+      text-align: center;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       width: 100%;
       box-sizing: border-box; /* Incluir padding en el ancho */
-
-   display: flex; /* Hacemos el header un contenedor flex */
-  align-items: center; /* Centra verticalmente los elementos hijos (logo y texto) */
-  justify-content: space-between; /* Distribuye espacio entre logo y texto */
-
-header .header-left {
-    flex-shrink: 0; /* Evita que el logo se encoja si hay mucho texto */
-    padding-right: 20px; /* Espacio entre el logo y el texto */
-}
-
-header .header-right {
-    flex-grow: 1; /* Permite que el texto ocupe el espacio restante */
-    text-align: right; /* Alinea el texto a la derecha */
-
-
-	.header-logo {
-    max-height: 80px; /* Tamaño máximo del alto del logo */
-    width: auto; /* Ancho se ajusta automáticamente para mantener proporciones */
-    margin-right: 15px; /* Un poco de margen a la derecha del logo si lo quieres despegado del borde */
-    /* Si tu logo tiene un fondo, puedes añadir un border-radius para suavizarlo: */
-    /* border-radius: 50%; */
-
-	
-	    
     }
 
     header h1 {
@@ -579,15 +556,11 @@ header .header-right {
 <body>
   <header>
 	 
-    <div class="header-left">
-        <img src="imagenes/logo.png" alt="Logo R&F Productos Integrales" class="header-logo">
-    </div>
-    <div class="header-right">
+    <img src="img/logo.jpg" alt="Logo R&F" class="logo-img">
     <h1>R&F Productos Integrales</h1>
     <p>🍃 Tu fuente de bienestar natural</p>
     <p>📍 Alma Rosa II, Santo Domingo Este, RD</p>
     <p>📞 Teléfono: <a href="tel:+18095927464">809-592-7464 / WhatsApp: 809-425-4540</a></p>
-  </div>
   </header>
 
   <div class="main-content">
