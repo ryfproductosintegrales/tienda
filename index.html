@@ -316,34 +316,34 @@
 
     /* Ficha Técnica Modal */
     .modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-  justify-content: center;
-  align-items: flex-start;
-  overflow: auto;
-  padding-top: 5vh;
-}
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: flex-start;
+      overflow: auto;
+      padding-top: 5vh;
+    }
 
-.modal-content {
-  background-color: #fefefe;
-  padding: 30px;
-  border: 1px solid #888;
-  border-radius: 12px;
-  width: 80%;
-  max-width: 600px;
-  max-height: 90vh;
-  overflow-y: auto;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  animation: fadeIn 0.3s;
-  position: relative;
-  margin: auto;
-}
+    .modal-content {
+      background-color: #fefefe;
+      padding: 30px;
+      border: 1px solid #888;
+      border-radius: 12px;
+      width: 80%;
+      max-width: 600px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      animation: fadeIn 0.3s;
+      position: relative;
+      margin: auto;
+    }
 
     @keyframes fadeIn {
       from {opacity: 0;}
@@ -474,7 +474,7 @@
       background-color: #c82333;
     }
 
-    /* Estilos del Pie de Página */
+    /* Estilos para el Pie de Página */
     footer {
       background-color: #343a40;
       color: white;
@@ -551,6 +551,78 @@
         margin-left: 0;
       }
     }
+    
+    /* Estilos para la imagen de ficha técnica y el lightbox */
+    .ficha-tecnica-img {
+      width: 100px; /* Tamaño normal de la imagen */
+      height: auto;
+      cursor: pointer; /* Indicar que es clickeable */
+      margin-left: 20px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      transition: transform 0.2s ease-in-out; /* Animación suave al pasar el ratón */
+    }
+
+    .ficha-tecnica-img:hover {
+      transform: scale(1.05); /* Pequeño efecto de zoom al pasar el ratón */
+    }
+
+    /* Estilos del Lightbox */
+    .lightbox-overlay {
+      position: fixed; /* Fija el lightbox sobre todo el contenido */
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro semi-transparente */
+      display: flex; /* Para centrar la imagen dentro */
+      justify-content: center; /* Centrar horizontalmente */
+      align-items: center; /* Centrar verticalmente */
+      z-index: 9999; /* Asegura que esté por encima de todo lo demás */
+      opacity: 0; /* Inicialmente transparente (oculto) */
+      visibility: hidden; /* Inicialmente oculto por completo */
+      transition: opacity 0.3s ease-in-out, visibility 0s 0.3s; /* Transición suave para el efecto de fade */
+    }
+
+    .lightbox-overlay.visible {
+      opacity: 1; /* Al añadir esta clase con JavaScript, se hace visible */
+      visibility: visible; /* Se vuelve completamente visible */
+      transition: opacity 0.3s ease-in-out, visibility 0s 0s; /* Sin retraso al mostrar */
+    }
+
+    .lightbox-content {
+      max-width: 90%; /* Limita el ancho de la imagen ampliada */
+      max-height: 90%; /* Limita la altura de la imagen ampliada */
+      background-color: #fff; /* Fondo blanco para la imagen (opcional) */
+      padding: 10px; /* Espaciado alrededor de la imagen (opcional) */
+      border-radius: 5px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5); /* Sombra suave */
+      position: relative; /* Para posicionar el botón de cerrar relativo a este */
+      display: flex; /* Para centrar la imagen dentro */
+      justify-content: center;
+      align-items: center;
+    }
+
+    .lightbox-content img {
+      max-width: 100%; /* La imagen no excederá el tamaño del contenedor */
+      max-height: 100%; /* La imagen no excederá el tamaño del contenedor */
+      display: block; /* Elimina cualquier espacio extra debajo de la imagen */
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      color: #fff; /* Color del botón de cerrar */
+      font-size: 30px;
+      cursor: pointer;
+      z-index: 10000; /* Asegura que el botón de cerrar esté por encima de la imagen */
+      text-shadow: 0 0 5px rgba(0,0,0,0.7); /* Sombra para mejor visibilidad del "X" */
+    }
+
+    .lightbox-close:hover {
+      color: #ccc; /* Cambio de color al pasar el ratón */
+    }
   </style>
 </head>
 <body>
@@ -566,8 +638,7 @@
     <input type="text" id="busqueda" placeholder="🔍 Buscar producto..." onkeyup="filtrarProductos()" />
 
     <div class="productos" id="productos">
-      <!-- Aquí se inyectarán las tarjetas de producto -->
-    </div>
+      </div>
 
     <div class="resumen-pedido section" id="resumenPedido">
       <h3>📝 Productos en tu Pedido</h3>
@@ -624,14 +695,12 @@
       Enviar pedido por WhatsApp
     </button>
 
-    <!-- Modal de Ficha Técnica -->
     <div id="fichaTecnicaModal" class="modal">
       <div class="modal-content">
         <span class="close-button" onclick="cerrarModal()">&times;</span>
         <h3 class="modal-title" id="modalTituloProducto"></h3>
         <div class="modal-body" id="modalCuerpoFicha">
-          <!-- Aquí se inyectará la ficha técnica con formato -->
-        </div>
+          </div>
       </div>
     </div>
   </div>
@@ -640,6 +709,12 @@
     <p>&copy; 2025 R&F Productos Integrales. Todos los derechos reservados.</p>
   </footer>
 
+  <div class="lightbox-overlay" id="lightbox-overlay">
+    <span class="lightbox-close" id="lightbox-close">&times;</span>
+    <div class="lightbox-content">
+      <img src="" alt="Imagen Ampliada" id="lightbox-img">
+    </div>
+  </div>
   <script>
     const productos = [
       {
@@ -2167,295 +2242,249 @@ debe procurar consumir los 3 frascos. Hara un "ALTO" por espacio de 3 a 6 meses 
           </ul>
         `
       }
-
-   
     ];
 
-    let carrito = [];
+    let productosEnCarrito = []; // Array para almacenar los productos en el carrito
 
-    function mostrarProductos() {
-      const cont = document.getElementById("productos");
-      cont.innerHTML = "";
+    // Función para mostrar los productos en el catálogo
+    function mostrarProductos(filtro = '') {
+      const productosDiv = document.getElementById('productos');
+      productosDiv.innerHTML = ''; // Limpiar productos anteriores
+      const productosFiltrados = productos.filter(producto =>
+        producto.nombre.toLowerCase().includes(filtro.toLowerCase())
+      );
 
-      productos.forEach((p, i) => {
-        // Inicializar cantidad si ya está en carrito
-        const productoEnCarrito = carrito.find(item => item.index === i);
-        const cantidadInicial = productoEnCarrito ? productoEnCarrito.cantidad : '';
-
-        const div = document.createElement("div");
-        div.className = "producto-card";
-        div.dataset.nombre = p.nombre.toLowerCase();
-
-        div.innerHTML = `
-          <img src="${p.imagen}" alt="${p.nombre}" class="producto-imagen">
+      productosFiltrados.forEach((producto, index) => {
+        const productoCard = document.createElement('div');
+        productoCard.classList.add('producto-card');
+        productoCard.innerHTML = `
+          <img src="${producto.imagen}" alt="${producto.nombre}" class="producto-imagen">
           <div class="producto-info">
-            <h3>${p.nombre}</h3>
-            <p class="producto-descripcion">${p.descripcion}</p>
-            <div class="precios">
-              <span>RD$${p.precioDetalle.toFixed(2)}</span>
-              ${p.precioMayor ? `<span class="precio-mayor">RD$${p.precioMayor.toFixed(2)} (Mayor)</span>` : ''}
-            </div>
-            <button type="button" class="ficha-tecnica-btn" onclick="abrirModal(${i})">Ver Ficha Técnica</button>
+            <h3>${producto.nombre}</h3>
+            <p class="producto-descripcion">${producto.descripcion}</p>
+            <p class="precios">RD$ ${producto.precioDetalle.toFixed(2)}
+              ${producto.precioMayor ? `<span class="precio-mayor">al por mayor RD$ ${producto.precioMayor.toFixed(2)}</span>` : ''}
+            </p>
             <div class="cantidad-control">
-              <button type="button" onclick="cambiarCantidad(${i}, -1)">-</button>
-              <input type="number" min="0" value="${cantidadInicial}" placeholder="Cant." data-index="${i}"
-                     onkeydown="manejarInputCantidadConEnter(event, ${i})"
-                     onblur="manejarInputCantidad(${i})"
-                     onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                     onpaste="return false;"
-                     ondrop="return false;">
-              <button type="button" onclick="cambiarCantidad(${i}, 1)">+</button>
+              <button onclick="cambiarCantidad(${index}, -1)">-</button>
+              <input type="number" class="cantidad-input" value="0" min="0" 
+                     data-index="${index}" 
+                     data-precio="${producto.precioDetalle.toFixed(2)}" 
+                     data-precio-mayor="${producto.precioMayor ? producto.precioMayor.toFixed(2) : ''}"
+                     data-nombre="${producto.nombre}" 
+                     data-id="${producto.nombre.replace(/<br>/g, '').replace(/\s+/g, '-').toLowerCase()}">
+              <button onclick="cambiarCantidad(${index}, 1)">+</button>
             </div>
           </div>
+          <button class="ficha-tecnica-btn" onclick="mostrarFichaTecnica(${index})">Ver Ficha Técnica</button>
         `;
-        cont.appendChild(div);
+        productosDiv.appendChild(productoCard);
       });
     }
 
-    function manejarInputCantidad(index) {
-      const input = document.querySelector(`.producto-card input[data-index="${index}"]`);
-      let qty = parseInt(input.value) || 0;
-      agregarOActualizarProductoEnCarrito(index, qty);
-    }
+    // Inicializar el catálogo al cargar la página
+    mostrarProductos();
 
-    function manejarInputCantidadConEnter(event, index) {
-      if (event.key === 'Enter') {
-        const input = event.target;
-        let qty = parseInt(input.value) || 0;
-        agregarOActualizarProductoEnCarrito(index, qty);
-        event.preventDefault();
-      }
+    function filtrarProductos() {
+      const busquedaInput = document.getElementById('busqueda');
+      mostrarProductos(busquedaInput.value);
     }
 
     function cambiarCantidad(index, cambio) {
-      const input = document.querySelector(`.producto-card input[data-index="${index}"]`);
-      const productoExistente = carrito.find(item => item.index === index);
-      let valorActualEnCarrito = productoExistente ? productoExistente.cantidad : 0;
-
-      valorActualEnCarrito += cambio;
-      if (valorActualEnCarrito < 0) valorActualEnCarrito = 0;
-
-      agregarOActualizarProductoEnCarrito(index, valorActualEnCarrito);
-      input.value = valorActualEnCarrito > 0 ? valorActualEnCarrito : '';
+      const input = document.querySelector(`.producto-card:nth-child(${index + 1}) .cantidad-input`);
+      let cantidad = parseInt(input.value) + cambio;
+      if (cantidad < 0) cantidad = 0;
+      input.value = cantidad;
+      actualizarCarrito(input);
     }
 
-    function agregarOActualizarProductoEnCarrito(index, newQuantity) {
-      const prod = productos[index];
-      const productoExistenteIndex = carrito.findIndex(item => item.index === index);
+    function actualizarCarrito(inputElement) {
+      const id = inputElement.dataset.id;
+      const nombre = inputElement.dataset.nombre;
+      let cantidad = parseInt(inputElement.value);
+      const precioDetalle = parseFloat(inputElement.dataset.precio);
+      const precioMayor = inputElement.dataset.precioMayor ? parseFloat(inputElement.dataset.precioMayor) : null;
+      let precioUnitarioActual = precioDetalle;
 
-      if (newQuantity > 0) {
-        const precioUnitario = (newQuantity >= 6 && prod.precioMayor) ? prod.precioMayor : prod.precioDetalle;
+      // Determinar si aplica precio al por mayor (ej. si la cantidad es 6 o más)
+      const cantidadParaMayor = 6; // Definir la cantidad a partir de la cual aplica precio al por mayor
+      if (precioMayor && cantidad >= cantidadParaMayor) {
+        precioUnitarioActual = precioMayor;
+      } else {
+        precioUnitarioActual = precioDetalle;
+      }
 
-        if (productoExistenteIndex > -1) {
-          carrito[productoExistenteIndex].cantidad = newQuantity;
-          carrito[productoExistenteIndex].precioUnitarioActual = precioUnitario;
+      const index = productosEnCarrito.findIndex(item => item.id === id);
+
+      if (cantidad > 0) {
+        if (index > -1) {
+          // Producto ya en el carrito, actualizar cantidad y precio
+          productosEnCarrito[index].cantidad = cantidad;
+          productosEnCarrito[index].precioUnitarioActual = precioUnitarioActual;
         } else {
-          carrito.push({
-            index: index,
-            nombre: prod.nombre,
-            cantidad: newQuantity,
-            precioUnitarioActual: precioUnitario,
-            precioDetalle: prod.precioDetalle,
-            precioMayor: prod.precioMayor
+          // Añadir nuevo producto al carrito
+          productosEnCarrito.push({
+            id,
+            nombre,
+            cantidad,
+            precioDetalle,
+            precioMayor,
+            precioUnitarioActual
           });
         }
       } else {
-        if (productoExistenteIndex > -1) {
-          carrito.splice(productoExistenteIndex, 1);
+        // Si la cantidad es 0 o menos, eliminar del carrito
+        if (index > -1) {
+          productosEnCarrito.splice(index, 1);
         }
       }
-
-      calcularTotales();
       actualizarResumenPedido();
-      const input = document.querySelector(`.producto-card input[data-index="${index}"]`);
-      if (input) {
-        input.value = newQuantity > 0 ? newQuantity : '';
-      }
-    }
-
-    function filtrarProductos() {
-      const filtro = document.getElementById("busqueda").value.toLowerCase();
-      document.querySelectorAll(".producto-card").forEach(item => {
-        const nombreProducto = item.dataset.nombre;
-        const descripcionProducto = item.querySelector('.producto-descripcion').textContent.toLowerCase();
-        item.style.display = (nombreProducto.includes(filtro) || descripcionProducto.includes(filtro)) ? "flex" : "none";
-      });
-    }
-
-    function mostrarCuentas(mostrar) {
-      document.getElementById("cuentas").style.display = mostrar ? "block" : "none";
-    }
-
-    function manejarEntrega() {
-      const entregaADomicilio = document.querySelector('input[name="entrega"]:checked').value === "Entrega a Domicilio";
-      const direccionInput = document.getElementById("direccion");
-      const direccionError = document.getElementById("direccion-error");
-
-      if (entregaADomicilio) {
-        direccionInput.placeholder = "📍 Dirección de Envío (Calle, Número, Sector, Ciudad)";
-        direccionInput.required = true;
-        direccionInput.readOnly = false;
-        direccionInput.style.backgroundColor = '';
-      } else {
-        direccionInput.placeholder = "No es necesaria la dirección para recoger en tienda";
-        direccionInput.value = '';
-        direccionInput.required = false;
-        direccionInput.readOnly = true;
-        direccionInput.style.backgroundColor = '#e9ecef';
-        direccionError.style.display = 'none';
-      }
       calcularTotales();
     }
 
-    function calcularTotales() {
-      let subtotal = 0;
-      carrito.forEach(item => {
-        const precio = (item.cantidad >= 6 && productos[item.index].precioMayor) ? productos[item.index].precioMayor : productos[item.index].precioDetalle;
-        item.precioUnitarioActual = precio;
-        subtotal += item.cantidad * precio;
-      });
-
-      const productosError = document.getElementById("productos-error");
-      if (carrito.length === 0) {
-        productosError.style.display = "block";
-      } else {
-        productosError.style.display = "none";
+    function eliminarProductoDelResumen(id) {
+      productosEnCarrito = productosEnCarrito.filter(item => item.id !== id);
+      // Poner la cantidad en 0 en el input del producto en el catálogo
+      const inputElement = document.querySelector(`.cantidad-input[data-id="${id}"]`);
+      if (inputElement) {
+        inputElement.value = 0;
       }
-
-      const descuento = subtotal >= 5000 ? subtotal * 0.05 : 0;
-
-      let envio = 0;
-      const tipoEntrega = document.querySelector('input[name="entrega"]:checked').value;
-      const direccionInput = document.getElementById("direccion").value.toLowerCase().trim();
-
-      if (tipoEntrega === "Entrega a Domicilio") {
-        if (direccionInput !== '') {
-          if (direccionInput.includes("santo domingo") || direccionInput.includes("dn") || direccionInput.includes("distrito nacional")) {
-            envio = 300;
-          } else {
-            envio = 600;
-          }
-        }
-      }
-
-      const total = subtotal - descuento + envio;
-
-      document.getElementById("subtotal").textContent = subtotal.toFixed(2);
-      document.getElementById("descuento").textContent = descuento.toFixed(2);
-      document.getElementById("envio").textContent = envio.toFixed(2);
-      document.getElementById("total").textContent = total.toFixed(2);
+      actualizarResumenPedido();
+      calcularTotales();
     }
 
     function actualizarResumenPedido() {
-      const resumenContainer = document.getElementById("listaProductosResumen");
-      const seccionResumen = document.getElementById("resumenPedido");
-      resumenContainer.innerHTML = "";
+      const resumenDiv = document.getElementById('resumenPedido');
+      const listaProductosResumen = document.getElementById('listaProductosResumen');
+      listaProductosResumen.innerHTML = '';
 
-      if (carrito.length === 0) {
-        resumenContainer.innerHTML = '<p style="text-align: center; color: #6c757d;">Aún no has agregado productos.</p>';
-        seccionResumen.style.display = 'none';
+      if (productosEnCarrito.length === 0) {
+        listaProductosResumen.innerHTML = '<p style="text-align: center; color: #6c757d;">Aún no has agregado productos.</p>';
+        resumenDiv.style.display = 'none';
       } else {
-        seccionResumen.style.display = 'block';
-        carrito.forEach((item, idx) => {
-          const div = document.createElement("div");
-          div.className = "resumen-item";
-          div.innerHTML = `
+        resumenDiv.style.display = 'block';
+        productosEnCarrito.forEach(item => {
+          const itemDiv = document.createElement('div');
+          itemDiv.classList.add('resumen-item');
+          itemDiv.innerHTML = `
             <span class="item-info">${item.nombre} x${item.cantidad}</span>
-            <span class="item-precio">RD$${(item.cantidad * item.precioUnitarioActual).toFixed(2)}</span>
-            <button class="eliminar-item-btn" onclick="eliminarDelResumen(${idx})">X</button>
+            <span class="item-precio">RD$ ${(item.cantidad * item.precioUnitarioActual).toFixed(2)}</span>
+            <button class="eliminar-item-btn" onclick="eliminarProductoDelResumen('${item.id}')">Eliminar</button>
           `;
-          resumenContainer.appendChild(div);
+          listaProductosResumen.appendChild(itemDiv);
         });
       }
     }
 
-    function eliminarDelResumen(indexEnCarrito) {
-      const productoEliminado = carrito[indexEnCarrito];
-      const originalProductIndex = productoEliminado.index;
 
-      carrito.splice(indexEnCarrito, 1);
+    function calcularTotales() {
+      let subtotal = 0;
+      productosEnCarrito.forEach(item => {
+        subtotal += item.cantidad * item.precioUnitarioActual;
+      });
 
-      const inputOriginal = document.querySelector(`.producto-card input[data-index="${originalProductIndex}"]`);
-      if (inputOriginal) {
-        inputOriginal.value = '';
+      document.getElementById('subtotal').textContent = subtotal.toFixed(2);
+
+      let descuento = 0;
+      // Ejemplo de descuento: 5% si el subtotal es más de RD$3000
+      if (subtotal >= 3000) {
+        descuento = subtotal * 0.05;
       }
+      document.getElementById('descuento').textContent = descuento.toFixed(2);
 
+      let costoEnvio = 0;
+      const tipoEntrega = document.querySelector('input[name="entrega"]:checked').value;
+      const direccion = document.getElementById('direccion').value.trim();
+
+      if (tipoEntrega === 'Entrega a Domicilio') {
+        if (direccion === '') {
+          costoEnvio = 0; // O un valor que indique que falta la dirección
+        } else {
+          costoEnvio = 150; // Costo fijo de envío, puedes hacerlo más complejo si necesitas
+        }
+      }
+      document.getElementById('envio').textContent = costoEnvio.toFixed(2);
+
+      let total = subtotal - descuento + costoEnvio;
+      document.getElementById('total').textContent = total.toFixed(2);
+
+      // Manejar visibilidad del error de dirección
+      if (tipoEntrega === 'Entrega a Domicilio' && direccion === '') {
+        document.getElementById('direccion-error').style.display = 'block';
+      } else {
+        document.getElementById('direccion-error').style.display = 'none';
+      }
+    }
+
+    function manejarEntrega() {
       calcularTotales();
-      actualizarResumenPedido();
     }
 
-    // Ficha Técnica Modal - Funciones (modificado para formato con flex y HTML)
-    function abrirModal(index) {
-      const producto = productos[index];
-      document.getElementById("modalTituloProducto").innerHTML = producto.nombre;
-      document.getElementById("modalCuerpoFicha").innerHTML = `
-        <img src="${producto.imagen}" alt="${producto.nombre}">
-        <div class="ficha-contenido">
-          <p><strong>Descripción:</strong> ${producto.descripcion}</p>
-          ${producto.fichaTecnica}
-        </div>
-      `;
-      document.getElementById("fichaTecnicaModal").style.display = "flex";
-    }
-    /* Antes en: <p>${producto.fichaTecnica}</p> :contentReference[oaicite:1]{index=1}
-       Ahora permite incluir HTML dentro de fichaTecnica para agregar secciones (uso, beneficios, etc.) */
-
-    function cerrarModal() {
-      document.getElementById("fichaTecnicaModal").style.display = "none";
+    function mostrarCuentas(mostrar) {
+      document.getElementById('cuentas').style.display = mostrar ? 'block' : 'none';
     }
 
-    window.onclick = function(event) {
-      const modal = document.getElementById("fichaTecnicaModal");
-      if (event.target == modal) {
-        modal.style.display = "none";
+    function validarFormulario() {
+      let valido = true;
+
+      // Validar nombre
+      const nombre = document.getElementById('nombre');
+      if (nombre.value.trim() === '') {
+        document.getElementById('nombre-error').style.display = 'block';
+        valido = false;
+      } else {
+        document.getElementById('nombre-error').style.display = 'none';
       }
+
+      // Validar teléfono (que sea un número de 10 dígitos o 11 si incluye el 1 inicial)
+      const telefono = document.getElementById('telefono');
+      const telefonoRegex = /^(1)?\d{10}$/; // Opcional '1' seguido de 10 dígitos
+      if (!telefonoRegex.test(telefono.value.trim())) {
+        document.getElementById('telefono-error').style.display = 'block';
+        valido = false;
+      } else {
+        document.getElementById('telefono-error').style.display = 'none';
+      }
+
+      // Validar dirección si es "Entrega a Domicilio"
+      const tipoEntrega = document.querySelector('input[name="entrega"]:checked').value;
+      const direccion = document.getElementById('direccion');
+      if (tipoEntrega === 'Entrega a Domicilio' && direccion.value.trim() === '') {
+        document.getElementById('direccion-error').style.display = 'block';
+        valido = false;
+      } else {
+        document.getElementById('direccion-error').style.display = 'none';
+      }
+
+      // Validar que haya al menos un producto en el carrito
+      if (productosEnCarrito.length === 0) {
+        document.getElementById('productos-error').style.display = 'block';
+        valido = false;
+      } else {
+        document.getElementById('productos-error').style.display = 'none';
+      }
+
+      return valido;
     }
 
     function enviarPedido() {
-      const nombre = document.getElementById("nombre");
-      const telefono = document.getElementById("telefono");
-      const direccion = document.getElementById("direccion");
-      const entregaADomicilio = document.querySelector('input[name="entrega"]:checked').value === "Entrega a Domicilio";
-      let isValid = true;
-
-      document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
-
-      if (nombre.value.trim() === '') {
-        document.getElementById('nombre-error').style.display = 'block';
-        isValid = false;
-      }
-
-      if (telefono.value.trim() === '' || !/^\d{10,15}$/.test(telefono.value.trim())) {
-        document.getElementById('telefono-error').style.display = 'block';
-        isValid = false;
-      }
-
-      if (entregaADomicilio && direccion.value.trim() === '') {
-        document.getElementById('direccion-error').style.display = 'block';
-        isValid = false;
-      }
-
-      if (carrito.length === 0) {
-        document.getElementById('productos-error').style.display = 'block';
-        isValid = false;
-      }
-
-      if (!isValid) {
-        alert("Por favor, completa todos los campos requeridos y selecciona al menos un producto.");
+      if (!validarFormulario()) {
+        alert('Por favor, completa todos los campos requeridos y asegúrate de tener productos en tu pedido.');
         return;
       }
 
-      const clienteNombre = nombre.value.trim();
-      const clienteTelefono = telefono.value.trim();
-      const clienteDireccion = (entregaADomicilio && direccion.value.trim() !== '') ? direccion.value.trim() : "N/A";
+      const clienteNombre = document.getElementById('nombre').value.trim();
+      const clienteTelefono = document.getElementById('telefono').value.trim();
+      const clienteDireccion = document.getElementById('direccion').value.trim();
       const entrega = document.querySelector('input[name="entrega"]:checked').value;
       const pago = document.querySelector('input[name="pago"]:checked').value;
-      const cuenta = (pago === "Transferencia") ? document.getElementById("cuentas").value : "N/A";
-      const comentario = document.getElementById("comentario").value.trim();
+      const cuenta = pago === "Transferencia" ? document.getElementById("cuentas").value : "";
+      const comentario = document.getElementById('comentario').value.trim();
 
-      let msg = `👉 *Nuevo Pedido desde la Web*:\n\n*🛍 Productos:*\n`;
-      let productosEnMensaje = [];
-      carrito.forEach(item => {
+      let msg = `*🛍️ Nuevo Pedido de R&F Productos Integrales:*\n\n*📋 Detalles del Pedido:*\n`;
+
+      const productosEnMensaje = [];
+      productosEnCarrito.forEach(item => {
         productosEnMensaje.push(`- ${item.nombre} x${item.cantidad} (RD$${item.precioUnitarioActual.toFixed(2)} c/u)`);
       });
       msg += productosEnMensaje.join('\n');
@@ -2478,17 +2507,72 @@ debe procurar consumir los 3 frascos. Hara un "ALTO" por espacio de 3 a 6 meses 
       const base = isMobile
         ? "https://api.whatsapp.com/send"
         : "https://web.whatsapp.com/send";
-      const url = `${base}?phone=${numeroWhatsApp}&text=${encodeURIComponent(msg)}`;
+      const whatsappUrl = `${base}?phone=${numeroWhatsApp}&text=${encodeURIComponent(msg)}`;
 
-      window.open(url, "_blank");
+      window.open(whatsappUrl, '_blank');
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-      mostrarProductos();
-      manejarEntrega();
-      calcularTotales();
-      actualizarResumenPedido();
+    // Funciones para la Modal de Ficha Técnica
+    function mostrarFichaTecnica(index) {
+      const producto = productos[index];
+      const modal = document.getElementById('fichaTecnicaModal');
+      const modalTitulo = document.getElementById('modalTituloProducto');
+      const modalCuerpo = document.getElementById('modalCuerpoFicha');
+
+      modalTitulo.innerHTML = producto.nombre;
+      modalCuerpo.innerHTML = `
+        <img src="${producto.imagen}" alt="${producto.nombre}" class="ficha-tecnica-img" data-large-src="${producto.imagen}">
+        <div class="ficha-contenido">
+          <p>${producto.descripcion}</p>
+          ${producto.fichaTecnica || '<p>No hay ficha técnica detallada disponible para este producto.</p>'}
+        </div>
+      `;
+      modal.style.display = 'flex'; // Usar flex para centrar
+    }
+
+    function cerrarModal() {
+      document.getElementById('fichaTecnicaModal').style.display = 'none';
+    }
+
+    // Cerrar modal si se hace clic fuera del contenido
+    window.onclick = function(event) {
+      const modal = document.getElementById('fichaTecnicaModal');
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+
+    // --- CÓDIGO AÑADIDO PARA LA FUNCIONALIDAD DE AMPLIACIÓN DE IMAGEN ---
+    // 1. Obtener referencias a los elementos del lightbox
+    const lightboxOverlay = document.getElementById('lightbox-overlay');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxClose = document.getElementById('lightbox-close');
+
+    // 2. Añadir un "escuchador de eventos" a cada imagen de ficha técnica
+    document.querySelectorAll('.ficha-tecnica-img').forEach(img => {
+      img.addEventListener('click', function() {
+        // Al hacer clic, obtiene la URL de la imagen grande
+        // Primero intenta usar el 'data-large-src', si no existe, usa el 'src' normal de la imagen
+        const largeSrc = this.dataset.largeSrc || this.src;
+        lightboxImg.src = largeSrc; // Establece la fuente de la imagen ampliada en el lightbox
+        lightboxOverlay.classList.add('visible'); // Muestra el lightbox añadiendo la clase 'visible'
+      });
     });
+
+    // 3. Añadir un "escuchador de eventos" para cerrar el lightbox al hacer clic en la "X"
+    lightboxClose.addEventListener('click', function() {
+      lightboxOverlay.classList.remove('visible'); // Oculta el lightbox quitando la clase 'visible'
+    });
+
+    // 4. Añadir un "escuchador de eventos" para cerrar el lightbox al hacer clic en el fondo oscuro
+    lightboxOverlay.addEventListener('click', function(e) {
+      // Importante: Solo cierra si el clic es directamente en el overlay (el fondo oscuro)
+      // y no si se hace clic en la imagen misma dentro del lightbox-content.
+      if (e.target === lightboxOverlay) {
+        lightboxOverlay.classList.remove('visible'); // Oculta el lightbox
+      }
+    });
+    // --- FIN DEL CÓDIGO AÑADIDO ---
   </script>
 </body>
 </html>
