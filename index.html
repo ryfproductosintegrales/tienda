@@ -959,8 +959,7 @@
             }
             
             populateCategoryMenu();
-            // Eliminado el bloque de re-renderizado de páginas para evitar el bucle infinito.
-            // Las páginas se re-renderizan explícitamente en el manejador de cambio de idioma.
+            // Esta función NO DEBE llamar a ninguna función de renderizado de página para evitar recursión.
         }
 
         // Abre el modal de la ficha técnica de un producto
@@ -1321,11 +1320,11 @@
 
             const customerNameInput = document.getElementById('customer-name');
             const customerAddressInput = document.getElementById('customer-address');
-            const customerPhoneInput = document.getElementById('customer-phone-order');
+            const customerPhoneInput = document.getElementById('customer-phone-order'); // Corrected typo here
 
             const customerName = customerNameInput ? customerNameInput.value.trim() : '';
             const customerAddress = customerAddressInput ? customerAddressInput.value.trim() : '';
-            const customerPhone = customerPhoneInput ? customerPhonePhoneInput.value.trim() : '';
+            const customerPhone = customerPhoneInput ? customerPhoneInput.value.trim() : ''; // Corrected typo here
             
             const deliveryMethod = getSelectedRadioValue('delivery-method');
             const paymentMethod = getSelectedRadioValue('payment-method');
@@ -1585,6 +1584,7 @@
                 </section>
             `;
             initCarousel(); // Inicializa el carrusel al renderizar la página de inicio
+            updateContentLanguage(); // Apply translations to newly rendered content
         }
 
         // Inicializa la lógica del carrusel (muestra diapositivas y establece el intervalo)
@@ -1884,9 +1884,7 @@
                 document.getElementById('filter-price-max')?.addEventListener('input', applyFiltersAndSort);
                 document.getElementById('sort-options')?.addEventListener('change', applyFiltersAndSort);
             }
-            // Solo actualizamos el contenido de lenguaje aquí para los elementos estáticos del shop
-            // y para asegurar que los selectores de filtro se traduzcan
-            updateContentLanguage(); 
+            updateContentLanguage(); // Apply translations to newly rendered content
         }
 
         // Renderiza la página de detalle de un producto
@@ -2026,7 +2024,7 @@
                     document.getElementById(`tab-${this.dataset.tab}`).classList.remove('hidden');
                 });
             });
-            // Eliminado updateContentLanguage() de aquí para evitar el bucle.
+            updateContentLanguage(); // Apply translations to newly rendered content
         }
 
         // Renderiza la página de detalle de un combo
@@ -2093,7 +2091,7 @@
                     </div>
                 `;
             }
-            // Eliminado updateContentLanguage() de aquí para evitar el bucle.
+            updateContentLanguage(); // Apply translations to newly rendered content
         }
 
 
@@ -2277,7 +2275,7 @@
                 `;
             }
             
-            // Eliminado updateContentLanguage() de aquí para evitar el bucle.
+            updateContentLanguage(); // Apply translations to newly rendered content
             toggleBankDetails(); 
             initCartFormListeners();
             calculateCartTotals();
@@ -2333,7 +2331,7 @@
                     ${wishlistContent}
                 `;
             }
-            // Eliminado updateContentLanguage() de aquí para evitar el bucle.
+            updateContentLanguage(); // Apply translations to newly rendered content
         }
 
 
@@ -2521,7 +2519,7 @@
                         const page = parts[0] || 'home';
                         const param = parts.slice(1).join('-');
                         renderPage(page, param); // Force re-render of current page
-                        updateContentLanguage(); // Update static translatable elements
+                        // updateContentLanguage() ya se llama dentro de renderPage, no es necesario aquí.
                         console.log(`Idioma cambiado a: ${currentLanguage}. Página re-renderizada.`);
                     });
                 });
