@@ -270,17 +270,7 @@
         </div>
     </div>
 
-    <!-- Modal de Ficha Técnica (Ahora solo para información muy puntual, si se quiere) -->
-    <div id="fichaTecnicaModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white p-6 rounded-lg shadow-xl max-w-lg w-11/12 md:w-3/4 lg:w-1/2 relative max-h-[90vh] overflow-y-auto">
-            <button onclick="closeFichaTecnicaModal()" class="absolute top-3 right-3 text-gray-500 hover:text-gray-800 text-3xl font-bold">&times;</button>
-            <h3 class="text-2xl font-bold text-primary mb-4 text-center" id="modalTituloProducto"></h3>
-            <div class="modal-body flex flex-col md:flex-row gap-4 items-center" id="modalCuerpoFicha">
-                <!-- Contenido inyectado aquí -->
-            </div>
-        </div>
-    </div>
-
+    <!-- NOTA: El modal de Ficha Técnica ha sido eliminado por completo. Su contenido se ha integrado en la descripción del producto. -->
 
     <script>
         // --- Funciones de Ayuda (Utilidades) ---
@@ -554,7 +544,7 @@
             { id: 'levadura-nutricional', name: 'Levadura Nutricional', imageFile: 'levaduranutricional.jpg', category: 'Alimentación Saludable', brand: 'R&F Integrales', priceDetail: 500, priceWholesale: 450, isOffer: false, dateAdded: '2025-07-10', salesCount: 150, description_es: 'En desarrollo.', description_en: 'Under development.', ingredients_es: 'En desarrollo.', ingredients_en: 'Under development.', usage_es: 'En desarrollo.', usage_en: 'Under development.', warnings_es: 'En desarrollo.', warnings_en: 'Under development.', benefits_es: ['En construcción.'], benefits_en: ['Under construction.'], certifications: ['En construcción'], origin_es: 'En construcción.', origin_en: 'Under construction.', process_es: 'En construcción.', process_en: 'Under construction.', characteristics_es: 'En construcción.', characteristics_en: 'Under construction.' },
             { id: 'licorice', name: 'Licorice', imageFile: 'regaliz.jpg', category: 'Suplementos Naturales', brand: 'R&F Integrales', priceDetail: 750, priceWholesale: 650, isOffer: false, dateAdded: '2025-07-11', salesCount: 100, description_es: 'En desarrollo.', description_en: 'Under development.', ingredients_es: 'En desarrollo.', ingredients_en: 'Under development.', usage_es: 'En desarrollo.', usage_en: 'Under development.', warnings_es: 'En desarrollo.', warnings_en: 'Under development.', benefits_es: ['En construcción.'], benefits_en: ['Under construction.'], certifications: ['En construcción'], origin_es: 'En construcción.', origin_en: 'Under construction.', process_es: 'En construcción.', process_en: 'Under construction.', characteristics_es: 'En construcción.', characteristics_en: 'Under construction.' },
             { id: 'maca-en-capsula', name: 'Maca En Capsula', imageFile: 'macacapsula.jpg', category: 'Suplementos Naturales', brand: 'R&F Integrales', priceDetail: 1200, priceWholesale: 1000, isOffer: false, dateAdded: '2025-07-12', salesCount: 180, description_es: 'En desarrollo.', description_en: 'Under development.', ingredients_es: 'En desarrollo.', ingredients_en: 'Under development.', usage_es: 'En desarrollo.', usage_en: 'Under development.', warnings_es: 'En desarrollo.', warnings_en: 'Under development.', benefits_es: ['En construcción.'], benefits_en: ['Under construction.'], certifications: ['En construcción'], origin_es: 'En construcción.', origin_en: 'Under construction.', process_es: 'En construcción.', process_en: 'Under construction.', characteristics_es: 'En construcción.', characteristics_en: 'Under construction.' },
-            { id: 'maca-en-polvo', name: 'Maca En Polvo', imageFile: 'macapolvo.jpg', category: 'Suplementos Naturales', brand: 'R&F Integrales', priceDetail: 900, priceWholesale: 780, isOffer: false, dateAdded: '2025-07-13', salesCount: 220, description_es: 'En desarrollo.', description_en: 'Under development.', ingredients_es: 'En desarrollo.', ingredients_en: 'Under development.', usage_es: 'En desarrollo.', usage_en: 'Under development.', warnings_es: 'En desarrollo.', warnings_en: 'Under development.', benefits_es: ['En construcción.'], benefits_en: ['Under construction.'], certifications: ['En construcción'], origin_es: 'En construcción.', origin_en: 'Under construction.', process_es: 'En construcción.', process_en: 'Under construction.', characteristics_es: 'En construcción.', characteristics_en: 'Under construction.' },
+            { id: 'maca-en-polvo', name: 'Maca En Polvo', imageFile: 'macapolvo.jpg', category: 'Suplementos Naturales', brand: 'R&F Integrales', priceDetail: 900, priceWholesale: 780, isOffer: false, dateAdded: '2025-07-13', salesCount: 220, description_es: 'En desarrollo.', description_en: 'Under development.', ingredients_es: 'En desarrollo.', ingredients_en: 'Under development.', usage_es: 'En desarrollo.', usage_en: 'Under development.', warnings_es: 'En desarrollo.', warnings_en: 'Under development.', benefits_es: ['En construcción.'], benefits_en: ['Under construction.'], certifications: ['En construcción'], origin_es: 'En construcción.', origin_en: 'Under construction.', process_es: 'En construcción.', process_en: 'En construcción.', characteristics_es: 'En construcción.', characteristics_en: 'Under construction.' },
             { id: 'miel-en-panal', name: 'Miel En Panal', imageFile: 'mielpanal.jpg', category: 'Alimentación Saludable', brand: 'R&F Integrales', priceDetail: 1100, priceWholesale: 950, isOffer: false, dateAdded: '2025-07-14', salesCount: 190, description_es: 'En desarrollo.', description_en: 'Under development.', ingredients_es: 'En desarrollo.', ingredients_en: 'Under development.', usage_es: 'En desarrollo.', usage_en: 'Under development.', warnings_es: 'En desarrollo.', warnings_en: 'Under development.', benefits_es: ['En construcción.'], benefits_en: ['Under construction.'], certifications: ['En construcción'], origin_es: 'En construcción.', origin_en: 'Under construction.', process_es: 'En construcción.', process_en: 'Under construction.', characteristics_es: 'En construcción.', characteristics_en: 'Under construction.' },
             { id: 'moringa-en-polvo', name: 'Moringa En Polvo', imageFile: 'moringapolvo.jpg', category: 'Suplementos Naturales', brand: 'R&F Integrales', priceDetail: 600, priceWholesale: 500, isOffer: false, dateAdded: '2025-07-15', salesCount: 160, description_es: 'En desarrollo.', description_en: 'Under development.', ingredients_es: 'En desarrollo.', ingredients_en: 'Under development.', usage_es: 'En desarrollo.', usage_en: 'Under development.', warnings_es: 'En desarrollo.', warnings_en: 'Under development.', benefits_es: ['En construcción.'], benefits_en: ['Under construction.'], certifications: ['En construcción'], origin_es: 'En construcción.', origin_en: 'Under construction.', process_es: 'En construcción.', process_en: 'Under construction.', characteristics_es: 'En construcción.', characteristics_en: 'Under construction.' },
             { id: 'palo-de-arco', name: 'Palo De Arco', imageFile: 'paloarco.jpg', category: 'Otros', brand: 'R&F Integrales', priceDetail: 450, priceWholesale: 380, isOffer: false, dateAdded: '2025-07-16', salesCount: 85, description_es: 'En desarrollo.', description_en: 'Under development.', ingredients_es: 'En desarrollo.', ingredients_en: 'Under development.', usage_es: 'En desarrollo.', usage_en: 'Under development.', warnings_es: 'En desarrollo.', warnings_en: 'Under development.', benefits_es: ['En construcción.'], benefits_en: ['Under construction.'], certifications: ['En construcción'], origin_es: 'En construcción.', origin_en: 'Under construction.', process_es: 'En construcción.', process_en: 'Under construction.', characteristics_es: 'En construcción.', characteristics_en: 'Under construction.' },
@@ -817,8 +807,8 @@
                 contactPageContent: "You can contact us via WhatsApp at 809-425-4540 or send us an email at info@ryfintegrales.com. Our team is available to assist you Monday through Friday, from 9:00 AM to 5:00 PM.",
                 helpFAQPageContent: "Find answers to frequently asked questions about our products, shipping, payments, and more. If you can't find what you're looking for, feel free to contact us directly.",
                 blogPageContent: "Visit our blog for the latest news in natural wellness, health tips, product usage guides, and healthy recipes. Stay informed on how to improve your quality of life naturally.",
-                privacyPolicyPageContent: "Our privacy policy details how R&F Integral Products collects, uses, and protects your personal information. We are committed to safeguarding your data and respecting your privacy at all times.",
-                termsOfUsePageContent: "Read our terms and conditions of use. These govern your access and use of our website, including the purchase of products and services. By using our site, you agree to these terms.",
+                privacyPolicyPageContent: "Our privacy policy details how R&F Productos Integrales collects, uses, and protects your personal information. We are committed to safeguarding your data and respecting your privacy at all times.",
+                termsOfUsePageContent: "Read our terms and conditions of use. These govern your access and use of our site, including the purchase of products and services. By using your site, you agree to these terms.",
                 shippingPolicyPageContent: "Our shipping policy explains delivery times, costs, and coverage areas. We offer free shipping for a minimum purchase and fast deliveries in the Dominican Republic.",
                 returnPolicyPageContent: "Consult our return policy for procedures and conditions for returning or exchanging products. Your satisfaction is our priority, and we seek fair and quick solutions.",
                 paymentMethodsPageContent: "We accept cash and bank transfer payments. We will soon expand our payment options for your convenience. All payments are secure and transparent."
@@ -841,7 +831,8 @@
         const cartModal = document.getElementById('cart-modal');
         const wishlistModal = document.getElementById('wishlist-modal');
         const searchInput = document.getElementById('search-input');
-        const fichaTecnicaModal = document.getElementById('fichaTecnicaModal');
+        // NOTA: fichaTecnicaModal y sus funciones relacionadas han sido eliminadas.
+
 
         // --- Funciones de Ayuda Centrales (dependen de datos/estado/DOM globales) ---
         // Formatea un precio a la moneda local
@@ -947,7 +938,7 @@
                         element.textContent = lang[key];
                     }
                 } else {
-                    console.warn(`Translation key "${key}" not found or is undefined for language "${currentLanguage}".`);
+                    // console.warn(`Translation key "${key}" not found or is undefined for language "${currentLanguage}".`);
                 }
             });
 
@@ -960,39 +951,6 @@
             
             populateCategoryMenu();
             // Esta función NO DEBE llamar a ninguna función de renderizado de página para evitar recursión.
-        }
-
-        // Abre el modal de la ficha técnica de un producto
-        function openFichaTecnicaModal(productId) {
-            const product = products.find(p => p.id === productId);
-            const lang = translations[currentLanguage];
-
-            if (!product) return;
-
-            // Construye el contenido del modal con los detalles clave
-            const origin = product[`origin_${currentLanguage}`] || product.origin_es;
-            const process = product[`process_${currentLanguage}`] || product.process_es;
-            const characteristics = product[`characteristics_${currentLanguage}`] || product.characteristics_es;
-
-            const modalContent = `
-                <img src="${product.image}" alt="${product.name}" onerror="this.onerror=null;this.src='https://placehold.co/150x150/D3D3D3/000000?text=NP';" class="w-36 h-36 object-contain rounded-lg shadow-sm flex-shrink-0">
-                <div class="ficha-contenido flex-grow text-sm leading-relaxed text-gray-700">
-                    <h4 class="font-bold text-lg mb-2">${lang.keyDetails}:</h4>
-                    ${origin ? `<p><strong>${lang.origin}:</strong> ${origin}</p>` : ''}
-                    ${process ? `<p><strong>${lang.process}:</strong> ${process}</p>` : ''}
-                    ${characteristics ? `<p><strong>${lang.characteristics}:</strong> ${characteristics}</p>` : ''}
-                    ${(!origin && !process && !characteristics) ? '<p>No hay detalles clave adicionales disponibles para este producto.</p>' : ''}
-                </div>
-            `;
-
-            if (document.getElementById("modalTituloProducto")) document.getElementById("modalTituloProducto").innerHTML = product.name;
-            if (document.getElementById("modalCuerpoFicha")) document.getElementById("modalCuerpoFicha").innerHTML = modalContent;
-            if (fichaTecnicaModal) fichaTecnicaModal.classList.remove('hidden');
-        }
-
-        // Cierra el modal de la ficha técnica
-        function closeFichaTecnicaModal() {
-            if (fichaTecnicaModal) fichaTecnicaModal.classList.add('hidden');
         }
 
         // Calcula el precio por unidad, considerando precios al por mayor
@@ -1320,11 +1278,11 @@
 
             const customerNameInput = document.getElementById('customer-name');
             const customerAddressInput = document.getElementById('customer-address');
-            const customerPhoneInput = document.getElementById('customer-phone-order'); // Corrected typo here
+            const customerPhoneInput = document.getElementById('customer-phone-order');
 
             const customerName = customerNameInput ? customerNameInput.value.trim() : '';
             const customerAddress = customerAddressInput ? customerAddressInput.value.trim() : '';
-            const customerPhone = customerPhoneInput ? customerPhoneInput.value.trim() : ''; // Corrected typo here
+            const customerPhone = customerPhoneInput ? customerPhoneInput.value.trim() : '';
             
             const deliveryMethod = getSelectedRadioValue('delivery-method');
             const paymentMethod = getSelectedRadioValue('payment-method');
@@ -1467,7 +1425,7 @@
             
             // Solo actualiza el hash si es diferente para evitar entradas duplicadas en el historial del navegador
             // O si el hash es el mismo pero forzamos el renderizado (ej. al cambiar de idioma)
-            if (window.location.hash.substring(1) !== newHash || (event && event.type === 'click')) { // Added click check
+            if (window.location.hash.substring(1) !== newHash) { 
                 window.location.hash = newHash;
                 console.log(`[navigateTo] Hash actualizado a: ${newHash}`);
             } else {
@@ -1584,7 +1542,7 @@
                 </section>
             `;
             initCarousel(); // Inicializa el carrusel al renderizar la página de inicio
-            updateContentLanguage(); // Apply translations to newly rendered content
+            // No es necesario llamar a updateContentLanguage() aquí, ya que renderPage() lo hará al final.
         }
 
         // Inicializa la lógica del carrusel (muestra diapositivas y establece el intervalo)
@@ -1860,9 +1818,7 @@
                                                 <button onclick="addToWishlist('${p.id}', 'product')" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-full hover:bg-gray-300 transition duration-200 mt-2" data-translate="addToWishlist">
                                                     <i class="fas fa-heart ${wishlist.includes(p.id) ? 'text-red-500' : ''}"></i> ${lang.addToWishlist}
                                                 </button>
-                                                <button onclick="openFichaTecnicaModal('${p.id}')" class="bg-gray-600 text-white px-4 py-2 rounded-full hover:bg-gray-700 transition duration-200 mt-2 text-sm">
-                                                    Ver Ficha Técnica
-                                                </button>
+                                                <!-- BOTÓN 'Ver Ficha Técnica' ELIMINADO -->
                                             </div>
                                         </div>
                                     `).join('') :
@@ -1884,7 +1840,7 @@
                 document.getElementById('filter-price-max')?.addEventListener('input', applyFiltersAndSort);
                 document.getElementById('sort-options')?.addEventListener('change', applyFiltersAndSort);
             }
-            updateContentLanguage(); // Apply translations to newly rendered content
+            // No es necesario llamar a updateContentLanguage() aquí, ya que renderPage() lo hará al final.
         }
 
         // Renderiza la página de detalle de un producto
@@ -1938,12 +1894,10 @@
                             <button onclick="addToCart('${product.id}')" class="w-full bg-primary text-white text-xl py-3 rounded-full hover:bg-green-700 transition duration-200 mb-4" data-translate="addToCart">
                                 <i class="fas fa-cart-plus mr-2"></i> ${lang.addToCart}
                             </button>
-                            <button onclick="addToWishlist('${product.id}', 'product')" class="w-full bg-gray-200 text-gray-700 text-xl py-3 rounded-full hover:bg-gray-300 transition duration-200 mb-4" data-translate="addToWishlist">
+                            <button onclick="addToWishlist('${product.id}', 'product')" class="w-full bg-gray-200 text-gray-700 text-xl py-3 rounded-full hover:bg-gray-300 transition duration-200 mb-8" data-translate="addToWishlist">
                                 <i class="fas fa-heart ${wishlist.includes(product.id) ? 'text-red-500' : ''}"></i> ${lang.addToWishlist}
                             </button>
-                            <button onclick="openFichaTecnicaModal('${product.id}')" class="w-full bg-gray-600 text-white text-xl py-3 rounded-full hover:bg-gray-700 transition duration-200 mb-8">
-                                                Ver Ficha Técnica
-                                            </button>
+                            <!-- BOTÓN 'Ver Ficha Técnica' ELIMINADO -->
 
 
                             <!-- Tabs para Descripción, Ingredientes, Uso, Advertencias, Reseñas -->
@@ -2024,7 +1978,7 @@
                     document.getElementById(`tab-${this.dataset.tab}`).classList.remove('hidden');
                 });
             });
-            updateContentLanguage(); // Apply translations to newly rendered content
+            // No es necesario llamar a updateContentLanguage() aquí, ya que renderPage() lo hará al final.
         }
 
         // Renderiza la página de detalle de un combo
@@ -2091,7 +2045,7 @@
                     </div>
                 `;
             }
-            updateContentLanguage(); // Apply translations to newly rendered content
+            // No es necesario llamar a updateContentLanguage() aquí, ya que renderPage() lo hará al final.
         }
 
 
@@ -2275,7 +2229,8 @@
                 `;
             }
             
-            updateContentLanguage(); // Apply translations to newly rendered content
+            // ATENCIÓN: updateContentLanguage() se llama al final de renderPage para asegurar que todos los elementos se actualicen
+            // No es necesario llamarlo aquí, ya que renderPage() lo hará al final.
             toggleBankDetails(); 
             initCartFormListeners();
             calculateCartTotals();
@@ -2331,7 +2286,7 @@
                     ${wishlistContent}
                 `;
             }
-            updateContentLanguage(); // Apply translations to newly rendered content
+            // No es necesario llamar a updateContentLanguage() aquí, ya que renderPage() lo hará al final.
         }
 
 
@@ -2430,7 +2385,10 @@
             if (searchInput && page !== 'shop') { 
                 searchInput.value = '';
             }
-            console.log(`[renderPage] Página ${page} renderizada exitosamente.`); 
+            // ¡IMPORTANTE! Llamar a updateContentLanguage aquí para asegurar que todo el contenido recién renderizado
+            // y los elementos estáticos se traduzcan correctamente.
+            updateContentLanguage(); 
+            console.log(`[renderPage] Página ${page} renderizada exitosamente y lenguaje actualizado.`); 
         }
 
         /**
@@ -2505,8 +2463,7 @@
                 const initialPage = initialParts[0] || 'home';
                 const initialParam = initialParts.slice(1).join('-');
                 renderPage(initialPage, initialParam);
-                // La llamada a updateContentLanguage() aquí es importante para los elementos fuera del app-content
-                updateContentLanguage(); 
+                
                 console.log("[DOMContentLoaded] Página inicial renderizada.");
 
                 // Event listener para los botones de cambio de idioma
@@ -2519,7 +2476,6 @@
                         const page = parts[0] || 'home';
                         const param = parts.slice(1).join('-');
                         renderPage(page, param); // Force re-render of current page
-                        // updateContentLanguage() ya se llama dentro de renderPage, no es necesario aquí.
                         console.log(`Idioma cambiado a: ${currentLanguage}. Página re-renderizada.`);
                     });
                 });
